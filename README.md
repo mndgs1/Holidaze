@@ -20,37 +20,37 @@ https://api.noroff.dev/docs/static/index.html
 ## User Stories
 The client has specified the following requirements in the form of User Stories:
 
-A user may view a list of Venues
-A user may search for a specific Venue
-A user may view a specific Venue page by id
-A user may view a calendar with available dates for a Venue
-A user with a stud.noroff.no email may register as a customer
-A registered customer may create a booking at a Venue
-A registered customer may view their upcoming bookings
-A user with a stud.noroff.no email may register as a Venue manager
-A registered Venue manager may create a Venue
-A registered Venue manager may update a Venue they manage
-A registered Venue manager may delete a Venue they manage
-A registered Venue manager may view bookings for a Venue they manage
-A registered user may login
-A registered user may update their avatar
-A registered user may logout
+1. A user may view a list of Venues
+2. A user may search for a specific Venue
+3. A user may view a specific Venue page by id
+4. A user may view a calendar with available dates for a Venue
+5. A user with a stud.noroff.no email may register as a customer
+6. A registered customer may create a booking at a Venue
+7. A registered customer may view their upcoming bookings
+8. A user with a stud.noroff.no email may register as a Venue manager
+9. A registered Venue manager may create a Venue
+10. A registered Venue manager may update a Venue they manage
+11. A registered Venue manager may delete a Venue they manage
+12. A registered Venue manager may view bookings for a Venue they manage
+13. A registered user may login
+14. A registered user may update their avatar
+15. A registered user may logout
 
 ## Technical Restrictions
 The company CTO has set the following technical restrictions:
 
-Must use an approved JavaScript Framework
-Must use an approved CSS Framework
-Must be hosted on an approved Static Host
-Must use an approved Design Application
-Must use an approved Planning Application
+1. Must use an approved JavaScript Framework
+2. Must use an approved CSS Framework
+3. Must be hosted on an approved Static Host
+4. Must use an approved Design Application
+5. Must use an approved Planning Application
 
 ## Required Links
 The Product Owner has requested links to the following:
 
-A Gantt chart for project timing
-A design prototype
-A style guide
+1. A Gantt chart for project timing
+2. A design prototype
+3. A style guide
 A kanban project board
 A repository link
 A hosted application demo link
