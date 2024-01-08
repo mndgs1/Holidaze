@@ -51,9 +51,9 @@ The Product Owner has requested links to the following:
 1. A Gantt chart for project timing
 2. A design prototype
 3. A style guide
-A kanban project board
-A repository link
-A hosted application demo link
+4. A kanban project board
+5. A repository link
+6. A hosted application demo link
 
 ## Approved Resources
 This list covers libraries and services that have been vetted by the company and approved for use.
