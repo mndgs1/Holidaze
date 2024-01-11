@@ -7,7 +7,11 @@ import Logo from "../../components/Logo";
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
 
+import { useState } from "react";
+
 const Register = () => {
+    const [hoverUser, setHoverUser] = useState(false);
+
     return (
         <>
             <section className={"flex justify-center h-screen"}>
@@ -17,14 +21,14 @@ const Register = () => {
                         Register
                     </Heading>
                     <form className="flex flex-col gap-5 items-center mb-3">
-                        <div className="flex flex-col items-center">
+                        <div className="flex flex-col items-center hover:opacity-85">
                             <UserIcon
                                 height={200}
                                 width={200}
-                                className="fill-gray-300 hover:fill-gray-200 transition-all"
+                                className="fill-gray-300  transition-all"
                             />
-                            <div className="-mt-4 bg-white px-3 py-1 drop-shadow rounded-xl">
-                                <Edit className="hover:fill-gray-300" />
+                            <div className="-mt-4 bg-white px-3 py-1 rounded-xl drop-shadow hover:drop-shadow-lg border hover:border-secondary">
+                                <Edit className="" />
                             </div>
                         </div>
                         <Input
