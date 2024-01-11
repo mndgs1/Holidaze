@@ -21,7 +21,7 @@ const Input = ({ type, id, name, label, ...rest }: InputProps) => {
                 htmlFor={id}
                 className={`absolute ml-4 top-1/2 transition-all -translate-y-2/4 text-secondary-400 ${
                     isOpen
-                        ? "bg-white px-1 text-sm transform translate-y-[-180%] translate-x-[-10%] text-secondary-600 origin-top-left"
+                        ? "bg-white rounded-xl px-1 text-sm transform translate-y-[-180%] translate-x-[-10%] text-secondary-600 origin-top-left"
                         : ""
                 }`}>
                 {label}
