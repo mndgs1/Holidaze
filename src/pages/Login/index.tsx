@@ -29,7 +29,7 @@ const Login = () => {
                             label="Password"
                         />
                         <Button primary xl>
-                            Log In
+                            Login
                         </Button>
                     </form>
                     <div className="flex gap-2 justify-center">

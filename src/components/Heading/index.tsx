@@ -11,7 +11,7 @@ interface HeadingProps {
 const Heading = ({ h1, h2, h3, children, ...rest }: HeadingProps) => {
     const classes = className(
         rest.className,
-        "text-secondary font-heading font-bold",
+        "text-secondary font-heading font-bold tracking-wide",
         {
             "text-3xl mb-9": h1,
             "text-2xl": h2,
