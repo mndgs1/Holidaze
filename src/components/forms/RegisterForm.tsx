@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 
-import Input from "../../common/Input";
-import Modal from "../../common/Modal";
-import Button from "../../common/Button";
-import Text from "../../common/Text";
+import Input from "../common/Input";
+import Modal from "../common/Modal";
+import Button from "../common/Button";
+import Text from "../common/Text";
 
 import { Dialog } from "@headlessui/react";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registrationSchema } from "../schemas";
+import { registrationSchema } from "./schemas";
 
-import { ReactComponent as UserIcon } from "../../../assets/icons/user.svg";
-import { ReactComponent as Edit } from "../../../assets/icons/edit.svg";
+import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
+import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
 
 // Register Form Component
 const RegisterForm = ({ ...rest }) => {
@@ -40,7 +40,6 @@ const RegisterForm = ({ ...rest }) => {
         setIsModalOpen(false);
     };
 
-    console.log(errors.name);
     return (
         <form
             className="flex flex-col gap-5 items-center mb-3"

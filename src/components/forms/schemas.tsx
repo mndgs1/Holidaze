@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-// Registration schema
+// Registration Form schema
 export const registrationSchema = yup.object({
     name: yup
         .string()

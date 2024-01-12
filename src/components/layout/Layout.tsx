@@ -1,7 +1,9 @@
 import React from "react";
-import Header from "../Header";
-import Footer from "../Footer";
+
 import { useLocation } from "react-router-dom";
+
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Layout: React.FC<{
     children: React.ReactNode;
