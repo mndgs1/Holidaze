@@ -39,7 +39,7 @@ const Button = ({
             "border-gray-900 bg-gray-900 text-white": secondary,
             "border-green-500 bg-green-500 text-white": success,
             "border-yellow-400 bg-yellow-400 text-white": warning,
-            "border-red-500 bg-red-500 text-white": danger,
+            "border-danger bg-danger text-white": danger,
             "h-13 max-w-76 font-bold text-lg": xl,
             "h-10": lg,
             "px-3 py-2 text-sm font-semibold shadow-sm inline-flex max-w-28":

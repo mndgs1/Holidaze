@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useUserActions } from "../stores/useUserStore";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -16,19 +16,27 @@ import Heading from "../components/common/Heading";
 import Link from "../components/common/Link";
 import Logo from "../components/common/Logo";
 import InputWithValidation from "../components/common/InputWithValidation";
+import ServerMessage from "../components/utility/ServerMessage";
 
 const Login = () => {
     const { setUser } = useUserActions();
     const navigate = useNavigate();
 
+    const [serverError, setServerError] = useState("");
+
     const loginMutation = useMutation({
         mutationFn: (data: UserCredentials) => {
+            setServerError("");
+
             const { email, password } = data;
             return login({ email, password });
         },
         onSuccess: (data: LoggedInUser) => {
             setUser(data);
             navigate("/explore");
+        },
+        onError: (error: any) => {
+            setServerError(error.message);
         },
     });
 
@@ -65,6 +73,7 @@ const Login = () => {
                                 errors={errors}
                             />
                         ))}
+
                         <Button primary xl>
                             Login
                         </Button>
@@ -73,6 +82,9 @@ const Login = () => {
                         <p>Don't have an account?</p>
                         <Link to="/register">Sign Up</Link>
                     </div>
+                    {serverError && (
+                        <ServerMessage>{serverError}</ServerMessage>
+                    )}
                 </div>
             </section>
         </>

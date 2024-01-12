@@ -18,7 +18,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         const classes = classNames(
             "w-full h-full border rounded-lg px-2 py-1 hover:border-secondary-300",
             {
-                "border-red-200 bg-red-50": danger,
+                "border-danger-200 bg-danger-50": danger,
             }
         );
 

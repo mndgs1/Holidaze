@@ -40,13 +40,12 @@ export const LoginInputConfig = [
         type: "text",
         id: "email",
         label: "Email address",
-        message: "Email must be a valid @stud.noroff.no",
+        autoFocus: true,
     },
     {
         type: "password",
         id: "password",
         label: "Password",
-        message: "Password must be minimum 6 characters",
     },
     {
         type: "checkbox",

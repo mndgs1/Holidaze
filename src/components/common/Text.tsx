@@ -24,13 +24,14 @@ const Text = ({
     sm,
     ...rest
 }: TextProps) => {
+    // add font-text later now doesnt work
     const classes = className(
-        "font-text",
+        "",
         {
             "text-secondary": primary,
             "font-extralight": secondary,
             "text-primary": success,
-            "text-red-600": danger,
+            "text-danger-600": danger,
             "text-xl": xl,
             "text-lg": lg,
             "text-sm": sm,
