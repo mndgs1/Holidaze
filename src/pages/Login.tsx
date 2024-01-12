@@ -30,6 +30,12 @@ const Login = () => {
                             name="password"
                             label="Password"
                         />
+                        <Input
+                            type="checkbox"
+                            id="remember"
+                            name="remember"
+                            label="Remember Me"
+                        />
                         <Button primary xl>
                             Login
                         </Button>

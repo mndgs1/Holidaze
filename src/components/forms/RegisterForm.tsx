@@ -105,16 +105,10 @@ const RegisterForm = ({ ...rest }) => {
                             {...register(fieldId)}
                             danger={!!errors[fieldId]?.message}
                         />
-                        {errors[fieldId]?.message ? (
+                        {errors[fieldId]?.message && (
                             <Text danger sm>
                                 {errors[fieldId]?.message}
                             </Text>
-                        ) : (
-                            input.message && (
-                                <Text secondary sm>
-                                    {input.message}
-                                </Text>
-                            )
                         )}
                     </div>
                 );

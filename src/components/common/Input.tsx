@@ -36,14 +36,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         // Checkbox Logic
         if (type === "checkbox") {
             return (
-                <div className="flex items-center gap-2">
+                <div className="flex gap-2 items-center">
                     <input
                         type={type}
                         id={id}
                         name={name}
-                        className={`${classes} ${isFocused ? "" : ""}`}
-                        onFocus={handleOpen}
-                        onBlur={handleBlur}
+                        className={`h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded`}
                         ref={ref}
                         {...rest}
                     />

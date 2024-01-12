@@ -35,7 +35,7 @@ const Button = ({
         "flex items-center justify-center border rounded-lg font-heading w-full  drop-shadow-xl tracking-wide",
         {
             "opacity-80": loading,
-            "text-white bg-primary hover:bg-primary-600": primary,
+            "text-white bg-primary hover:bg-primary-450": primary,
             "border-gray-900 bg-gray-900 text-white": secondary,
             "border-green-500 bg-green-500 text-white": success,
             "border-yellow-400 bg-yellow-400 text-white": warning,

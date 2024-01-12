@@ -28,7 +28,7 @@ const Text = ({
         "font-text",
         {
             "text-secondary": primary,
-            "font-light": secondary,
+            "font-extralight": secondary,
             "text-primary": success,
             "text-red-600": danger,
             "text-xl": xl,

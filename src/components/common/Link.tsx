@@ -10,7 +10,7 @@ const Link = ({ to, children, ...rest }: LinkProps) => {
     return (
         <RouterLink
             to={to}
-            className={"text-warning underline hover:text-warning-600"}
+            className={"text-warning underline hover:text-warning-450"}
             {...rest}>
             {children}
         </RouterLink>
