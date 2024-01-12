@@ -2,7 +2,7 @@ import React from "react";
 import Heading from "../components/common/Heading";
 import Link from "../components/common/Link";
 import Logo from "../components/common/Logo";
-import RegisterForm from "../components/Forms/RegisterForm";
+import RegisterForm from "../components/forms/RegisterForm";
 
 const Register = () => {
     return (

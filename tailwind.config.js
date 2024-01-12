@@ -14,7 +14,19 @@ module.exports = {
             fontFamily: {
                 heading: ["Montserrat", "Quicksand", "sans-serif"],
                 text: ["Roboto", "ui-serif"],
-                brand: ["Poppins", "ui-sans-serif"],
+            },
+            fontWeight: {
+                heading: {
+                    light: 300,
+                    normal: 400,
+                    semibold: 500,
+                    bold: 700,
+                },
+                text: {
+                    light: 300,
+                    normal: 400,
+                    bold: 700,
+                },
             },
             spacing: {
                 13: "52px",

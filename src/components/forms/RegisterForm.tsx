@@ -14,6 +14,38 @@ import { registrationSchema } from "./schemas";
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
 
+const RegisterInputConfig = [
+    {
+        type: "text",
+        id: "name",
+        label: "Name",
+        autoFocus: true,
+        message: "Name must be minimum 4 characters",
+    },
+    {
+        type: "text",
+        id: "email",
+        label: "Email address",
+        message: "Email must be a valid @stud.noroff.no",
+    },
+    {
+        type: "text",
+        id: "repeatEmail",
+        label: "Repeat email address",
+    },
+    {
+        type: "password",
+        id: "password",
+        label: "Password",
+        message: "Password must be minimum 6 characters",
+    },
+    {
+        type: "password",
+        id: "repeatPassword",
+        label: "Repeat password",
+    },
+];
+
 // Register Form Component
 const RegisterForm = ({ ...rest }) => {
     const {
@@ -55,67 +87,39 @@ const RegisterForm = ({ ...rest }) => {
                     <Edit className="" />
                 </button>
             </div>
-            <div className="flex flex-col gap-1 w-full">
-                <Input
-                    type="text"
-                    id="name"
-                    label="Name"
-                    autoFocus
-                    {...register("name")}
-                    danger={!!errors.name?.message}
-                />
-                <Text danger sm>
-                    {errors.name?.message}
-                </Text>
-            </div>
-            <div className="flex flex-col gap-1 w-full">
-                <Input
-                    type="text"
-                    id="email"
-                    label="Email address"
-                    {...register("email")}
-                    danger={!!errors.email?.message}
-                />
-                <Text danger sm>
-                    {errors.email?.message}
-                </Text>
-            </div>
-            <div className="flex flex-col gap-1 w-full">
-                <Input
-                    type="text"
-                    id="repeatEmail"
-                    label="Repeat email address"
-                    {...register("repeatEmail")}
-                    danger={!!errors.repeatEmail?.message}
-                />
-                <Text danger sm>
-                    {errors.repeatEmail?.message}
-                </Text>
-            </div>
-            <div className="flex flex-col gap-1 w-full">
-                <Input
-                    type="password"
-                    id="password"
-                    label="Password"
-                    {...register("password")}
-                    danger={!!errors.password?.message}
-                />
-                <Text danger sm>
-                    {errors.password?.message}
-                </Text>
-            </div>
-            <div className="flex flex-col gap-1 w-full">
-                <Input
-                    type="password"
-                    id="repeatPassword"
-                    label="Repeat password"
-                    {...register("repeatPassword")}
-                    danger={!!errors.repeatPassword?.message}
-                />
-                <Text danger sm>
-                    {errors.repeatPassword?.message}
-                </Text>
-            </div>
+            {RegisterInputConfig.map((input) => {
+                const fieldId = input.id as
+                    | "name"
+                    | "email"
+                    | "repeatEmail"
+                    | "password"
+                    | "repeatPassword";
+
+                return (
+                    <div className="flex flex-col gap-1 w-full" key={input.id}>
+                        <Input
+                            type={input.type}
+                            id={input.id}
+                            label={input.label}
+                            autoFocus={input.autoFocus || false}
+                            {...register(fieldId)}
+                            danger={!!errors[fieldId]?.message}
+                        />
+                        {errors[fieldId]?.message ? (
+                            <Text danger sm>
+                                {errors[fieldId]?.message}
+                            </Text>
+                        ) : (
+                            input.message && (
+                                <Text secondary sm>
+                                    {input.message}
+                                </Text>
+                            )
+                        )}
+                    </div>
+                );
+            })}
+
             <Button primary xl>
                 Register
             </Button>
