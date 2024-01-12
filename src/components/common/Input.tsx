@@ -11,7 +11,10 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ type, id, name, label, className, danger, onBlur, ...rest }, ref) => {
+    (
+        { type, id, name, label, className, danger, onBlur, onChange, ...rest },
+        ref
+    ) => {
         const classes = classNames(
             "w-full h-full border rounded-lg px-2 py-1 hover:border-secondary-300",
             {
@@ -29,8 +32,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             if (onBlur) {
                 onBlur(event);
             }
-            const input = document.getElementById(id) as HTMLInputElement;
+            const input = event.target;
             if (!input.value) setIsFocused(false);
+        };
+
+        // Handle onChange to prevent autocomplete overwriting
+        const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+            if (onChange) {
+                onChange(event);
+            }
+            const input = event.target;
+            if (input.value) {
+                setIsFocused(true);
+            }
         };
 
         // Checkbox Logic
@@ -75,6 +89,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                     className={`${classes} ${isFocused ? "" : ""}`}
                     onFocus={handleOpen}
                     onBlur={handleBlur}
+                    onChange={handleChange}
                     ref={ref}
                     {...rest}
                 />

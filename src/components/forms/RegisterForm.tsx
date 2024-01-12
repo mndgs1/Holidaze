@@ -1,50 +1,19 @@
 import React, { useState } from "react";
 
-import Input from "../common/Input";
 import Modal from "../common/Modal";
 import Button from "../common/Button";
-import Text from "../common/Text";
+import InputWithValidation from "../common/InputWithValidation";
 
 import { Dialog } from "@headlessui/react";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registrationSchema } from "./schemas";
+
+import { registrationSchema } from "../../constants/schemas";
+import { RegisterInputConfig } from "../../constants/inputConfig";
 
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
-
-const RegisterInputConfig = [
-    {
-        type: "text",
-        id: "name",
-        label: "Name",
-        autoFocus: true,
-        message: "Name must be minimum 4 characters",
-    },
-    {
-        type: "text",
-        id: "email",
-        label: "Email address",
-        message: "Email must be a valid @stud.noroff.no",
-    },
-    {
-        type: "text",
-        id: "repeatEmail",
-        label: "Repeat email address",
-    },
-    {
-        type: "password",
-        id: "password",
-        label: "Password",
-        message: "Password must be minimum 6 characters",
-    },
-    {
-        type: "password",
-        id: "repeatPassword",
-        label: "Repeat password",
-    },
-];
 
 // Register Form Component
 const RegisterForm = ({ ...rest }) => {
@@ -87,32 +56,14 @@ const RegisterForm = ({ ...rest }) => {
                     <Edit className="" />
                 </button>
             </div>
-            {RegisterInputConfig.map((input) => {
-                const fieldId = input.id as
-                    | "name"
-                    | "email"
-                    | "repeatEmail"
-                    | "password"
-                    | "repeatPassword";
-
-                return (
-                    <div className="flex flex-col gap-1 w-full" key={input.id}>
-                        <Input
-                            type={input.type}
-                            id={input.id}
-                            label={input.label}
-                            autoFocus={input.autoFocus || false}
-                            {...register(fieldId)}
-                            danger={!!errors[fieldId]?.message}
-                        />
-                        {errors[fieldId]?.message && (
-                            <Text danger sm>
-                                {errors[fieldId]?.message}
-                            </Text>
-                        )}
-                    </div>
-                );
-            })}
+            {RegisterInputConfig.map((input) => (
+                <InputWithValidation
+                    key={input.id}
+                    input={input}
+                    register={register}
+                    errors={errors}
+                />
+            ))}
 
             <Button primary xl>
                 Register

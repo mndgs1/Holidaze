@@ -1,11 +1,49 @@
 import React from "react";
-import Input from "../components/common/Input";
+
+import { useUserActions } from "../stores/useUserStore";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { login } from "../api/auth/login";
+import { LoggedInUser, UserCredentials } from "../constants/interfaces";
+import { loginSchema } from "../constants/schemas";
+import { LoginInputConfig } from "../constants/inputConfig";
+
 import Button from "../components/common/Button";
 import Heading from "../components/common/Heading";
 import Link from "../components/common/Link";
 import Logo from "../components/common/Logo";
+import InputWithValidation from "../components/common/InputWithValidation";
 
 const Login = () => {
+    const { setUser } = useUserActions();
+    const navigate = useNavigate();
+
+    const loginMutation = useMutation({
+        mutationFn: (data: UserCredentials) => {
+            const { email, password } = data;
+            return login({ email, password });
+        },
+        onSuccess: (data: LoggedInUser) => {
+            setUser(data);
+            navigate("/explore");
+        },
+    });
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(loginSchema),
+    });
+
+    async function onSubmit(data: UserCredentials) {
+        loginMutation.mutate(data);
+    }
+
     return (
         <>
             <Logo
@@ -16,26 +54,17 @@ const Login = () => {
                     <Heading h1 className="text-center">
                         Welcome back
                     </Heading>
-                    <form className="flex flex-col gap-6 justify-center mb-3">
-                        <Input
-                            type="text"
-                            id="name"
-                            name="name"
-                            label="Email address"
-                            autoFocus
-                        />
-                        <Input
-                            type="password"
-                            id="password"
-                            name="password"
-                            label="Password"
-                        />
-                        <Input
-                            type="checkbox"
-                            id="remember"
-                            name="remember"
-                            label="Remember Me"
-                        />
+                    <form
+                        className="flex flex-col gap-6 justify-center mb-3"
+                        onSubmit={handleSubmit(onSubmit)}>
+                        {LoginInputConfig.map((input) => (
+                            <InputWithValidation
+                                key={input.id}
+                                input={input}
+                                register={register}
+                                errors={errors}
+                            />
+                        ))}
                         <Button primary xl>
                             Login
                         </Button>
