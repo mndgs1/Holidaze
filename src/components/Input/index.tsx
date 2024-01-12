@@ -30,7 +30,7 @@ const Input = ({ type, id, name, label, ...rest }: InputProps) => {
                 type={type}
                 id={id}
                 name={name}
-                className={`w-full h-full border rounded-lg px-2 py-1 ${
+                className={`w-full h-full border rounded-lg px-2 py-1 hover:border-secondary-300${
                     isOpen ? "" : ""
                 }`}
                 onFocus={handleOpen}

@@ -8,13 +8,15 @@ import Logo from "../../components/Logo";
 const Login = () => {
     return (
         <>
-            <section className={"flex justify-center h-screen"}>
-                <div className="w-76 mt-20">
-                    <Logo className={"flex justify-center mb-16"} />
+            <Logo
+                className={"absolute left-1/2 transform -translate-x-1/2 mt-16"}
+            />
+            <section className={"flex items-center justify-center h-screen"}>
+                <div className="w-76">
                     <Heading h1 className="text-center">
                         Welcome back
                     </Heading>
-                    <form className="flex flex-col gap-5 justify-center mb-3">
+                    <form className="flex flex-col gap-6 justify-center mb-3">
                         <Input
                             type="text"
                             id="name"
