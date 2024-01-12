@@ -32,7 +32,6 @@ const Button = ({
     ...rest
 }: ButtonProps) => {
     const classes = className(
-        rest.className,
         "flex items-center justify-center border rounded-lg font-heading w-full  drop-shadow-xl tracking-wide",
         {
             "opacity-80": loading,
@@ -45,7 +44,8 @@ const Button = ({
             "h-10": lg,
             "px-3 py-2 text-sm font-semibold shadow-sm inline-flex max-w-28":
                 md,
-        }
+        },
+        rest.className
     );
 
     return (
