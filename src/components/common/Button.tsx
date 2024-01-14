@@ -55,9 +55,10 @@ const Button = ({
             className={classes}
             onClick={onClick}>
             {loading ? (
-                <div>
-                    <GoSync className="animate-spin" /> Proccessing
-                </div>
+                <>
+                    <GoSync className="animate-spin mr-4" />
+                    <span className="">Loading...</span>
+                </>
             ) : (
                 children
             )}

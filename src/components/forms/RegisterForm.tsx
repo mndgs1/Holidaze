@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Modal from "../common/Modal";
 import Button from "../common/Button";
+import Text from "../common/Text";
 import InputWithValidation from "../common/InputWithValidation";
 
 import { Dialog } from "@headlessui/react";
@@ -11,12 +12,21 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { registrationSchema } from "../../constants/schemas";
 import { RegisterInputConfig } from "../../constants/inputConfig";
+import { registerUser } from "../../api/auth/registerUser";
 
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
+import { User } from "../../constants/interfaces";
+import { useMutation } from "@tanstack/react-query";
 
+// For Error. I want to send it up to the page.
+// Should I use global state? Or get the prop up the tree?
 // Register Form Component
-const RegisterForm = ({ ...rest }) => {
+const RegisterForm = ({ error, ...rest }: any) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [serverError, setServerError] = useState("");
+
     const {
         register,
         handleSubmit,
@@ -26,12 +36,37 @@ const RegisterForm = ({ ...rest }) => {
         resolver: yupResolver(registrationSchema),
     });
 
-    function onSubmit(data: { name: string; email: string; password: string }) {
-        console.log(data);
-        reset();
-    }
+    const registerMutation = useMutation({
+        mutationFn: (data: User) => {
+            setIsLoading(true);
+            setServerError("");
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+            console.log("data", data);
+            const { name, email, password, venueManager, avatar } = data;
+            return registerUser({
+                name,
+                email,
+                password,
+                venueManager,
+                avatar,
+            });
+        },
+        onSuccess: (data: User) => {
+            console.log("succesfuly registered", data);
+            reset();
+        },
+        onError: (error: any) => {
+            console.log(error);
+            setServerError(error.message);
+        },
+        onSettled: () => setIsLoading(false),
+    });
+
+    function onSubmit(data: User) {
+        // Why does it send in repeat password? it does not check for types
+        console.log("data onSubmit", data);
+        registerMutation.mutate(data);
+    }
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -56,6 +91,7 @@ const RegisterForm = ({ ...rest }) => {
                     <Edit className="" />
                 </button>
             </div>
+
             {RegisterInputConfig.map((input) => (
                 <InputWithValidation
                     key={input.id}
@@ -65,7 +101,7 @@ const RegisterForm = ({ ...rest }) => {
                 />
             ))}
 
-            <Button primary xl>
+            <Button primary xl loading={isLoading}>
                 Register
             </Button>
             <UserAvatarModal
@@ -73,6 +109,12 @@ const RegisterForm = ({ ...rest }) => {
                 closeModal={closeModal}
                 isModalOpen={isModalOpen}
             />
+
+            {serverError && (
+                <div className="p-2 bg-danger-50 rounded mt-8">
+                    <Text>{serverError}</Text>
+                </div>
+            )}
         </form>
     );
 };

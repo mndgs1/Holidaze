@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { useUserActions } from "../stores/useUserStore";
 import { useNavigate } from "react-router-dom";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -15,8 +15,8 @@ import Button from "../components/common/Button";
 import Heading from "../components/common/Heading";
 import Link from "../components/common/Link";
 import Logo from "../components/common/Logo";
+import Text from "../components/common/Text";
 import InputWithValidation from "../components/common/InputWithValidation";
-import ServerMessage from "../components/utility/ServerMessage";
 
 const Login = () => {
     const { setUser } = useUserActions();
@@ -28,6 +28,7 @@ const Login = () => {
         mutationFn: (data: UserCredentials) => {
             setServerError("");
 
+            console.log("data", data);
             const { email, password } = data;
             return login({ email, password });
         },
@@ -49,6 +50,7 @@ const Login = () => {
     });
 
     async function onSubmit(data: UserCredentials) {
+        console.log("data onSubmit", data);
         loginMutation.mutate(data);
     }
 
@@ -83,7 +85,9 @@ const Login = () => {
                         <Link to="/register">Sign Up</Link>
                     </div>
                     {serverError && (
-                        <ServerMessage>{serverError}</ServerMessage>
+                        <div className="p-2 bg-danger-50 rounded mt-8">
+                            <Text>{serverError}</Text>
+                        </div>
                     )}
                 </div>
             </section>

@@ -9,7 +9,8 @@ const InputWithValidation = ({ input, register, errors }: any) => {
         | "email"
         | "repeatEmail"
         | "password"
-        | "repeatPassword";
+        | "repeatPassword"
+        | "remember";
 
     return (
         <div className="flex flex-col gap-1 w-full" key={input.id}>
@@ -18,7 +19,7 @@ const InputWithValidation = ({ input, register, errors }: any) => {
                 id={input.id}
                 label={input.label}
                 autoFocus={input.autoFocus || false}
-                {...register(fieldId as any)}
+                {...register(fieldId as string)}
                 danger={!!errors[fieldId]?.message}
             />
             {errors[fieldId]?.message && (

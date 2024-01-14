@@ -10,19 +10,15 @@ export async function login(
         body: JSON.stringify(userDetails),
     };
 
-    console.log(LOGIN_URL);
-    console.log(options);
     const response = await fetch(LOGIN_URL, options);
 
     const json = await response.json();
-
-    console.log(json);
 
     if (!response.ok) {
         throw new Error(json.errors?.[0]?.message ?? "There was an error");
     }
 
-    const loggedInUser: LoggedInUser = json; // Adjust this based on your API response structure
+    const loggedInUser: LoggedInUser = json;
 
     return loggedInUser;
 }

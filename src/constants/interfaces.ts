@@ -1,12 +1,12 @@
 export interface UserCredentials {
     email: string;
     password: string;
-    rememberMe?: boolean;
+    remember?: boolean;
 }
 
 export interface User extends UserCredentials {
-    name: string;
-    avatar?: string;
+    name?: string;
+    avatar?: string | null;
     venueManager?: boolean;
 }
 

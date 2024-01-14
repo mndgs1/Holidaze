@@ -1,25 +1,32 @@
 import React from "react";
-import className from "classnames";
+import classNames from "classnames";
 
 import Text from "../common/Text";
-
 interface ServerMessageProps {
-    children: React.ReactNode;
+    message: string;
+    danger?: boolean;
+    success?: boolean;
     className?: string;
 }
 
-const ServerMessage = ({ children, ...rest }: ServerMessageProps) => {
-    const classes = className(
-        "mt-4 px-2 py-2 bg-danger-50 rounded-lg",
-        {},
+const ServerMessage = ({
+    message,
+    danger,
+    success,
+    ...rest
+}: ServerMessageProps) => {
+    const classes = classNames(
+        "p-2 rounded",
+        {
+            "text-danger-600 bg-danger-50": danger,
+            "text-success-600 bg-success-50": success,
+        },
         rest.className
     );
 
     return (
-        <div className={classes} {...rest}>
-            <Text primary className="text-danger-800">
-                {children}
-            </Text>
+        <div className={classes}>
+            <Text>{message}</Text>
         </div>
     );
 };
