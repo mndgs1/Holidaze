@@ -15,6 +15,9 @@ module.exports = {
                 heading: ["Montserrat", "Quicksand", "sans-serif"],
                 text: ["Roboto", "ui-serif"],
             },
+            height: {
+                84: "334px",
+            },
             fontWeight: {
                 heading: {
                     light: 300,
