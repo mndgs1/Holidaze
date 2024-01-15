@@ -1,7 +1,18 @@
 import React from "react";
+import className from "classnames";
 
-const Footer = () => {
-    return <div>Footer</div>;
+interface FooterProps {
+    className?: string;
+}
+
+const Footer = ({ ...rest }: FooterProps) => {
+    const classes = className("", rest.className);
+
+    return (
+        <footer className={classes} {...rest}>
+            Footer
+        </footer>
+    );
 };
 
 export default Footer;
