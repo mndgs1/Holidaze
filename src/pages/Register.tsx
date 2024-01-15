@@ -16,7 +16,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { registrationSchema } from "../constants/schemas";
 import { RegisterInputConfig } from "../constants/inputConfig";
 import { registerUser } from "../api/auth/registerUser";
-import { User } from "../constants/interfaces";
+import { User } from "../constants/interfaces/user";
 
 import { ReactComponent as UserIcon } from "../assets/icons/user.svg";
 import { ReactComponent as Edit } from "../assets/icons/edit.svg";

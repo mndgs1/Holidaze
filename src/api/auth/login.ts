@@ -1,13 +1,14 @@
 import { LOGIN_URL } from "../../constants/api";
-import { UserCredentials, LoggedInUser } from "../../constants/interfaces";
+import { UserCredentials, LoggedInUser } from "../../constants/interfaces/user";
 
 export async function login(
     userDetails: UserCredentials
 ): Promise<LoggedInUser> {
+    const { password, email } = userDetails;
     const options = {
         headers: { "Content-Type": "application/json" },
         method: "POST",
-        body: JSON.stringify(userDetails),
+        body: JSON.stringify({ password, email }),
     };
 
     const response = await fetch(LOGIN_URL, options);
@@ -18,6 +19,7 @@ export async function login(
         throw new Error(json.errors?.[0]?.message ?? "There was an error");
     }
 
+    json.remember = userDetails.remember;
     const loggedInUser: LoggedInUser = json;
 
     return loggedInUser;

@@ -1,5 +1,5 @@
 import { REGISTER_URL } from "../../constants/api";
-import { User } from "../../constants/interfaces";
+import { User } from "../../constants/interfaces/user";
 
 export async function registerUser(userDetails: User) {
     const options = {

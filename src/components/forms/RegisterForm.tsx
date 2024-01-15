@@ -16,7 +16,7 @@ import { registerUser } from "../../api/auth/registerUser";
 
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
-import { User } from "../../constants/interfaces";
+import { User } from "../../constants/interfaces/user";
 import { useMutation } from "@tanstack/react-query";
 
 // For Error. I want to send it up to the page.

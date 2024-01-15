@@ -7,7 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { login } from "../api/auth/login";
-import { LoggedInUser, UserCredentials } from "../constants/interfaces";
+import { LoggedInUser, UserCredentials } from "../constants/interfaces/user";
 import { loginSchema } from "../constants/schemas";
 import { LoginInputConfig } from "../constants/inputConfig";
 
@@ -28,9 +28,7 @@ const Login = () => {
         mutationFn: (data: UserCredentials) => {
             setServerError("");
 
-            console.log("data", data);
-            const { email, password } = data;
-            return login({ email, password });
+            return login(data);
         },
         onSuccess: (data: LoggedInUser) => {
             console.log("succesfuly logged in", data);

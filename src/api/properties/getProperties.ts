@@ -1,5 +1,5 @@
 import { LOGIN_URL } from "../../constants/api";
-import { UserCredentials, LoggedInUser } from "../../constants/interfaces";
+import { UserCredentials, LoggedInUser } from "../../constants/interfaces/user";
 
 export async function login(
     userDetails: UserCredentials

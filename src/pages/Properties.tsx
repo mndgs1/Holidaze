@@ -2,8 +2,6 @@ import React from "react";
 
 import Text from "../components/common/Text";
 
-import { useToken } from "../stores/useUserStore";
-
 const Properties = () => {
     return (
         <>
