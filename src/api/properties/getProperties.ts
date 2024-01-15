@@ -1,16 +1,15 @@
-import { LOGIN_URL } from "../../constants/api";
-import { UserCredentials, LoggedInUser } from "../../constants/interfaces/user";
+import { PROPERTIES_URL } from "../../constants/api";
+import { Property } from "../../constants/interfaces/property";
 
-export async function login(
-    userDetails: UserCredentials
-): Promise<LoggedInUser> {
+export async function getProperties(token: string) {
     const options = {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        body: JSON.stringify(userDetails),
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
     };
 
-    const response = await fetch(LOGIN_URL, options);
+    const response = await fetch(PROPERTIES_URL, options);
 
     const json = await response.json();
 
@@ -18,7 +17,6 @@ export async function login(
         throw new Error(json.errors?.[0]?.message ?? "There was an error");
     }
 
-    const loggedInUser: LoggedInUser = json;
-
-    return loggedInUser;
+    const properties: Property[] = json;
+    return properties;
 }
