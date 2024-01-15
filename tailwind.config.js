@@ -3,12 +3,12 @@ module.exports = {
     content: ["./src/**/*.{js,jsx,ts,tsx}"],
     theme: {
         fontSize: {
-            sm: ["14px", "20px"],
-            base: ["16px", "24px"],
-            lg: ["18px", "26px"],
-            xl: ["22px", "28px"],
-            "2xl": ["24px", "32px"],
-            "3xl": ["32px", "40px"],
+            // sm: ["14px", "20px"],
+            // base: ["16px", "24px"],
+            // lg: ["18px", "26px"],
+            // xl: ["22px", "28px"],
+            // "2xl": ["24px", "32px"],
+            // "3xl": ["32px", "40px"],
         },
         extend: {
             fontFamily: {
@@ -16,6 +16,7 @@ module.exports = {
                 text: ["Roboto", "ui-serif"],
             },
             height: {
+                21: "82px",
                 84: "334px",
             },
             fontWeight: {
@@ -38,6 +39,9 @@ module.exports = {
             spacing: {
                 13: "52px",
                 76: "304px",
+            },
+            screens: {
+                "3xl": "1920px",
             },
             colors: {
                 primary: {

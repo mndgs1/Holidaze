@@ -13,11 +13,13 @@ const Layout: React.FC<{
     return (
         <>
             {pathname === "/login" || pathname === "/register" ? null : (
-                <Header className="max-w-screen-2xl" />
+                <Header />
             )}
-            <main className="max-w-screen-2xl">{children}</main>
+            <main className="mx-6 sm:mx-10 md:mx-16 lg:mx-24 xl:mx-34 2xl:mx-40 3xl:mx-auto max-w-screen-2xl">
+                {children}
+            </main>
             {pathname === "/login" || pathname === "/register" ? null : (
-                <Footer className="max-w-screen-2xl" />
+                <Footer />
             )}
         </>
     );

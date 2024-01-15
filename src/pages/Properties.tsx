@@ -39,11 +39,14 @@ const Properties = () => {
 
     return (
         <>
-            <section>
+            <section className="">
                 {data?.map((property) => (
-                    <Link to={`/properties/${property.id}`} key={property.id}>
-                        <div className="max-w-80">
-                            <div className="w-full h-84">
+                    <Link
+                        to={`/properties/${property.id}`}
+                        key={property.id}
+                        className="block mb-4dw">
+                        <div className="mb-4">
+                            <div className="w-full h-84 mb-1">
                                 <img
                                     className="w-full h-full object-cover rounded-lg"
                                     src={
@@ -55,7 +58,9 @@ const Properties = () => {
                                     alt={property.name}
                                 />
                             </div>
-                            <Heading h3>{property.name}</Heading>
+                            <Heading h3 className="mb-0">
+                                {property.name}
+                            </Heading>
                             <Text primary>{property.rating} stars</Text>
                             <Text primary>For {property.maxGuests} Guests</Text>
                             <Text primary>
