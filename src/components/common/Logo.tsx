@@ -1,9 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useToken } from "../../stores/useUserStore";
 
 const Logo = ({ ...rest }) => {
+    const token = useToken();
+    const isLoggedIn = !!token;
+
     return (
-        <Link {...rest} to={"/"}>
+        <Link {...rest} to={isLoggedIn ? "/properties" : "/"}>
             <svg
                 width="100"
                 height="33"

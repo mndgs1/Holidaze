@@ -6,6 +6,7 @@ module.exports = {
             sm: ["14px", "20px"],
             base: ["16px", "24px"],
             lg: ["18px", "26px"],
+            mdlg: ["20px", "28px"],
             xl: ["22px", "28px"],
             "2xl": ["24px", "32px"],
             "3xl": ["32px", "40px"],
@@ -14,6 +15,15 @@ module.exports = {
             fontFamily: {
                 heading: ["Montserrat", "Quicksand", "sans-serif"],
                 text: ["Roboto", "ui-serif"],
+            },
+            height: {
+                13: "52px",
+                21: "82px",
+                84: "334px",
+            },
+            margin: {
+                21: "82px",
+                84: "334px",
             },
             fontWeight: {
                 heading: {
@@ -35,6 +45,9 @@ module.exports = {
             spacing: {
                 13: "52px",
                 76: "304px",
+            },
+            screens: {
+                "3xl": "1920px",
             },
             colors: {
                 primary: {

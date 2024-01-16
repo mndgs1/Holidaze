@@ -4,7 +4,7 @@ export interface Property {
     id: string;
     name: string;
     description: string;
-    media?: string[] | "";
+    media?: string[];
     price: number;
     maxGuests: number;
     rating?: number | 0;

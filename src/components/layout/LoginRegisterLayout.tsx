@@ -18,10 +18,13 @@ const LoginRegisterLayout = ({
     const windowHeight = useWindowHeight();
 
     return (
-        <div className="lg:grid lg:grid-cols-8">
-            <section className="hidden lg:block lg:col-span-5">
-                <div className="">
-                    <img src="/public/assets/Images/login.jpg" alt="asd"></img>
+        <div className="xl:grid xl:grid-cols-8">
+            <section className="hidden xl:block xl:col-span-5">
+                <div className="w-full h-screen">
+                    <img
+                        src="/assets/Images/login.jpg"
+                        alt="asd"
+                        className="h-full w-full object-cover"></img>
                 </div>
             </section>
 
