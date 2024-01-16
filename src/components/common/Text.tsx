@@ -11,6 +11,7 @@ interface TextProps {
     xl?: boolean;
     lg?: boolean;
     sm?: boolean;
+    bold?: boolean;
 }
 
 const Text = ({
@@ -22,6 +23,7 @@ const Text = ({
     xl,
     lg,
     sm,
+    bold,
     ...rest
 }: TextProps) => {
     // add font-text later now doesnt work
@@ -35,6 +37,7 @@ const Text = ({
             "text-xl": xl,
             "text-lg": lg,
             "text-sm": sm,
+            "font-medium": bold,
         },
         rest.className
     );
