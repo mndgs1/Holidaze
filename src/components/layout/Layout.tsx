@@ -6,6 +6,7 @@ import useOnScrollUp from "../../hooks/useOnScrollUp";
 
 import Header from "./Header";
 import Footer from "./Footer";
+import Navigation from "./Navigation";
 
 const Layout: React.FC<{
     children: React.ReactNode;
@@ -31,12 +32,12 @@ const Layout: React.FC<{
                 {children}
             </main>
             {isMobile && (
-                <nav
-                    className={`fixed w-full bottom-0 left-0 right-0 h-21 bg-primary-450 ${
+                <Navigation
+                    className={`fixed w-full bottom-0 left-0 right-0 h-13 bg-white border-t border-secondary-100 ${
                         !isHeaderVisible
                             ? "transform translate-y-full transition-all duration-300"
                             : "transform translate-y-0 transition-all duration-300"
-                    }`}></nav>
+                    }`}></Navigation>
             )}
             <Footer />
         </>

@@ -18,8 +18,6 @@ import { RegisterInputConfig } from "../constants/inputConfig";
 import { registerUser } from "../api/auth/registerUser";
 import { User } from "../constants/interfaces/user";
 
-import { ReactComponent as UserIcon } from "../assets/icons/user.svg";
-import { ReactComponent as Edit } from "../assets/icons/edit.svg";
 import { useMutation } from "@tanstack/react-query";
 
 const Register = () => {
@@ -87,7 +85,9 @@ const Register = () => {
                 <div
                     className="flex flex-col items-center transition-all duration-300 hover:opacity-85"
                     onClick={openModal}>
-                    <UserIcon
+                    <img
+                        src="/assets/placeholders/profile-placeholder.jpg"
+                        alt="profile"
                         height={200}
                         width={200}
                         className="fill-gray-300"
@@ -95,7 +95,7 @@ const Register = () => {
                     <button
                         type="button"
                         className="-mt-4 bg-white px-3 py-1 rounded-xl drop-shadow hover:drop-shadow-lg border hover:border-secondary-300 transition-all duration-300">
-                        <Edit className="" />
+                        {/* <Edit className="" /> */}
                     </button>
                 </div>
 

@@ -18,7 +18,7 @@ const Header = ({ ...rest }: HeaderProps) => {
     );
     return (
         <header
-            className={`drop-shadow-md fixed w-full top-0 left-0 right-0 bg-white ${
+            className={`drop-shadow-md fixed w-full top-0 left-0 right-0 bg-white border-b border-secondary-100 ${
                 !isHeaderVisible
                     ? "transform -translate-y-full transition-all duration-300"
                     : "transform translate-y-0 transition-all duration-300"

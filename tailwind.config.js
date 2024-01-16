@@ -17,6 +17,7 @@ module.exports = {
                 text: ["Roboto", "ui-serif"],
             },
             height: {
+                13: "52px",
                 21: "82px",
                 84: "334px",
             },
