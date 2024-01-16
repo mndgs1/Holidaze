@@ -6,15 +6,17 @@ interface HeadingProps {
     h1?: boolean;
     h2?: boolean;
     h3?: boolean;
+    h4?: boolean;
     className?: string;
 }
-const Heading = ({ h1, h2, h3, children, ...rest }: HeadingProps) => {
+const Heading = ({ h1, h2, h3, h4, children, ...rest }: HeadingProps) => {
     const classes = className(
         "font-heading font-bold",
         {
             "text-3xl mb-9": h1,
             "text-2xl": h2,
-            "text-xl mb-1": h3,
+            "text-xl": h3,
+            "text-lg": h4,
         },
         rest.className
     );
@@ -25,6 +27,8 @@ const Heading = ({ h1, h2, h3, children, ...rest }: HeadingProps) => {
         <h2 className={classes}>{children}</h2>
     ) : h3 ? (
         <h3 className={classes}>{children}</h3>
+    ) : h4 ? (
+        <h4 className={classes}>{children}</h4>
     ) : null;
 };
 
