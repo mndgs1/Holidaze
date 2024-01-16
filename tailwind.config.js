@@ -20,6 +20,10 @@ module.exports = {
                 21: "82px",
                 84: "334px",
             },
+            margin: {
+                21: "82px",
+                84: "334px",
+            },
             fontWeight: {
                 heading: {
                     light: 300,

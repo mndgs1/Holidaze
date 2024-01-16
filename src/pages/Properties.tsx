@@ -44,9 +44,9 @@ const Properties = () => {
                     <Link
                         to={`/properties/${property.id}`}
                         key={property.id}
-                        className="block mb-4dw">
+                        className="block">
                         <div className="mb-4">
-                            <div className="w-full h-84 mb-1">
+                            <div className="w-full h-84">
                                 <img
                                     className="w-full h-full object-cover rounded-lg"
                                     src={
