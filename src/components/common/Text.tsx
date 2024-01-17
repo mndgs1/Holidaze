@@ -36,7 +36,7 @@ const Text = ({
             "text-danger-600": danger,
             "text-xl": xl,
             "text-lg": lg,
-            "text-sm": sm,
+            "text-sm leading-tight": sm,
             "font-medium": bold,
         },
         rest.className

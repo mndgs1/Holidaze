@@ -75,14 +75,3 @@ const Navigation = ({ ...rest }: NavigationProps) => {
 };
 
 export default Navigation;
-
-{
-    /* <NavLink to={item.to}>
-<li className="flex flex-col items-center justify-center">
-    {item.icon}
-    <Text secondary sm className="leading-tight">
-        {item.text}
-    </Text>
-</li>
-</NavLink> */
-}

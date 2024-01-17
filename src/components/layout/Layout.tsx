@@ -27,7 +27,7 @@ const Layout: React.FC<{
             <Header />
             <main
                 className={
-                    "mt-21 mx-6 sm:mx-10 md:mx-16 lg:mx-24 xl:mx-34 2xl:mx-40 3xl:mx-auto max-w-screen-2xl"
+                    "mt-24 mx-6 sm:mx-10 md:mx-16 lg:mx-24 xl:mx-34 2xl:mx-40 3xl:mx-auto max-w-screen-2xl"
                 }>
                 {children}
             </main>
