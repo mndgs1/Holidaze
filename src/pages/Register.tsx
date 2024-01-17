@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 
-import Modal from "../components/common/Modal";
 import Button from "../components/common/Button";
 import Text from "../components/common/Text";
 import InputWithValidation from "../components/common/InputWithValidation";
 import Heading from "../components/common/Heading";
 import Link from "../components/common/Link";
 import LoginRegisterLayout from "../components/layout/LoginRegisterLayout";
-
-import { Dialog } from "@headlessui/react";
+import Avatar from "../components/common/Avatar";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -21,7 +19,6 @@ import { User } from "../constants/interfaces/user";
 import { useMutation } from "@tanstack/react-query";
 
 const Register = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [serverError, setServerError] = useState("");
 
@@ -65,40 +62,15 @@ const Register = () => {
         console.log("data onSubmit", data);
         registerMutation.mutate(data);
     }
-
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-
     return (
         <LoginRegisterLayout register>
-            <Heading h1 className="text-center">
+            <Heading h1 className="text-center  mb-9">
                 Register
             </Heading>
             <form
                 className="flex flex-col gap-5 items-center mb-3"
                 onSubmit={handleSubmit(onSubmit)}>
-                <div
-                    className="flex flex-col items-center transition-all duration-300 hover:opacity-85"
-                    onClick={openModal}>
-                    <img
-                        src="/assets/placeholders/profile-placeholder.jpg"
-                        alt="profile"
-                        height={200}
-                        width={200}
-                        className="fill-gray-300"
-                    />
-                    <button
-                        type="button"
-                        className="-mt-4 bg-white px-3 py-1 rounded-xl drop-shadow hover:drop-shadow-lg border hover:border-secondary-300 transition-all duration-300">
-                        {/* <Edit className="" /> */}
-                    </button>
-                </div>
-
+                <Avatar />
                 {RegisterInputConfig.map((input) => (
                     <InputWithValidation
                         key={input.id}
@@ -111,12 +83,6 @@ const Register = () => {
                 <Button primary xl loading={isLoading}>
                     Register
                 </Button>
-                <UserAvatarModal
-                    openModal={openModal}
-                    closeModal={closeModal}
-                    isModalOpen={isModalOpen}
-                />
-
                 {serverError && (
                     <div className="p-2 bg-danger-50 rounded mt-8">
                         <Text>{serverError}</Text>
@@ -131,44 +97,3 @@ const Register = () => {
     );
 };
 export default Register;
-
-const UserAvatarModal: React.FC<{
-    openModal: () => void;
-    closeModal: () => void;
-    isModalOpen: boolean;
-}> = ({ openModal, closeModal, isModalOpen }) => {
-    return (
-        <Modal openModal={openModal} isOpen={isModalOpen}>
-            <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">
-                    <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"></div>
-                    <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                        <Dialog.Title
-                            as="h3"
-                            className="text-base font-semibold leading-6 text-gray-900">
-                            Deactivate account
-                        </Dialog.Title>
-                        <div className="mt-2">
-                            <p className="text-sm text-gray-500">
-                                Are you sure you want to deactivate your
-                                account? All of your data will be permanently
-                                removed. This action cannot be undone.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                <Button primary lg onClick={closeModal}>
-                    Deactivate
-                </Button>
-                <button
-                    type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    onClick={closeModal}>
-                    Cancel
-                </button>
-            </div>
-        </Modal>
-    );
-};

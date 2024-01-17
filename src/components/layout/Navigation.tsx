@@ -3,7 +3,6 @@ import className from "classnames";
 import { FaSuitcaseRolling, FaSearch, FaUserCircle } from "react-icons/fa";
 import { FaHouse } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
-import classNames from "classnames";
 
 import Text from "../common/Text";
 

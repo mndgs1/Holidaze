@@ -8,11 +8,23 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     danger?: boolean;
     className?: string;
     onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+    checked?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
     (
-        { type, id, name, label, className, danger, onBlur, onChange, ...rest },
+        {
+            type,
+            id,
+            name,
+            label,
+            className,
+            danger,
+            onBlur,
+            onChange,
+            checked,
+            ...rest
+        },
         ref
     ) => {
         const classes = classNames(

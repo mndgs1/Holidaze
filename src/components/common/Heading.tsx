@@ -13,7 +13,7 @@ const Heading = ({ h1, h2, h3, h4, children, ...rest }: HeadingProps) => {
     const classes = className(
         "font-heading font-bold",
         {
-            "text-3xl mb-9": h1,
+            "text-3xl": h1,
             "text-2xl": h2,
             "text-xl": h3,
             "text-lg": h4,

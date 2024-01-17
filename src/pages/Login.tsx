@@ -55,7 +55,7 @@ const Login = () => {
 
     return (
         <LoginRegisterLayout login>
-            <Heading h1 className="text-center">
+            <Heading h1 className="text-center  mb-9">
                 Welcome back
             </Heading>
             <form

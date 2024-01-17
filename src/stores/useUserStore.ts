@@ -28,3 +28,10 @@ export const useUserActions = () => {
     const { setUser, clearUser } = useUserStore();
     return { setUser, clearUser };
 };
+
+export const useUser = () => {
+    const user = useUserStore((state) => state.user);
+
+    if (user) return user;
+    else return null;
+};
