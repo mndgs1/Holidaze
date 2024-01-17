@@ -45,7 +45,7 @@ const Properties = () => {
                         to={`/properties/${property.id}`}
                         key={property.id}
                         className="block">
-                        <div className="mb-4">
+                        <div className="pb-1 mb-4 border-b border-secondary-100">
                             <div className="w-full h-84">
                                 <img
                                     className="w-full h-full object-cover rounded-lg"
@@ -61,8 +61,12 @@ const Properties = () => {
                             <Heading h3 className="mb-0">
                                 {property.name}
                             </Heading>
-                            <Text primary>{property.rating} stars</Text>
-                            <Text primary>For {property.maxGuests} Guests</Text>
+                            <Text primary sm>
+                                {property.rating} stars
+                            </Text>
+                            <Text primary sm>
+                                For {property.maxGuests} Guests
+                            </Text>
                             <Text primary>
                                 <strong>{property.price}kr</strong> night
                             </Text>
