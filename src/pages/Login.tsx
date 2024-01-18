@@ -33,7 +33,7 @@ const Login = () => {
         onSuccess: (data: LoggedInUser) => {
             console.log("succesfuly logged in", data);
             setUser(data);
-            navigate("/properties");
+            navigate("/app/properties");
         },
         onError: (error: any) => {
             setServerError(error.message);
@@ -55,7 +55,7 @@ const Login = () => {
 
     return (
         <LoginRegisterLayout login>
-            <Heading h1 className="text-center">
+            <Heading h1 className="text-center  mb-9">
                 Welcome back
             </Heading>
             <form

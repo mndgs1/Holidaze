@@ -15,7 +15,8 @@ const Layout: React.FC<{
     const isMobile = useIsMobile();
     const isHeaderVisible = useOnScrollUp();
 
-    if (pathname === "/login" || pathname === "/register") {
+    console.log(pathname);
+    if (!pathname.includes("/app")) {
         return (
             <>
                 <main>{children}</main>
@@ -39,7 +40,7 @@ const Layout: React.FC<{
                             : "transform translate-y-0 transition-all duration-300"
                     }`}></Navigation>
             )}
-            <Footer />
+            {pathname !== "/app/profile" && <Footer />}
         </>
     );
 };

@@ -3,7 +3,6 @@ import className from "classnames";
 import { FaSuitcaseRolling, FaSearch, FaUserCircle } from "react-icons/fa";
 import { FaHouse } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
-import classNames from "classnames";
 
 import Text from "../common/Text";
 
@@ -15,22 +14,22 @@ const NavItems = [
     {
         icon: <FaSearch />,
         text: "Explore",
-        to: "/properties",
+        to: "/app/properties",
     },
     {
         icon: <FaSuitcaseRolling />,
         text: "Trips",
-        to: "/bookings",
+        to: "/app/bookings",
     },
     {
         icon: <FaHouse />,
         text: "Rentals",
-        to: "/rentals",
+        to: "/app/rentals",
     },
     {
         icon: <FaUserCircle />,
         text: "Profile",
-        to: "/profile",
+        to: "/app/profile",
     },
 ];
 
@@ -40,7 +39,7 @@ const Navigation = ({ ...rest }: NavigationProps) => {
         <nav className={classes}>
             <ul className="flex justify-around">
                 {NavItems.map((item) => (
-                    <NavLink to={item.to}>
+                    <NavLink key={item.text} to={item.to}>
                         {({ isActive }) => (
                             <li
                                 className={[

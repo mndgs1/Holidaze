@@ -7,7 +7,7 @@ const Logo = ({ ...rest }) => {
     const isLoggedIn = !!token;
 
     return (
-        <Link {...rest} to={isLoggedIn ? "/properties" : "/"}>
+        <Link {...rest} to={isLoggedIn ? "/app/properties" : "/"}>
             <svg
                 width="100"
                 height="33"

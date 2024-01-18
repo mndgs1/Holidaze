@@ -23,6 +23,7 @@ export const registrationSchema = yup.object({
         .oneOf([yup.ref("password")], "Passwords must match")
         .required("Repeat password is required"),
     venueManager: yup.boolean(),
+    avatar: yup.string(),
 });
 
 export const loginSchema = yup.object({
