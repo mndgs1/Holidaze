@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Button from "../components/common/Button";
 import Text from "../components/common/Text";
@@ -19,12 +19,14 @@ import { User } from "../constants/interfaces/user";
 import { useMutation } from "@tanstack/react-query";
 
 const Register = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [serverError, setServerError] = useState("");
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [serverError, setServerError] = React.useState("");
 
     const {
         register,
         handleSubmit,
+        setValue,
+        watch,
         formState: { errors },
         reset,
     } = useForm({
@@ -57,11 +59,21 @@ const Register = () => {
         onSettled: () => setIsLoading(false),
     });
 
+    const { avatar, venueManager } = watch();
+
+    console.log("venue manager state: " + venueManager);
     function onSubmit(data: User) {
         // Why does it send in repeat password? it does not check for types
         console.log("data onSubmit", data);
         registerMutation.mutate(data);
     }
+
+    const [modalFormData, setModalFormData] = React.useState("");
+
+    React.useEffect(() => {
+        setValue("avatar", modalFormData);
+    }, [setValue, modalFormData]);
+
     return (
         <LoginRegisterLayout register>
             <Heading h1 className="text-center  mb-9">
@@ -70,7 +82,7 @@ const Register = () => {
             <form
                 className="flex flex-col gap-5 items-center mb-3"
                 onSubmit={handleSubmit(onSubmit)}>
-                <Avatar />
+                <Avatar avatar={avatar} setModalFormData={setModalFormData} />
                 {RegisterInputConfig.map((input) => (
                     <InputWithValidation
                         key={input.id}

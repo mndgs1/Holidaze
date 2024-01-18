@@ -27,7 +27,7 @@ const Profile = () => {
     return (
         <section className="flex flex-col items-center">
             <form className="flex flex-col items-center mb-2">
-                <Avatar />
+                {/* <Avatar /> */}
                 <Heading h1 className="mt-4">
                     {user.name}
                 </Heading>
@@ -36,11 +36,10 @@ const Profile = () => {
                 </Text>
                 <Input
                     type="checkbox"
-                    id="vanueManager"
+                    id="venueManager"
                     label="I want to rent my property"
-                    className="mb-4"
                 />
-                <Button primary xl>
+                <Button primary xl className="mt-4">
                     Save Changes
                 </Button>
             </form>

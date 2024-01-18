@@ -63,6 +63,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                         name={name}
                         className={`h-5 w-5 border-gray-300 rounded`}
                         ref={ref}
+                        onChange={handleChange}
+                        {...rest}
                     />
                     <label
                         htmlFor={id}
