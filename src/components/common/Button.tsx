@@ -32,7 +32,7 @@ const Button = ({
     ...rest
 }: ButtonProps) => {
     const classes = className(
-        "flex items-center justify-center border rounded-lg font-heading w-full  drop-shadow-xl tracking-wide",
+        "flex items-center justify-center border rounded-lg font-heading drop-shadow-xl tracking-wide",
         {
             "opacity-80": loading,
             "text-white bg-primary hover:bg-primary-450": primary,

@@ -1,37 +1,26 @@
 import React, { InputHTMLAttributes, forwardRef, useState } from "react";
-import classNames from "classnames";
+import className from "classnames";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     type: string;
     id: string;
     label: string;
     danger?: boolean;
-    className?: string;
     onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
     checked?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
     (
-        {
-            type,
-            id,
-            name,
-            label,
-            className,
-            danger,
-            onBlur,
-            onChange,
-            checked,
-            ...rest
-        },
+        { type, id, name, label, danger, onBlur, onChange, checked, ...rest },
         ref
     ) => {
-        const classes = classNames(
+        const classes = className(
             "w-full h-full border rounded-lg px-2 py-1 hover:border-secondary-300",
             {
                 "border-danger-200 bg-danger-50": danger,
-            }
+            },
+            rest.className
         );
 
         const [isFocused, setIsFocused] = useState(false);
@@ -61,15 +50,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
         // Checkbox Logic
         if (type === "checkbox") {
+            const checkboxClasses = className(
+                "flex gap-2 items-center",
+                rest.className
+            );
+
             return (
-                <div className="flex gap-2 items-center">
+                <div className={checkboxClasses}>
                     <input
                         type={type}
                         id={id}
                         name={name}
-                        className={`h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded`}
+                        className={`h-5 w-5 border-gray-300 rounded`}
                         ref={ref}
-                        {...rest}
                     />
                     <label
                         htmlFor={id}

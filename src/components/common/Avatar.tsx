@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Modal from "./Modal";
 import Button from "./Button";
-import { FaEdit } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
 import { Dialog } from "@headlessui/react";
 
 const Avatar = () => {
@@ -18,8 +18,7 @@ const Avatar = () => {
 
     return (
         <>
-            <button
-                type="button"
+            <div
                 className="flex flex-col items-center transition-all duration-300 "
                 onClick={openModal}>
                 <img
@@ -32,9 +31,9 @@ const Avatar = () => {
                 <button
                     type="button"
                     className="-mt-4 bg-white px-3 py-1 rounded-xl drop-shadow hover:drop-shadow-lg border hover:border-secondary-300 transition-all duration-300">
-                    <FaEdit className="fill-secondary-400" />
+                    <MdEdit className="" />
                 </button>
-            </button>
+            </div>
             <UserAvatarModal
                 openModal={openModal}
                 closeModal={closeModal}

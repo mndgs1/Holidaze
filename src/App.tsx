@@ -13,11 +13,11 @@ function App() {
         <Layout>
             <Routes>
                 <Route path="/" index element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/*" element={<Page404 />} />
-                <Route path="/properties" element={<Properties />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+                <Route path="*" element={<Page404 />} />
+                <Route path="app/properties" element={<Properties />} />
+                <Route path="app/profile" element={<Profile />} />
             </Routes>
         </Layout>
     );

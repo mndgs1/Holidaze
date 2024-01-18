@@ -7,33 +7,44 @@ import Heading from "../components/common/Heading";
 import Text from "../components/common/Text";
 import { useUser } from "../stores/useUserStore";
 import { useNavigate } from "react-router-dom";
+import { useUserActions } from "../stores/useUserStore";
 
 const Profile = () => {
     const user = useUser();
-
     const navigate = useNavigate();
+    const { clearUser } = useUserActions();
+
     if (user === null) {
         navigate("/login");
         return null;
     }
+
+    const handleLogout = () => {
+        clearUser();
+        navigate("/");
+    };
+
     return (
         <section className="flex flex-col items-center">
-            <form className="flex flex-col items-center">
+            <form className="flex flex-col items-center mb-2">
                 <Avatar />
-                <Heading h1>{user.name}</Heading>
-                <Text primary bold>
+                <Heading h1 className="mt-4">
+                    {user.name}
+                </Heading>
+                <Text primary bold className="mb-8">
                     {user.email}
                 </Text>
                 <Input
                     type="checkbox"
                     id="vanueManager"
                     label="I want to rent my property"
+                    className="mb-4"
                 />
                 <Button primary xl>
                     Save Changes
                 </Button>
             </form>
-            <Button secondary xl>
+            <Button secondary xl onClick={handleLogout}>
                 Logout
             </Button>
         </section>

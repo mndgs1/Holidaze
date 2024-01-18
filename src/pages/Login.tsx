@@ -33,7 +33,7 @@ const Login = () => {
         onSuccess: (data: LoggedInUser) => {
             console.log("succesfuly logged in", data);
             setUser(data);
-            navigate("/properties");
+            navigate("/app/properties");
         },
         onError: (error: any) => {
             setServerError(error.message);
