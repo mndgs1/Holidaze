@@ -11,7 +11,8 @@ const InputWithValidation = ({ input, register, errors }: any) => {
         | "password"
         | "repeatPassword"
         | "remember"
-        | "venueManager";
+        | "venueManager"
+        | "avatar";
 
     return (
         <div className="flex flex-col gap-1 w-full" key={input.id}>
