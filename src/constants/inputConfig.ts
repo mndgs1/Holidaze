@@ -93,4 +93,9 @@ export const CombinedInputConfig = {
         id: "remember",
         label: "Remember Me",
     },
+    avatar: {
+        type: "text",
+        id: "avatar",
+        label: "Avatar URL",
+    },
 };
