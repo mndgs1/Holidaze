@@ -13,6 +13,7 @@ export interface Property {
     meta: Amenities;
     location: Location;
     bookings?: Booking[];
+    owner?: Profile;
 }
 
 export interface Profile {
