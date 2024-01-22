@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import Modal from "./Modal";
 import Button from "./Button";
 import { MdEdit } from "react-icons/md";
+import InputWithValidation from "./InputWithValidation";
+import { CombinedInputConfig } from "../../constants/inputConfig";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+import useImageValidator from "../../hooks/useImageValidator";
 
 import { useForm } from "react-hook-form";
 
@@ -25,7 +29,12 @@ const Avatar = ({
         setIsModalOpen(false);
     };
 
-    const { register, reset, handleSubmit } = useForm<FormValues>({
+    const {
+        register,
+        reset,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<FormValues>({
         defaultValues: {
             avatar,
         },
@@ -46,13 +55,17 @@ const Avatar = ({
             <div
                 className="flex flex-col items-center transition-all duration-300 "
                 onClick={openModal}>
-                <img
-                    src="/assets/placeholders/profile-placeholder.jpg"
-                    alt="profile"
-                    height={200}
-                    width={200}
-                    className="hover:opacity-80"
-                />
+                <div className="h-52 w-52">
+                    <img
+                        src={
+                            avatar
+                                ? avatar
+                                : `/assets/placeholders/profile-placeholder.jpg`
+                        }
+                        className="rounded-full h-full w-full object-cover"
+                        alt="profile"
+                    />
+                </div>
                 <button
                     type="button"
                     className="-mt-4 bg-white px-3 py-1 rounded-xl drop-shadow hover:drop-shadow-lg border hover:border-secondary-300 transition-all duration-300">
@@ -60,31 +73,39 @@ const Avatar = ({
                 </button>
             </div>
             <Modal openModal={openModal} isOpen={isModalOpen}>
-                <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                        <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"></div>
-                        <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                            <form onSubmit={handleSubmit(onSubmit)}>
-                                <h2>Modal</h2>
-                                <input
-                                    placeholder="avatar"
-                                    {...register("avatar")}
-                                />
-                                <button>Change</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    <Button primary lg onClick={closeModal}>
-                        Deactivate
-                    </Button>
+                <div className="bg-white p-8 relative">
                     <button
-                        type="button"
-                        className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                        onClick={closeModal}>
-                        Cancel
+                        onClick={closeModal}
+                        className="flex items-center gap-1 absolute">
+                        <IoArrowBackCircleOutline className="h-10 w-10 text-secondary-450" />
                     </button>
+                    <div className="h-52 w-52 mx-auto mb-4 mt-2">
+                        <img
+                            src={
+                                avatar
+                                    ? avatar
+                                    : `/assets/placeholders/profile-placeholder.jpg`
+                            }
+                            className="rounded-full h-full w-full object-cover"
+                            alt="profile"
+                        />
+                    </div>
+                    <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="w-76 relative">
+                        <InputWithValidation
+                            key={CombinedInputConfig.avatar.id}
+                            input={CombinedInputConfig.avatar}
+                            register={register}
+                            errors={errors}
+                        />
+                        <Button
+                            primary
+                            sm
+                            className="absolute top-0 right-0 h-13">
+                            Save
+                        </Button>
+                    </form>
                 </div>
             </Modal>
         </>

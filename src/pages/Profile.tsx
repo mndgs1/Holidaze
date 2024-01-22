@@ -8,19 +8,19 @@ import Text from "../components/common/Text";
 import { useNavigate } from "react-router-dom";
 import { LoggedInUser } from "../constants/interfaces/user";
 import { useMutation } from "@tanstack/react-query";
-import { updateAvatar, updateProfile } from "../api/profiles/putProfile";
+import { updateProfile, updateAvatar } from "../api/profiles/putProfile";
 import { useForm } from "react-hook-form";
 import { updateSchema } from "../constants/schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useToken, useUserActions, useUser } from "../stores/useUserStore";
-import InputWithValidation from "../components/common/InputWithValidation";
 
 const Profile = () => {
     const user = useUser();
     const token = useToken();
     const navigate = useNavigate();
 
-    const { clearUser } = useUserActions();
+    const { clearUser, updateStoreAvatar, updateStoreVenueManager } =
+        useUserActions();
 
     const { register, handleSubmit, setValue, watch, reset } = useForm({
         resolver: yupResolver(updateSchema),
@@ -36,6 +36,7 @@ const Profile = () => {
             updateAvatar({ token, name: user?.name, avatar });
         },
         onSuccess: (data: LoggedInUser) => {
+            console.log(data);
             reset();
         },
         onError: (error: any) => {},
@@ -54,7 +55,7 @@ const Profile = () => {
         setValue("avatar", modalFormData);
     }, [setValue, modalFormData]);
 
-    if (user === null) {
+    if (!user) {
         navigate("/login");
         return null;
     }
@@ -83,7 +84,11 @@ const Profile = () => {
                         label="I want to rent my property"
                         {...register("venueManager")}
                     />
-                    <Button primary xl className="mt-4">
+                    <Button
+                        primary
+                        xl
+                        className="mt-4"
+                        loading={profileMutation.isPending}>
                         Save Changes
                     </Button>
                 </form>

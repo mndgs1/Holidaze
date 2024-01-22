@@ -30,7 +30,7 @@ const Navigation = ({ ...rest }: NavigationProps) => {
         {
             icon: <FaUserCircle />,
             text: "Profile",
-            to: "/app/my-profile",
+            to: "/app/profile",
         },
     ];
 
