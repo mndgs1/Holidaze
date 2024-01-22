@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { updateSchema } from "../constants/schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useToken, useUserActions, useUser } from "../stores/useUserStore";
+import InputWithValidation from "../components/common/InputWithValidation";
 
 const Profile = () => {
     const user = useUser();
@@ -35,7 +36,6 @@ const Profile = () => {
             updateAvatar({ token, name: user?.name, avatar });
         },
         onSuccess: (data: LoggedInUser) => {
-            console.log(data);
             reset();
         },
         onError: (error: any) => {},
@@ -44,6 +44,7 @@ const Profile = () => {
     const { avatar } = watch();
 
     function onSubmit(data: any) {
+        console.log(data);
         profileMutation.mutate(data);
     }
 

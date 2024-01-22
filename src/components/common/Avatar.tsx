@@ -68,7 +68,7 @@ const Avatar = ({
                                 <h2>Modal</h2>
                                 <input
                                     placeholder="avatar"
-                                    {...register("avatar", { required: true })}
+                                    {...register("avatar")}
                                 />
                                 <button>Change</button>
                             </form>
