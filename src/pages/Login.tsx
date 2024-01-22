@@ -31,7 +31,6 @@ const Login = () => {
             return login(data);
         },
         onSuccess: (data: LoggedInUser) => {
-            console.log("succesfuly logged in", data);
             setUser(data);
             navigate("/app/properties");
         },
@@ -49,7 +48,6 @@ const Login = () => {
     });
 
     async function onSubmit(data: UserCredentials) {
-        console.log("data onSubmit", data);
         loginMutation.mutate(data);
     }
 

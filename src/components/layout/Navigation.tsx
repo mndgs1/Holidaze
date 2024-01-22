@@ -10,30 +10,30 @@ interface NavigationProps {
     className?: string;
 }
 
-const NavItems = [
-    {
-        icon: <FaSearch />,
-        text: "Explore",
-        to: "/app/properties",
-    },
-    {
-        icon: <FaSuitcaseRolling />,
-        text: "Trips",
-        to: "/app/bookings",
-    },
-    {
-        icon: <FaHouse />,
-        text: "Rentals",
-        to: "/app/rentals",
-    },
-    {
-        icon: <FaUserCircle />,
-        text: "Profile",
-        to: "/app/profile",
-    },
-];
-
 const Navigation = ({ ...rest }: NavigationProps) => {
+    const NavItems = [
+        {
+            icon: <FaSearch />,
+            text: "Explore",
+            to: "/app/properties",
+        },
+        {
+            icon: <FaSuitcaseRolling />,
+            text: "Trips",
+            to: "/app/bookings",
+        },
+        {
+            icon: <FaHouse />,
+            text: "Rentals",
+            to: "/app/rentals",
+        },
+        {
+            icon: <FaUserCircle />,
+            text: "Profile",
+            to: "/app/my-profile",
+        },
+    ];
+
     const classes = className("mx-6", rest.className);
     return (
         <nav className={classes}>

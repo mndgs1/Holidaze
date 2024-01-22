@@ -15,7 +15,6 @@ const Layout: React.FC<{
     const isMobile = useIsMobile();
     const isHeaderVisible = useOnScrollUp();
 
-    console.log(pathname);
     if (!pathname.includes("/app")) {
         return (
             <>

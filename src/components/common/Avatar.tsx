@@ -70,7 +70,7 @@ const Avatar = ({
                                     placeholder="avatar"
                                     {...register("avatar", { required: true })}
                                 />
-                                <input type="submit" />
+                                <button>Change</button>
                             </form>
                         </div>
                     </div>
