@@ -42,8 +42,7 @@ const Button = ({
             "border-danger bg-danger text-white": danger,
             "h-13 w-76 font-bold text-lg": xl,
             "h-10": lg,
-            "px-3 py-2 text-sm font-semibold shadow-sm inline-flex max-w-28":
-                md,
+            "px-3 py-2 w-28": md,
         },
         rest.className
     );

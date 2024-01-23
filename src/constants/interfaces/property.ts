@@ -12,7 +12,7 @@ export interface Property {
     updated?: string;
     meta: Amenities;
     location: Location;
-    bookings?: Booking[];
+    bookings: Booking[];
     owner?: Profile;
 }
 

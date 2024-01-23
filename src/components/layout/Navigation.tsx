@@ -34,7 +34,7 @@ const NavItems = [
 ];
 
 const Navigation = ({ ...rest }: NavigationProps) => {
-    const classes = className("mx-6", rest.className);
+    const classes = className("px-6", rest.className);
     return (
         <nav className={classes}>
             <ul className="flex justify-around">

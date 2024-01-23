@@ -3,8 +3,7 @@ import { getProperty } from "../api/properties/getProperty";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useToken } from "../stores/useUserStore";
-import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import { Calendar } from "react-modern-calendar-datepicker";
+import { useNavigate } from "react-router-dom";
 
 import Button from "../components/common/Button";
 import Text from "../components/common/Text";
@@ -14,12 +13,28 @@ import { MdOutlineWifi } from "react-icons/md";
 import { LuParkingSquare } from "react-icons/lu";
 import { MdOutlinePets } from "react-icons/md";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
+import { CiCirclePlus } from "react-icons/ci";
+import { CiCircleMinus } from "react-icons/ci";
 
-const Property = () => {
+import DatePicker from "../components/common/DatePicker/DatePicker";
+import { DayRange } from "react-modern-calendar-datepicker";
+
+import { createBookedDaysArray } from "../utils/createBookedDaysArray";
+import { monthNumberToName } from "../utils/monthNumberToName";
+
+import { useMutation } from "@tanstack/react-query";
+import { Booking, CreateBookingData } from "../constants/interfaces/booking";
+import { postBooking } from "../api/bookings/postBooking";
+import { postBookingSchema } from "../constants/schemas";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const PropertyPage = () => {
     const token = useToken();
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
 
-    const [selectedDayRange, setSelectedDayRange] = useState({
+    const [selectedDayRange, setSelectedDayRange] = useState<DayRange>({
         from: null,
         to: null,
     });
@@ -28,14 +43,41 @@ const Property = () => {
         throw new Error("Cant find a property id");
     }
 
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        watch,
+        formState: { errors },
+        reset,
+    } = useForm({
+        resolver: yupResolver(postBookingSchema),
+    });
+
     const { isLoading, isError, data } = useQuery({
         queryKey: [`property/${id}`],
         queryFn: () => {
             if (!token) {
-                // navigate("/login");
+                navigate("/login");
                 throw new Error("No token");
             }
             return Promise.resolve(getProperty(token, id));
+        },
+    });
+
+    const bookingMutation = useMutation({
+        mutationFn: (data: CreateBookingData) => {
+            if (!token) {
+                navigate("/login");
+                throw new Error("No token");
+            }
+            return postBooking(token, data);
+        },
+        onSuccess: (data: Booking) => {
+            console.log("succesfuly logged in", data);
+        },
+        onError: (error: any) => {
+            console.log(error.message);
         },
     });
 
@@ -52,8 +94,13 @@ const Property = () => {
         );
     }
 
-    console.log(data);
-
+    function onSubmit(data: any) {
+        // Why does it send in repeat password? it does not check for types
+        console.log("data onSubmit", data);
+        bookingMutation.mutate(data);
+    }
+    console.log(selectedDayRange);
+    const bookedDays = createBookedDaysArray(data);
     return (
         <>
             <section className="pb-3.5 mb-3.5 border-b border-secondary-100">
@@ -137,16 +184,6 @@ const Property = () => {
                     </div>
                 </div>
             </section>
-            <section className="pb-3.5 mb-3.5 border-b border-secondary-100">
-                <Heading h3 className="mb-2.5">
-                    Availability
-                </Heading>
-                <Calendar
-                    value={selectedDayRange}
-                    onChange={setSelectedDayRange}
-                    shouldHighlightWeekends
-                />
-            </section>
             {data.owner && (
                 <section className="pb-3.5 mb-3.5 border-b border-secondary-100">
                     <Heading h3 className="mb-2.5">
@@ -171,8 +208,56 @@ const Property = () => {
                     </div>
                 </section>
             )}
+
+            <section className="pb-3.5 mb-3.5 border-b border-secondary-100 ">
+                <div className="pb-3.5 mb-3.5 border-b border-secondary-100">
+                    <Heading h3 className="mb-2.5">
+                        Book Property
+                    </Heading>
+                    <DatePicker
+                        value={selectedDayRange}
+                        onChange={setSelectedDayRange}
+                        disabledDays={bookedDays}
+                    />
+                    <div className="flex gap-2 items-center">
+                        <Text primary bold className="">
+                            Guests:
+                        </Text>
+                        <button>
+                            <CiCircleMinus className="h-8 w-8 fill-secondary-300 hover:fill-secondary" />
+                        </button>
+                        <Text primary bold>
+                            5
+                        </Text>
+                        <button>
+                            <CiCirclePlus className="h-8 w-8 fill-secondary-300 hover:fill-secondary" />
+                        </button>
+                    </div>
+                </div>
+                <div className=" flex justify-between">
+                    <div>
+                        <Text bold className="underline ">
+                            {selectedDayRange.from && selectedDayRange.to
+                                ? `${monthNumberToName(
+                                      selectedDayRange.from.month
+                                  ).substring(0, 3)} ${
+                                      selectedDayRange.from.day
+                                  } -  ${monthNumberToName(
+                                      selectedDayRange.to.month
+                                  ).substring(0, 3)} ${selectedDayRange.to.day}`
+                                : "Choose Time"}
+                        </Text>
+                        <Text>
+                            <strong>{data.price}</strong> kr night
+                        </Text>
+                    </div>
+                    <Button primary md>
+                        Reserve
+                    </Button>
+                </div>
+            </section>
         </>
     );
 };
 
-export default Property;
+export default PropertyPage;
