@@ -5,15 +5,18 @@ export async function postBooking(token: string, data: CreateBookingData) {
     const options = {
         headers: {
             "Content-Type": "application/json",
-            method: "POST",
             Authorization: `Bearer ${token}`,
-            body: JSON.stringify(data),
         },
+        method: "POST",
+        body: JSON.stringify(data),
     };
+
+    console.log(data);
 
     const response = await fetch(BOOKINGS_URL, options);
 
     const json = await response.json();
+    console.log(json);
 
     if (!response.ok) {
         throw new Error(json.errors?.[0]?.message ?? "There was an error");

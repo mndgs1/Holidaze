@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/common/Button";
 import Text from "../components/common/Text";
 import Heading from "../components/common/Heading";
+import Modal from "../components/common/Modal";
 
 import { MdOutlineWifi } from "react-icons/md";
 import { LuParkingSquare } from "react-icons/lu";
@@ -34,6 +35,7 @@ const PropertyPage = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
 
+    const [guestCount, setGuestCount] = useState<number>(1);
     const [selectedDayRange, setSelectedDayRange] = useState<DayRange>({
         from: null,
         to: null,
@@ -65,16 +67,40 @@ const PropertyPage = () => {
         },
     });
 
+    const { dateFrom, dateTo } = watch();
+
+    React.useEffect(() => {
+        setValue("guests", guestCount);
+        if (selectedDayRange.from) {
+            const fromDate = new Date(
+                selectedDayRange.from.year,
+                selectedDayRange.from.month - 1,
+                selectedDayRange.from.day
+            );
+            setValue("dateFrom", fromDate);
+        }
+
+        if (selectedDayRange.to) {
+            const toDate = new Date(
+                selectedDayRange.to.year,
+                selectedDayRange.to.month - 1,
+                selectedDayRange.to.day
+            );
+            setValue("dateTo", toDate);
+        }
+    }, [setValue, guestCount, selectedDayRange.from, selectedDayRange.to]);
+
     const bookingMutation = useMutation({
         mutationFn: (data: CreateBookingData) => {
             if (!token) {
                 navigate("/login");
                 throw new Error("No token");
             }
+            console.log(data);
             return postBooking(token, data);
         },
         onSuccess: (data: Booking) => {
-            console.log("succesfuly logged in", data);
+            console.log("mutation sucess", data);
         },
         onError: (error: any) => {
             console.log(error.message);
@@ -94,12 +120,28 @@ const PropertyPage = () => {
         );
     }
 
-    function onSubmit(data: any) {
-        // Why does it send in repeat password? it does not check for types
-        console.log("data onSubmit", data);
-        bookingMutation.mutate(data);
+    function onSubmit() {
+        if (data) {
+            const bookingData: CreateBookingData = {
+                venueId: data.id,
+                guests: guestCount,
+                dateFrom: dateFrom,
+                dateTo: dateTo,
+            };
+            console.log("booking data", bookingData);
+            bookingMutation.mutate(bookingData);
+        }
     }
-    console.log(selectedDayRange);
+    const guestMinus = () => {
+        const updatedValue = Math.max(guestCount - 1, 1);
+        setGuestCount(updatedValue);
+    };
+
+    const guestPlus = () => {
+        const updatedValue = Math.min(guestCount + 1, data.maxGuests);
+        setGuestCount(updatedValue);
+    };
+
     const bookedDays = createBookedDaysArray(data);
     return (
         <>
@@ -223,15 +265,22 @@ const PropertyPage = () => {
                         <Text primary bold className="">
                             Guests:
                         </Text>
-                        <button>
-                            <CiCircleMinus className="h-8 w-8 fill-secondary-300 hover:fill-secondary" />
+                        <button type="button">
+                            <CiCircleMinus
+                                className="h-8 w-8 fill-secondary-300 hover:fill-secondary"
+                                onClick={guestMinus}
+                            />
                         </button>
                         <Text primary bold>
-                            5
+                            {guestCount}
                         </Text>
-                        <button>
-                            <CiCirclePlus className="h-8 w-8 fill-secondary-300 hover:fill-secondary" />
+                        <button type="button">
+                            <CiCirclePlus
+                                onClick={guestPlus}
+                                className="h-8 w-8 fill-secondary-300 hover:fill-secondary"
+                            />
                         </button>
+                        <Text secondary>Max. 4 Guests</Text>
                     </div>
                 </div>
                 <div className=" flex justify-between">
@@ -251,11 +300,12 @@ const PropertyPage = () => {
                             <strong>{data.price}</strong> kr night
                         </Text>
                     </div>
-                    <Button primary md>
+                    <Button primary md onClick={onSubmit}>
                         Reserve
                     </Button>
                 </div>
             </section>
+            {bookingMutation.isSuccess && <Modal isOpen>SUCCESS</Modal>}
         </>
     );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import "./DatePicker.css";
 import Calendar from "@hassanmojab/react-modern-calendar-datepicker";
 
-const DatePicker = ({ value, onChange, disabledDays }: any) => {
+const DatePicker = ({ value, onChange, disabledDays, ...rest }: any) => {
     return (
         <Calendar
             value={value}

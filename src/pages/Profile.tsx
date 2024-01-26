@@ -1,6 +1,6 @@
 import React from "react";
 
-import Avatar from "../components/common/Avatar";
+// import Avatar from "../components/common/Avatar";
 import Input from "../components/common/Input";
 import Button from "../components/common/Button";
 import Heading from "../components/common/Heading";

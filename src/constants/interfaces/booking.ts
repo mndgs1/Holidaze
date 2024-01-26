@@ -13,8 +13,8 @@ export interface Booking {
 }
 
 export interface CreateBookingData {
-    dateFrom: "string"; // Required - Instance of new Date()
-    dateTo: "string"; // Required - Instance of new Date()
-    guests: 0; // Required
-    venueId: "string"; // Required - The id of the venue to book
+    dateFrom: Date; // Required - Instance of new Date()
+    dateTo: Date; // Required - Instance of new Date()
+    guests: number; // Required
+    venueId: string; // Required - The id of the venue to book
 }
