@@ -36,16 +36,16 @@ const Button = ({
     ...rest
 }: ButtonProps) => {
     const classes = className(
-        "flex text-white items-center justify-center border rounded-lg font-heading drop-shadow-xl tracking-wide",
+        "flex items-center justify-center border rounded-lg font-heading drop-shadow-xl tracking-wide",
         {
             "opacity-80": loading,
-            "bg-primary hover:bg-primary-450": primary,
-            "bg-secondary ": secondary,
+            "bg-primary hover:bg-primary-450 text-white": primary,
+            "bg-secondary text-white": secondary,
             "border-green-500 bg-green-500 text-white": success,
             "border-yellow-400 bg-yellow-400 text-white": warning,
             "border-danger bg-danger text-white": danger,
             "bg-white": outline,
-            "text-primary": outline && primary,
+            "text-primary border-primary": outline && primary,
             "text-secondary border-secondary": outline && secondary,
             // "text-green-500": outline && success,
             // "text-yellow-400": outline && warning,
