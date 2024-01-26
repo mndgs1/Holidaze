@@ -6,19 +6,21 @@ import { MdEdit } from "react-icons/md";
 import InputWithValidation from "./InputWithValidation";
 import { CombinedInputConfig } from "../../constants/inputConfig";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import useImageValidator from "../../hooks/useImageValidator";
+// import useImageValidator from "../../hooks/useImageValidator";
+
+import { User } from "../../constants/interfaces/user";
 
 import { useForm } from "react-hook-form";
 
 type FormValues = { avatar: string };
 
-const Avatar = ({
-    avatar,
-    setModalFormData,
-}: {
+interface AvatarProps {
     avatar: string | undefined;
     setModalFormData: React.Dispatch<React.SetStateAction<string>>;
-}) => {
+    user?: User;
+}
+
+const Avatar = ({ avatar, setModalFormData, user }: AvatarProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
@@ -60,6 +62,8 @@ const Avatar = ({
                         src={
                             avatar
                                 ? avatar
+                                : user?.avatar
+                                ? user.avatar
                                 : `/assets/placeholders/profile-placeholder.jpg`
                         }
                         className="rounded-full h-full w-full object-cover"
@@ -84,6 +88,8 @@ const Avatar = ({
                             src={
                                 avatar
                                     ? avatar
+                                    : user?.avatar
+                                    ? user.avatar
                                     : `/assets/placeholders/profile-placeholder.jpg`
                             }
                             className="rounded-full h-full w-full object-cover"

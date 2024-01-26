@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Avatar from "../components/common/Avatar";
 import Input from "../components/common/Input";
@@ -15,7 +15,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useToken, useUserActions, useUser } from "../stores/useUserStore";
 
 const Profile = () => {
-    const user = useUser();
+    const loggedInUser = useUser();
     const token = useToken();
     const navigate = useNavigate();
 
@@ -29,14 +29,22 @@ const Profile = () => {
     const profileMutation = useMutation({
         mutationFn: (data: LoggedInUser) => {
             const { venueManager } = data;
-            return updateProfile({ token, name: user?.name, venueManager });
+            return updateProfile({
+                token,
+                name: loggedInUser?.name,
+                venueManager,
+            });
         },
         onMutate: (data: LoggedInUser) => {
             const { avatar } = data;
-            updateAvatar({ token, name: user?.name, avatar });
+            console.log(data);
+            updateAvatar({ token, name: loggedInUser?.name, avatar });
+            if (data.avatar) {
+                updateStoreAvatar(data.avatar);
+            }
         },
         onSuccess: (data: LoggedInUser) => {
-            console.log(data);
+            updateStoreVenueManager(data.venueManager);
             reset();
         },
         onError: (error: any) => {},
@@ -45,7 +53,6 @@ const Profile = () => {
     const { avatar } = watch();
 
     function onSubmit(data: any) {
-        console.log(data);
         profileMutation.mutate(data);
     }
 
@@ -55,7 +62,7 @@ const Profile = () => {
         setValue("avatar", modalFormData);
     }, [setValue, modalFormData]);
 
-    if (!user) {
+    if (!loggedInUser) {
         navigate("/login");
         return null;
     }
@@ -68,20 +75,25 @@ const Profile = () => {
     return (
         <section className="flex flex-col items-center">
             <div className="flex flex-col items-center">
-                <Avatar avatar={avatar} setModalFormData={setModalFormData} />
+                <Avatar
+                    avatar={avatar}
+                    setModalFormData={setModalFormData}
+                    user={loggedInUser}
+                />
                 <form
                     className="flex flex-col items-center mb-2"
                     onSubmit={handleSubmit(onSubmit)}>
                     <Heading h1 className="mt-4">
-                        {user.name}
+                        {loggedInUser.name}
                     </Heading>
                     <Text primary bold className="mb-8">
-                        {user.email}
+                        {loggedInUser.email}
                     </Text>
                     <Input
                         type="checkbox"
                         id="venueManager"
                         label="I want to rent my property"
+                        defaultChecked={loggedInUser.venueManager}
                         {...register("venueManager")}
                     />
                     <Button
