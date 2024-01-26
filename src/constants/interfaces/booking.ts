@@ -8,7 +8,7 @@ export interface Booking {
     guests: number;
     created: string;
     updated: string;
-    venue?: Property;
+    venue: Property;
     customer?: Profile;
 }
 

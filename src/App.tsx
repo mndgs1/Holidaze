@@ -8,6 +8,7 @@ import Page404 from "./pages/Page404";
 import Properties from "./pages/Properties";
 import Profile from "./pages/Profile";
 import PropertyPage from "./pages/PropertyPage";
+import Bookings from "./pages/Bookings";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="app/properties" element={<Properties />} />
                 <Route path="app/profile" element={<Profile />} />
                 <Route path="app/Property/:id" element={<PropertyPage />} />
+                <Route path="app/bookings" element={<Bookings />} />
             </Routes>
         </Layout>
     );
