@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Avatar from "../components/common/Avatar";
 import Input from "../components/common/Input";
 import Button from "../components/common/Button";
 import Heading from "../components/common/Heading";
 import Text from "../components/common/Text";
+
 import { useNavigate } from "react-router-dom";
 import { LoggedInUser } from "../constants/interfaces/user";
 import { useMutation } from "@tanstack/react-query";

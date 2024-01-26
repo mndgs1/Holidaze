@@ -8,7 +8,7 @@ const DatePicker = ({ value, onChange, disabledDays, ...rest }: any) => {
             value={value}
             onChange={onChange}
             shouldHighlightWeekends
-            inputPlaceholder="Check Calendar"
+            inputPlaceholder="Check Availability"
             inputClassName={`w-full h-13 rounded-lg border border-primary px-3.5 text-center py-2.5 focus:outline-none focus:ring-2 z-0 focus:ring-primary focus:border-transparent ${
                 value.from && value.to
                     ? "ring-2 ring-primary border-transparent"
