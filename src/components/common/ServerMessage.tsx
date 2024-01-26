@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import Text from "../common/Text";
+import Text from "./Text";
 interface ServerMessageProps {
     message: string;
     danger?: boolean;

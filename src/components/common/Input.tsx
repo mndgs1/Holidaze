@@ -7,14 +7,10 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     label: string;
     danger?: boolean;
     onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-    checked?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-    (
-        { type, id, name, label, danger, onBlur, onChange, checked, ...rest },
-        ref
-    ) => {
+    ({ type, id, name, label, danger, onBlur, onChange, ...rest }, ref) => {
         const classes = className(
             "w-full h-full border rounded-lg px-2 py-1 hover:border-secondary-300",
             {

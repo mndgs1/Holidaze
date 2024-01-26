@@ -14,6 +14,8 @@ interface ButtonProps {
     xl?: boolean;
     lg?: boolean;
     md?: boolean;
+    sm?: boolean;
+    outline?: boolean;
     onClick?: () => void;
 }
 
@@ -25,24 +27,33 @@ const Button = ({
     warning,
     danger,
     loading,
+    outline,
     xl,
     md,
     lg,
+    sm,
     onClick,
     ...rest
 }: ButtonProps) => {
     const classes = className(
-        "flex items-center justify-center border rounded-lg font-heading drop-shadow-xl tracking-wide",
+        "flex text-white items-center justify-center border rounded-lg font-heading drop-shadow-xl tracking-wide",
         {
             "opacity-80": loading,
-            "text-white bg-primary hover:bg-primary-450": primary,
-            "bg-secondary text-white": secondary,
+            "bg-primary hover:bg-primary-450": primary,
+            "bg-secondary ": secondary,
             "border-green-500 bg-green-500 text-white": success,
             "border-yellow-400 bg-yellow-400 text-white": warning,
             "border-danger bg-danger text-white": danger,
+            "bg-white": outline,
+            "text-primary": outline && primary,
+            "text-secondary border-secondary": outline && secondary,
+            // "text-green-500": outline && success,
+            // "text-yellow-400": outline && warning,
+            // "text-red-500": outline && danger,
             "h-13 w-76 font-bold text-lg": xl,
             "h-10": lg,
             "px-3 py-2 w-28": md,
+
         },
         rest.className
     );

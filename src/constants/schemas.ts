@@ -22,7 +22,7 @@ export const registrationSchema = yup.object({
         .string()
         .oneOf([yup.ref("password")], "Passwords must match")
         .required("Repeat password is required"),
-    venueManager: yup.boolean(),
+    venueManager: yup.boolean().required(),
     avatar: yup.string(),
 });
 
@@ -34,6 +34,7 @@ export const loginSchema = yup.object({
     password: yup.string().required("Please enter a password"),
     remember: yup.boolean(),
 });
+
 
 export const postBookingSchema = yup.object({
     venueId: yup.string().required("Please select a venue"),
