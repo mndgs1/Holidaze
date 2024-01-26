@@ -35,6 +35,14 @@ export const loginSchema = yup.object({
     remember: yup.boolean(),
 });
 
+
+export const postBookingSchema = yup.object({
+    venueId: yup.string().required("Please select a venue"),
+    dateFrom: yup.date().required("Please select a start date"),
+    dateTo: yup.date().required("Please select an end date"),
+    guests: yup.number().required("Please enter the number of guests"),
+});
+
 export const updateSchema = yup.object({
     venueManager: yup.boolean(),
     avatar: yup.string(),

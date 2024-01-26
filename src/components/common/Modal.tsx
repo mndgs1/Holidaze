@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 interface ModalProps {
-    openModal: () => void;
+    openModal?: () => void;
     isOpen: boolean;
     children: React.ReactNode;
     ref?: any;
@@ -15,7 +15,7 @@ const Modal = ({ openModal, isOpen, children, ref }: ModalProps) => {
                 as="div"
                 className="relative z-10"
                 initialFocus={ref}
-                onClose={openModal}>
+                onClose={openModal ? openModal : () => {}}>
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"

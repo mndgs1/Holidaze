@@ -10,31 +10,31 @@ interface NavigationProps {
     className?: string;
 }
 
-const Navigation = ({ ...rest }: NavigationProps) => {
-    const NavItems = [
-        {
-            icon: <FaSearch />,
-            text: "Explore",
-            to: "/app/properties",
-        },
-        {
-            icon: <FaSuitcaseRolling />,
-            text: "Trips",
-            to: "/app/bookings",
-        },
-        {
-            icon: <FaHouse />,
-            text: "Rentals",
-            to: "/app/rentals",
-        },
-        {
-            icon: <FaUserCircle />,
-            text: "Profile",
-            to: "/app/profile",
-        },
-    ];
+const NavItems = [
+    {
+        icon: <FaSearch />,
+        text: "Explore",
+        to: "/app/properties",
+    },
+    {
+        icon: <FaSuitcaseRolling />,
+        text: "Trips",
+        to: "/app/bookings",
+    },
+    {
+        icon: <FaHouse />,
+        text: "Rentals",
+        to: "/app/rentals",
+    },
+    {
+        icon: <FaUserCircle />,
+        text: "Profile",
+        to: "/app/profile",
+    },
+];
 
-    const classes = className("mx-6", rest.className);
+const Navigation = ({ ...rest }: NavigationProps) => {
+    const classes = className("px-6", rest.className);
     return (
         <nav className={classes}>
             <ul className="flex justify-around">
@@ -74,3 +74,4 @@ const Navigation = ({ ...rest }: NavigationProps) => {
 };
 
 export default Navigation;
+
