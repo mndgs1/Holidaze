@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 import Modal from "./Modal";
 import Button from "./Button";
-import { MdEdit } from "react-icons/md";
+import Icon from "./Icon";
 import InputWithValidation from "./InputWithValidation";
 import { CombinedInputConfig } from "../../constants/inputConfig";
-import { IoArrowBackCircleOutline } from "react-icons/io5";
+
 // import useImageValidator from "../../hooks/useImageValidator";
 
 import { User } from "../../constants/interfaces/user";
@@ -73,7 +73,7 @@ const Avatar = ({ avatar, setModalFormData, user }: AvatarProps) => {
                 <button
                     type="button"
                     className="-mt-4 bg-white px-3 py-1 rounded-xl drop-shadow hover:drop-shadow-lg border hover:border-secondary-300 transition-all duration-300">
-                    <MdEdit className="" />
+                    <Icon edit sm />
                 </button>
             </div>
             <Modal openModal={openModal} isOpen={isModalOpen}>
@@ -81,7 +81,7 @@ const Avatar = ({ avatar, setModalFormData, user }: AvatarProps) => {
                     <button
                         onClick={closeModal}
                         className="flex items-center gap-1 absolute">
-                        <IoArrowBackCircleOutline className="h-10 w-10 text-secondary-450" />
+                        <Icon back xl className="text-secondary-450" />
                     </button>
                     <div className="h-52 w-52 mx-auto mb-4 mt-2">
                         <img
