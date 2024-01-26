@@ -267,7 +267,8 @@ const PropertyPage = () => {
                         <button type="button" onClick={guestMinus}>
                             <Icon
                                 minus
-                                className="h-8 w-8 fill-secondary-300 hover:fill-secondary"
+                                lg
+                                className=" fill-secondary-300 hover:fill-secondary"
                             />
                         </button>
                         <Text primary bold>
@@ -276,7 +277,8 @@ const PropertyPage = () => {
                         <button type="button" onClick={guestPlus}>
                             <Icon
                                 plus
-                                className="h-8 w-8 fill-secondary-300 hover:fill-secondary"
+                                lg
+                                className="fill-secondary-300 hover:fill-secondary"
                             />
                         </button>
                         <Text secondary>Max. {data.maxGuests} Guests</Text>

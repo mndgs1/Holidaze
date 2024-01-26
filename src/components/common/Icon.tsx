@@ -36,7 +36,6 @@ interface IconProps {
     lg?: boolean;
     xl?: boolean;
     xxl?: boolean;
-    active?: boolean;
     home?: boolean;
 }
 
@@ -59,7 +58,6 @@ const Icon = ({
     lg,
     xl,
     xxl,
-    active,
     home,
     ...rest
 }: IconProps) => {
@@ -114,6 +112,47 @@ const Icon = ({
         return <FaHouse className={classes} />;
     }
     return null;
+};
+
+Icon.propTypes = {
+    checkVariationValue: ({
+        edit,
+        back,
+        wifi,
+        pets,
+        breakfast,
+        refresh,
+        wave,
+        luggage,
+        search,
+        user,
+        parking,
+        plus,
+        minus,
+        home,
+    }: IconProps) => {
+        const count =
+            Number(!!edit) +
+            Number(!!back) +
+            Number(!!wifi) +
+            Number(!!pets) +
+            Number(!!breakfast) +
+            Number(!!refresh) +
+            Number(!!wave) +
+            Number(!!luggage) +
+            Number(!!search) +
+            Number(!!user) +
+            Number(!!parking) +
+            Number(!!plus) +
+            Number(!!minus) +
+            Number(!!home);
+
+        if (count > 1) {
+            return new Error(
+                "Only one of primary, secondary, success, warning, danger can be true"
+            );
+        }
+    },
 };
 
 export default Icon;
