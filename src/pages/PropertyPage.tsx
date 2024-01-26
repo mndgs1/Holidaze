@@ -280,7 +280,7 @@ const PropertyPage = () => {
                                 className="h-8 w-8 fill-secondary-300 hover:fill-secondary"
                             />
                         </button>
-                        <Text secondary>Max. 4 Guests</Text>
+                        <Text secondary>Max. {data.maxGuests} Guests</Text>
                     </div>
                 </div>
                 <div className=" flex justify-between">
