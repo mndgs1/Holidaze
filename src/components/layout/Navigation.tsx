@@ -1,9 +1,8 @@
 import React from "react";
 import className from "classnames";
-import { FaSuitcaseRolling, FaSearch, FaUserCircle } from "react-icons/fa";
-import { FaHouse } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 
+import Icon from "../common/Icon";
 import Text from "../common/Text";
 
 interface NavigationProps {
@@ -12,22 +11,22 @@ interface NavigationProps {
 
 const NavItems = [
     {
-        icon: <FaSearch />,
+        icon: <Icon search md />,
         text: "Explore",
         to: "/app/properties",
     },
     {
-        icon: <FaSuitcaseRolling />,
+        icon: <Icon luggage md />,
         text: "Trips",
         to: "/app/bookings",
     },
     {
-        icon: <FaHouse />,
+        icon: <Icon home md />,
         text: "Rentals",
         to: "/app/rentals",
     },
     {
-        icon: <FaUserCircle />,
+        icon: <Icon user md />,
         text: "Profile",
         to: "/app/profile",
     },
@@ -48,7 +47,6 @@ const Navigation = ({ ...rest }: NavigationProps) => {
                                 ].join(" ")}>
                                 {React.cloneElement(item.icon, {
                                     className: [
-                                        "w-6 h-6",
                                         isActive
                                             ? "fill-primary"
                                             : "fill-secondary",
@@ -74,4 +72,3 @@ const Navigation = ({ ...rest }: NavigationProps) => {
 };
 
 export default Navigation;
-

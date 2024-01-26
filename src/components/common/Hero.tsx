@@ -2,8 +2,8 @@ import React from "react";
 
 import Text from "./Text";
 import Button from "./Button";
+import Icon from "./Icon";
 import { useNavigate } from "react-router-dom";
-import { PiHandWavingLight } from "react-icons/pi";
 
 interface HeroProps {
     informational?: boolean;
@@ -25,7 +25,7 @@ const Hero = ({
     if (informational) {
         return (
             <div className="flex flex-col items-center">
-                <PiHandWavingLight className="mt-20 fill-primary h-16 w-16" />
+                <Icon wave className="mt-20 fill-primary" xxl />
                 <Text primary bold className="mt-14">
                     {statement}
                 </Text>

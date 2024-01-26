@@ -9,19 +9,12 @@ import Button from "../components/common/Button";
 import Text from "../components/common/Text";
 import Heading from "../components/common/Heading";
 import Modal from "../components/common/Modal";
+import Icon from "../components/common/Icon";
+import DatePicker from "../components/common/DatePicker/DatePicker";
 
 import PropertyPageSkeleton from "../components/common/Skeletons/PropertyPageSkeleton";
 
-import { MdOutlineWifi } from "react-icons/md";
-import { LuParkingSquare } from "react-icons/lu";
-import { MdOutlinePets } from "react-icons/md";
-import { MdOutlineRestaurantMenu } from "react-icons/md";
-import { CiCirclePlus } from "react-icons/ci";
-import { CiCircleMinus } from "react-icons/ci";
-
-import DatePicker from "../components/common/DatePicker/DatePicker";
 import { DayRange } from "react-modern-calendar-datepicker";
-
 import { createBookedDaysArray } from "../utils/createBookedDaysArray";
 import { monthNumberToName } from "../utils/monthNumberToName";
 
@@ -197,7 +190,7 @@ const PropertyPage = () => {
                 </Heading>
                 <div className="flex flex-col gap-1">
                     <div className="flex gap-2 items-center">
-                        <MdOutlineWifi className="h-6 w-6 " />
+                        <Icon wifi md />
                         <Text
                             primary
                             className={data.meta.wifi ? "" : "line-through"}>
@@ -205,7 +198,7 @@ const PropertyPage = () => {
                         </Text>
                     </div>
                     <div className="flex gap-2 items-center">
-                        <LuParkingSquare className="h-6 w-6" />
+                        <Icon parking md />
                         <Text
                             primary
                             className={data.meta.wifi ? "" : "line-through"}>
@@ -213,7 +206,7 @@ const PropertyPage = () => {
                         </Text>
                     </div>
                     <div className="flex gap-2 items-center">
-                        <MdOutlinePets className="h-6 w-6 " />
+                        <Icon pets md />
                         <Text
                             primary
                             className={data.meta.wifi ? "" : "line-through"}>
@@ -221,7 +214,7 @@ const PropertyPage = () => {
                         </Text>
                     </div>
                     <div className="flex gap-2 items-center">
-                        <MdOutlineRestaurantMenu className="h-6 w-6 " />
+                        <Icon breakfast md />
                         <Text
                             primary
                             className={data.meta.wifi ? "" : "line-through"}>
@@ -271,18 +264,18 @@ const PropertyPage = () => {
                         <Text primary bold className="">
                             Guests:
                         </Text>
-                        <button type="button">
-                            <CiCircleMinus
+                        <button type="button" onClick={guestMinus}>
+                            <Icon
+                                minus
                                 className="h-8 w-8 fill-secondary-300 hover:fill-secondary"
-                                onClick={guestMinus}
                             />
                         </button>
                         <Text primary bold>
                             {guestCount}
                         </Text>
-                        <button type="button">
-                            <CiCirclePlus
-                                onClick={guestPlus}
+                        <button type="button" onClick={guestPlus}>
+                            <Icon
+                                plus
                                 className="h-8 w-8 fill-secondary-300 hover:fill-secondary"
                             />
                         </button>

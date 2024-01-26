@@ -1,5 +1,5 @@
 import className from "classnames";
-import { GoSync } from "react-icons/go";
+import Icon from "./Icon";
 
 interface ButtonProps {
     children: React.ReactNode;
@@ -53,7 +53,6 @@ const Button = ({
             "h-13 w-76 font-bold text-lg": xl,
             "h-10": lg,
             "px-3 py-2 w-28": md,
-
         },
         rest.className
     );
@@ -66,7 +65,7 @@ const Button = ({
             onClick={onClick}>
             {loading ? (
                 <>
-                    <GoSync className="animate-spin mr-4" />
+                    <Icon refresh className="mr-4 animate-spin" />
                     <span className="">Loading...</span>
                 </>
             ) : (
