@@ -10,6 +10,8 @@ import Text from "../components/common/Text";
 import Heading from "../components/common/Heading";
 import Modal from "../components/common/Modal";
 
+import PropertyPageSkeleton from "../components/common/Skeletons/PropertyPageSkeleton";
+
 import { MdOutlineWifi } from "react-icons/md";
 import { LuParkingSquare } from "react-icons/lu";
 import { MdOutlinePets } from "react-icons/md";
@@ -108,10 +110,12 @@ const PropertyPage = () => {
     });
 
     if (isLoading) {
-        return <span>Loading...</span>;
+        console.log("loading");
+        return <PropertyPageSkeleton />;
     }
 
     if (isError || !data) {
+        console.log("error");
         return (
             <Text danger>
                 There was an error trying to get properties! Try refreshing...
@@ -244,7 +248,9 @@ const PropertyPage = () => {
                             />
                         </div>
                         <div className="">
-                            <Text primary>{data.owner.name}</Text>
+                            <Text primary bold>
+                                {data.owner.name}
+                            </Text>
                             <Text primary>{data.owner.email}</Text>
                         </div>
                     </div>

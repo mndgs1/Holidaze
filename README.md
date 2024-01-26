@@ -102,3 +102,19 @@ GitHub Projects
 Include the required links in the Moodle delivery window using this template format.
 All final changes must be merged into the default branch main or master. Other branches will not be checked.
 Ensure that the readme.md file describes your project thoroughly, including how to setup and run the project locally and any special instructions for testers.
+
+## Things to implement, after core
+
+### Property
+
+1. Right now I can add a booking in the past. Block Date picker dates up to this date
+2. Add total price to before doing reservation.
+3. Add Payment form
+4. Add media galery
+5. Fix reservation success modal
+6. Add rating with stars
+
+### Api calls
+
+1. Add pagination
+2. Add skeletons for api calls
