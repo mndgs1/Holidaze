@@ -15,32 +15,45 @@ const Layout: React.FC<{
     const isMobile = useIsMobile();
     const isHeaderVisible = useOnScrollUp();
 
-    if (!pathname.includes("/app")) {
+    if (pathname.includes("/login") || pathname.includes("/register")) {
         return (
             <>
                 <main>{children}</main>
             </>
         );
     }
+    if (pathname.includes("/app/"))
+        return (
+            <>
+                <Header />
+                <main
+                    className={
+                        "mt-24 mx-6 sm:mx-10 md:mx-16 lg:mx-24 xl:mx-34 2xl:mx-40 3xl:mx-auto max-w-screen-2xl"
+                    }>
+                    {children}
+                </main>
+                {isMobile && (
+                    <Navigation
+                        className={`fixed flex flex-col justify-center bottom-0 left-0 right-0 h-14 bg-white border-t border-secondary-100 ${
+                            !isHeaderVisible
+                                ? "transform translate-y-full transition-all duration-300"
+                                : "transform translate-y-0 transition-all duration-300"
+                        }`}></Navigation>
+                )}
+                {pathname !== "/app/profile" && <Footer />}
+            </>
+        );
     return (
-        <>
+        <div className="relative">
             <Header />
             <main
                 className={
-                    "mt-24 mx-6 sm:mx-10 md:mx-16 lg:mx-24 xl:mx-34 2xl:mx-40 3xl:mx-auto max-w-screen-2xl"
+                    "z-10 mx-6 sm:mx-10 md:mx-16 lg:mx-24 xl:mx-34 2xl:mx-40 3xl:mx-auto max-w-screen-2xl"
                 }>
                 {children}
             </main>
-            {isMobile && (
-                <Navigation
-                    className={`fixed flex flex-col justify-center bottom-0 left-0 right-0 h-14 bg-white border-t border-secondary-100 ${
-                        !isHeaderVisible
-                            ? "transform translate-y-full transition-all duration-300"
-                            : "transform translate-y-0 transition-all duration-300"
-                    }`}></Navigation>
-            )}
-            {pathname !== "/app/profile" && <Footer />}
-        </>
+            <Footer />
+        </div>
     );
 };
 
