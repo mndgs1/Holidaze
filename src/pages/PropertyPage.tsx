@@ -41,12 +41,12 @@ const PropertyPage = () => {
     }
 
     const {
-        register,
-        handleSubmit,
+        // register,
+        // handleSubmit,
         setValue,
         watch,
-        formState: { errors },
-        reset,
+        // formState: { errors },
+        // reset,
     } = useForm({
         resolver: yupResolver(postBookingSchema),
     });
