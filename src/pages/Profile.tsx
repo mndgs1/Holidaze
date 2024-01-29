@@ -93,7 +93,7 @@ const Profile = () => {
                     <Input
                         type="checkbox"
                         id="venueManager"
-                        label="I want to rent my property"
+                        label="I am a property manager"
                         defaultChecked={loggedInUser.venueManager}
                         {...register("venueManager")}
                     />

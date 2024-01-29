@@ -1,6 +1,7 @@
 import React from "react";
 import className from "classnames";
 import Logo from "../common/Logo";
+import Search from "../common/Search";
 
 import useOnScrollUp from "../../hooks/useOnScrollUp";
 import useIsMobile from "../../hooks/useIsMobile";
@@ -25,7 +26,7 @@ const Header = ({ ...rest }: HeaderProps) => {
             }`}>
             <div className={classes} {...rest}>
                 <Logo />
-                <div className="h-10 w-20 bg-primary"></div>
+                <Search />
                 {!isMobile && <div className="h-10 w-20 bg-primary">Nav</div>}
             </div>
         </header>

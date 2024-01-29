@@ -7,7 +7,7 @@ import {
     MdOutlineRestaurantMenu,
 } from "react-icons/md";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { GoSync } from "react-icons/go";
+import { GoSync, GoSearch } from "react-icons/go";
 import { PiHandWavingLight } from "react-icons/pi";
 import { FaSuitcaseRolling, FaSearch, FaUserCircle } from "react-icons/fa";
 import { LuParkingSquare } from "react-icons/lu";
@@ -37,6 +37,7 @@ interface IconProps {
     xl?: boolean;
     xxl?: boolean;
     home?: boolean;
+    searchlite?: boolean;
 }
 
 const Icon = ({
@@ -49,6 +50,7 @@ const Icon = ({
     wave,
     luggage,
     search,
+    searchlite,
     user,
     parking,
     plus,
@@ -111,6 +113,9 @@ const Icon = ({
     if (home) {
         return <FaHouse className={classes} />;
     }
+    if (searchlite) {
+        return <GoSearch className={classes} />;
+    }
     return null;
 };
 
@@ -130,6 +135,7 @@ Icon.propTypes = {
         plus,
         minus,
         home,
+        searchlite,
     }: IconProps) => {
         const count =
             Number(!!edit) +
@@ -145,7 +151,8 @@ Icon.propTypes = {
             Number(!!parking) +
             Number(!!plus) +
             Number(!!minus) +
-            Number(!!home);
+            Number(!!home) +
+            Number(!!searchlite);
 
         if (count > 1) {
             return new Error(

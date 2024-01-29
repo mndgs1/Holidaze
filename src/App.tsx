@@ -9,6 +9,8 @@ import Properties from "./pages/Properties";
 import Profile from "./pages/Profile";
 import PropertyPage from "./pages/PropertyPage";
 import Bookings from "./pages/Bookings";
+import MyProperties from "./pages/MyProperties";
+import CreateListing from "./pages/CreateListing";
 
 function App() {
     return (
@@ -22,6 +24,11 @@ function App() {
                 <Route path="app/profile" element={<Profile />} />
                 <Route path="app/Property/:id" element={<PropertyPage />} />
                 <Route path="app/bookings" element={<Bookings />} />
+                <Route path="app/myProperties" element={<MyProperties />} />
+                <Route
+                    path="app/myProperties/create"
+                    element={<CreateListing />}
+                />
             </Routes>
         </Layout>
     );

@@ -23,7 +23,7 @@ const NavItems = [
     {
         icon: <Icon home md />,
         text: "Rentals",
-        to: "/app/rentals",
+        to: "/app/myProperties",
     },
     {
         icon: <Icon user md />,
