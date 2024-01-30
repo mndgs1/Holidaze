@@ -3,7 +3,16 @@ import React from "react";
 import Heading from "../components/common/Heading";
 import Hero from "../components/common/Hero";
 
+import { useToken } from "../stores/useUserStore";
+import { useNavigate } from "react-router-dom";
+
 const MyProperties = () => {
+    const token = useToken();
+    const navigate = useNavigate();
+    if (!token) {
+        navigate("/login");
+    }
+
     return (
         <>
             <section>

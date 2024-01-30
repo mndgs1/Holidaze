@@ -15,7 +15,6 @@ interface ButtonProps {
     lg?: boolean;
     md?: boolean;
     sm?: boolean;
-    outline?: boolean;
     onClick?: () => void;
 }
 
@@ -27,7 +26,6 @@ const Button = ({
     warning,
     danger,
     loading,
-    outline,
     xl,
     md,
     lg,
@@ -36,25 +34,22 @@ const Button = ({
     ...rest
 }: ButtonProps) => {
     const classes = className(
+        rest.className,
         "flex items-center justify-center border rounded-lg font-heading drop-shadow-xl tracking-wide",
         {
             "opacity-80": loading,
-            "bg-primary hover:bg-primary-450 text-white": primary,
-            "bg-secondary text-white": secondary,
+            "bg-primary hover:bg-primary-450 border-primary text-white":
+                primary,
+            "bg-secondary hover:bg-secondary-450 text-white": secondary,
             "border-green-500 bg-green-500 text-white": success,
-            "border-yellow-400 bg-yellow-400 text-white": warning,
-            "border-danger bg-danger text-white": danger,
-            "bg-white": outline,
-            "text-primary border-primary": outline && primary,
-            "text-secondary border-secondary": outline && secondary,
-            // "text-green-500": outline && success,
-            // "text-yellow-400": outline && warning,
-            // "text-red-500": outline && danger,
+            "border-warning bg-warning text-white": warning,
+            "border-danger bg-danger hover:bg-danger-400 hover:border-danger-400 text-white":
+                danger,
             "h-13 w-76 font-bold text-lg": xl,
             "h-10": lg,
             "px-3 py-2 w-28": md,
-        },
-        rest.className
+            "px-3 py-2 text-sm": sm,
+        }
     );
 
     return (
