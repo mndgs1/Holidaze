@@ -11,6 +11,7 @@ import PropertyPage from "./pages/PropertyPage";
 import Bookings from "./pages/Bookings";
 import MyProperties from "./pages/MyProperties";
 import CreateListing from "./pages/CreateListing";
+import About from "./pages/About";
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                     path="app/myProperties/create"
                     element={<CreateListing />}
                 />
+                <Route path="/about" element={<About />} />
             </Routes>
         </Layout>
     );

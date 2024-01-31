@@ -6,13 +6,25 @@ import {
     MdOutlinePets,
     MdOutlineRestaurantMenu,
 } from "react-icons/md";
-import { IoArrowBackCircleOutline } from "react-icons/io5";
+import {
+    IoArrowBackCircleOutline,
+    IoArrowForwardCircleOutline,
+} from "react-icons/io5";
 import { GoSync, GoSearch } from "react-icons/go";
 import { PiHandWavingLight } from "react-icons/pi";
-import { FaSuitcaseRolling, FaSearch, FaUserCircle } from "react-icons/fa";
+import {
+    FaSuitcaseRolling,
+    FaSearch,
+    FaUserCircle,
+    FaFacebook,
+    FaInstagram,
+    FaYoutube,
+} from "react-icons/fa";
 import { LuParkingSquare } from "react-icons/lu";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { FaHouse } from "react-icons/fa6";
+import { GiReceiveMoney } from "react-icons/gi";
+import { FaMapLocationDot, FaXTwitter } from "react-icons/fa6";
 
 import className from "classnames";
 
@@ -22,6 +34,10 @@ interface IconProps {
     wifi?: boolean;
     pets?: boolean;
     breakfast?: boolean;
+    facebook?: boolean;
+    instagram?: boolean;
+    youtube?: boolean;
+    twitter?: boolean;
     refresh?: boolean;
     wave?: boolean;
     luggage?: boolean;
@@ -29,8 +45,11 @@ interface IconProps {
     user?: boolean;
     parking?: boolean;
     plus?: boolean;
+    forward?: boolean;
     minus?: boolean;
+    money?: boolean;
     className?: string;
+    location?: boolean;
     sm?: boolean;
     md?: boolean;
     lg?: boolean;
@@ -52,9 +71,16 @@ const Icon = ({
     search,
     searchlite,
     user,
+    facebook,
+    instagram,
+    youtube,
+    forward,
+    twitter,
     parking,
     plus,
     minus,
+    money,
+    location,
     sm,
     md,
     lg,
@@ -116,6 +142,27 @@ const Icon = ({
     if (searchlite) {
         return <GoSearch className={classes} />;
     }
+    if (money) {
+        return <GiReceiveMoney className={classes} />;
+    }
+    if (location) {
+        return <FaMapLocationDot className={classes} />;
+    }
+    if (facebook) {
+        return <FaFacebook className={classes} />;
+    }
+    if (instagram) {
+        return <FaInstagram className={classes} />;
+    }
+    if (youtube) {
+        return <FaYoutube className={classes} />;
+    }
+    if (twitter) {
+        return <FaXTwitter className={classes} />;
+    }
+    if (forward) {
+        return <IoArrowForwardCircleOutline className={classes} />;
+    }
     return null;
 };
 
@@ -135,6 +182,13 @@ Icon.propTypes = {
         plus,
         minus,
         home,
+        money,
+        location,
+        facebook,
+        instagram,
+        youtube,
+        twitter,
+        forward,
         searchlite,
     }: IconProps) => {
         const count =
@@ -152,6 +206,13 @@ Icon.propTypes = {
             Number(!!plus) +
             Number(!!minus) +
             Number(!!home) +
+            Number(!!money) +
+            Number(!!location) +
+            Number(!!facebook) +
+            Number(!!instagram) +
+            Number(!!youtube) +
+            Number(!!twitter) +
+            Number(!!forward) +
             Number(!!searchlite);
 
         if (count > 1) {
