@@ -6,7 +6,10 @@ import {
     MdOutlinePets,
     MdOutlineRestaurantMenu,
 } from "react-icons/md";
-import { IoArrowBackCircleOutline } from "react-icons/io5";
+import {
+    IoArrowBackCircleOutline,
+    IoArrowForwardCircleOutline,
+} from "react-icons/io5";
 import { GoSync, GoSearch } from "react-icons/go";
 import { PiHandWavingLight } from "react-icons/pi";
 import {
@@ -42,6 +45,7 @@ interface IconProps {
     user?: boolean;
     parking?: boolean;
     plus?: boolean;
+    forward?: boolean;
     minus?: boolean;
     money?: boolean;
     className?: string;
@@ -70,6 +74,7 @@ const Icon = ({
     facebook,
     instagram,
     youtube,
+    forward,
     twitter,
     parking,
     plus,
@@ -155,6 +160,9 @@ const Icon = ({
     if (twitter) {
         return <FaXTwitter className={classes} />;
     }
+    if (forward) {
+        return <IoArrowForwardCircleOutline className={classes} />;
+    }
     return null;
 };
 
@@ -180,6 +188,7 @@ Icon.propTypes = {
         instagram,
         youtube,
         twitter,
+        forward,
         searchlite,
     }: IconProps) => {
         const count =
@@ -203,6 +212,7 @@ Icon.propTypes = {
             Number(!!instagram) +
             Number(!!youtube) +
             Number(!!twitter) +
+            Number(!!forward) +
             Number(!!searchlite);
 
         if (count > 1) {

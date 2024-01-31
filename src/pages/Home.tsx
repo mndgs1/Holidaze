@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
 import Heading from "../components/common/Heading";
 import Text from "../components/common/Text";
 import Button from "../components/common/Button";
 import Icon from "../components/common/Icon";
+import Link from "../components/common/Link";
+import { Link as RouterLink } from "react-router-dom";
 
 export default function Home() {
     return (
@@ -23,18 +24,18 @@ export default function Home() {
                         Find your next holiday stay with us.
                     </Text>
                     <div className="flex items-center justify-center gap-x-4">
-                        <Link to="/login">
+                        <RouterLink to="/login">
                             <Button primary md>
                                 Login
                             </Button>
-                        </Link>
-                        <Link to={"/register"}>
+                        </RouterLink>
+                        <RouterLink to={"/register"}>
                             <Button
                                 md
                                 className="text-sm font-semibold leading-6 border-black ">
                                 Register <span aria-hidden="true">→</span>
                             </Button>
-                        </Link>
+                        </RouterLink>
                     </div>
                 </div>
             </div>
@@ -72,13 +73,16 @@ export default function Home() {
                 </div>
             </section>
             <section className="mt-8">
-                <Heading h2>Reviews</Heading>
-            </section>
-            <section className="mt-8">
-                <Heading h2>About Us</Heading>
-            </section>
-            <section className="mt-8">
-                <Heading h2>Contact Us</Heading>
+                <Heading h2>About Project</Heading>
+                <Text primary>
+                    Holidaze is a fictional project created by me Mindaugas
+                    Bankauskas for my final exam in Noroff Front-end development
+                    course. The project is using Noroff API and is built with
+                    React, Typescript & Tailwind.{" "}
+                    <span>
+                        <Link to="/about">{"Read more >"}</Link>
+                    </span>
+                </Text>
             </section>
         </>
     );
