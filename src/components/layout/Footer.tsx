@@ -2,6 +2,7 @@ import React from "react";
 import className from "classnames";
 
 import Text from "../common/Text";
+import Icon from "../common/Icon";
 
 interface FooterProps {
     className?: string;
@@ -9,14 +10,48 @@ interface FooterProps {
 
 const Footer = ({ ...rest }: FooterProps) => {
     const classes = className(
-        "mx-6 sm:mx-10 md:mx-16 lg:mx-24 xl:mx-34 2xl:mx-40 3xl:mx-auto max-w-screen-2xl",
+        "px-6 sm:px-10 md:px-16 lg:px-24 xl:px-34 2xl:px-40 3xl:px-auto max-w-screen-2xl flex flex-col gap-4 mt-8 border-t border-secondary-100 justify-between items-center py-4",
         rest.className
     );
 
     return (
         <footer className={""} {...rest}>
             <div className={classes} {...rest}>
-                <Text primary>Footer </Text>
+                <Text secondary>© 2024 Holidaze Inc. All rights reserved.</Text>
+                <div className="flex gap-4">
+                    <button className="hover:opacity-80">
+                        <a
+                            href="https://facebook.com"
+                            target="_blank"
+                            rel="noreferrer">
+                            <Icon facebook md className="fill-secondary" />
+                        </a>
+                    </button>
+                    <button className="hover:opacity-80">
+                        <a
+                            href="https://instagram.com"
+                            target="_blank"
+                            rel="noreferrer">
+                            <Icon instagram md className="fill-secondary" />
+                        </a>
+                    </button>
+                    <button className="hover:opacity-80">
+                        <a
+                            href="https://twitter.com"
+                            target="_blank"
+                            rel="noreferrer">
+                            <Icon twitter md className="fill-secondary" />
+                        </a>
+                    </button>
+                    <button className="hover:opacity-80">
+                        <a
+                            href="https://youtube.com"
+                            target="_blank"
+                            rel="noreferrer">
+                            <Icon youtube md className="fill-secondary" />
+                        </a>
+                    </button>
+                </div>
             </div>
         </footer>
     );

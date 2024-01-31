@@ -57,7 +57,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                         type={type}
                         id={id}
                         name={name}
-                        className={`h-5 w-5 border-gray-300 rounded`}
+                        className={`h-5 w-5 border-gray-300 rounded accent-primary`}
                         ref={ref}
                         onChange={handleChange}
                         {...rest}
@@ -76,7 +76,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             <div className="relative w-full h-13">
                 <label
                     htmlFor={id}
-                    className={`absolute ml-4 top-1/2 transition-all -translate-y-2/4 ${
+                    className={`absolute ml-4 top-1/2 transition-all -translate-y-2/4 accent-primary ${
                         danger ? "text-secondary" : "text-secondary-400"
                     } ${
                         isFocused
