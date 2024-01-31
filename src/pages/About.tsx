@@ -35,7 +35,7 @@ const About = () => {
                         href="https://docs.noroff.dev/holidaze/authentication"
                         target="_blank"
                         rel="noreferrer">
-                        <Button warning md>
+                        <Button secondary md>
                             API Docs
                         </Button>
                     </a>
