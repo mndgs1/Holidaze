@@ -32,7 +32,7 @@ const Login = () => {
         },
         onSuccess: (data: LoggedInUser) => {
             setUser(data);
-            navigate("/app/properties");
+            navigate("/holidaze/properties");
         },
         onError: (error: any) => {
             setServerError(error.message);

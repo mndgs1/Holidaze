@@ -22,7 +22,7 @@ const MyProperties = () => {
                     statement="You have no active properties"
                     suggestion="Create a property listing and start earning today!"
                     buttonText="List Property"
-                    navigateTo="/app/myProperties/create"
+                    navigateTo="/holidaze/myProperties/create"
                 />
             </section>
         </>

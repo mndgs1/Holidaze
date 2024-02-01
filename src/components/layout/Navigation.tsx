@@ -16,22 +16,22 @@ const LoggedInNavItems = [
     {
         icon: <Icon search md />,
         text: "Explore",
-        to: "/app/properties",
+        to: "/holidaze/properties",
     },
     {
         icon: <Icon luggage md />,
         text: "Trips",
-        to: "/app/bookings",
+        to: "/holidaze/bookings",
     },
     {
         icon: <Icon home md />,
         text: "Rentals",
-        to: "/app/myProperties",
+        to: "/holidaze/myProperties",
     },
     {
         icon: <Icon user md />,
         text: "Profile",
-        to: "/app/profile",
+        to: "/holidaze/profile",
     },
 ];
 

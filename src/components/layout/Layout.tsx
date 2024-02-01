@@ -22,7 +22,7 @@ const Layout: React.FC<{
             </>
         );
     }
-    if (pathname.includes("/app/"))
+    if (pathname.includes("/holidaze/"))
         return (
             <>
                 <Header />
@@ -40,7 +40,7 @@ const Layout: React.FC<{
                                 : "transform translate-y-0 transition-all duration-300"
                         }`}></Navigation>
                 )}
-                {pathname !== "/app/profile" && <Footer />}
+                {pathname !== "/holidaze/profile" && <Footer />}
             </>
         );
     return (
