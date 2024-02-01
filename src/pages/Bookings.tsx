@@ -26,7 +26,7 @@ const Bookings = () => {
             }
             return Promise.resolve(getBookings(token, user.name));
         },
-        staleTime: 5 * 100000,
+        // staleTime: 5 * 100000,
     });
 
     if (isLoading) {

@@ -5,6 +5,7 @@ import Heading from "./Heading";
 import Text from "./Text";
 
 import { format } from "date-fns";
+import { Property } from "../../constants/interfaces/property";
 
 function formatToLongDate(dateString: string): string {
     const inputDate = new Date(dateString);
@@ -14,9 +15,10 @@ function formatToLongDate(dateString: string): string {
 
 interface CardProps {
     booking?: Booking;
+    property?: Property;
 }
 
-const Card = ({ booking }: CardProps) => {
+const Card = ({ booking, property }: CardProps) => {
     if (booking) {
         return (
             <div key={booking.id} className="flex gap-2">
@@ -40,6 +42,29 @@ const Card = ({ booking }: CardProps) => {
                         {formatToLongDate(booking.dateFrom)} -{" "}
                         {formatToLongDate(booking.dateTo)}
                     </Text>
+                </div>
+            </div>
+        );
+    }
+    if (property) {
+        return (
+            <div key={property.id} className="flex gap-2">
+                <div className="h-32 w-32">
+                    <img
+                        src={
+                            property.media[0]
+                                ? property.media[0]
+                                : "/assets/placeholders/property-placeholder.jpg"
+                        }
+                        alt={`${property.name}`}
+                        className="w-full h-full object-cover rounded-lg"
+                    />
+                </div>
+                <div className="flex flex-col justify-between">
+                    <div>
+                        <Heading h4>{property.name}</Heading>
+                        <Text primary>Price: {property.price} kr</Text>
+                    </div>
                 </div>
             </div>
         );

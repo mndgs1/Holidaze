@@ -3,11 +3,11 @@ import { CreateProperty, Property } from "../../constants/interfaces/property";
 
 export async function postProperty(token: string, data: CreateProperty) {
     const options = {
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
         },
-        method: "POST",
         body: JSON.stringify(data),
     };
 
