@@ -6,8 +6,8 @@ export async function postBooking(token: string, data: CreateBookingData) {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
+            method: "POST",
         },
-        method: "POST",
         body: JSON.stringify(data),
     };
 

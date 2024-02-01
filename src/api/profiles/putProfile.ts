@@ -14,8 +14,8 @@ export async function updateAvatar({
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
+            method: "PUT",
         },
-        method: "PUT",
         body: JSON.stringify({ avatar: avatar }),
     };
 
