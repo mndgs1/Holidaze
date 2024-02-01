@@ -31,8 +31,10 @@ const Header = ({ ...rest }: HeaderProps) => {
             }`}>
             <div className={classes} {...rest}>
                 <Logo />
-                {pathname.includes("/app/") && <Search />}
-                {(!isMobile || !pathname.includes("/app/")) && <Navigation />}
+                {pathname.includes("/holidaze/") && <Search />}
+                {(!isMobile || !pathname.includes("/holidaze/")) && (
+                    <Navigation />
+                )}
             </div>
         </header>
     );

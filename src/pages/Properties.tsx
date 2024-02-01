@@ -42,7 +42,7 @@ const Properties = () => {
             <section className="">
                 {data?.map((property) => (
                     <Link
-                        to={`/app/property/${property.id}`}
+                        to={`/holidaze/property/${property.id}`}
                         key={property.id}
                         className="block">
                         <div className="pb-1 mb-4 border-b border-secondary-100">

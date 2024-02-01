@@ -21,13 +21,19 @@ function App() {
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
                 <Route path="*" element={<Page404 />} />
-                <Route path="app/properties" element={<Properties />} />
-                <Route path="app/profile" element={<Profile />} />
-                <Route path="app/Property/:id" element={<PropertyPage />} />
-                <Route path="app/bookings" element={<Bookings />} />
-                <Route path="app/myProperties" element={<MyProperties />} />
+                <Route path="holidaze/properties" element={<Properties />} />
+                <Route path="holidaze/profile" element={<Profile />} />
                 <Route
-                    path="app/myProperties/create"
+                    path="holidaze/Property/:id"
+                    element={<PropertyPage />}
+                />
+                <Route path="holidaze/bookings" element={<Bookings />} />
+                <Route
+                    path="holidaze/myProperties"
+                    element={<MyProperties />}
+                />
+                <Route
+                    path="holidaze/myProperties/create"
                     element={<CreateListing />}
                 />
                 <Route path="/about" element={<About />} />

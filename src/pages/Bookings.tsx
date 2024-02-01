@@ -66,7 +66,7 @@ const Bookings = () => {
                         statement="You have no upcomming trips"
                         suggestion="Start looking for a new adventure!"
                         buttonText="Explore"
-                        navigateTo="/app/properties"></Hero>
+                        navigateTo="/holidaze/properties"></Hero>
                 )}
             </section>
             <section className="mt-8">
