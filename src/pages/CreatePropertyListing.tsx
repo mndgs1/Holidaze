@@ -18,6 +18,7 @@ import { useMutation } from "@tanstack/react-query";
 import { postProperty } from "../api/properties/postProperty";
 import { CreateProperty } from "../constants/interfaces/property";
 import { Property } from "../constants/interfaces/property";
+import isImageValid from "../utils/isImageValid";
 
 interface CreatePropertyListingProps {
     property?: Property;
@@ -26,6 +27,8 @@ interface CreatePropertyListingProps {
 const CreatePropertyListing = ({ property }: CreatePropertyListingProps) => {
     const [isLoading, setIsLoading] = React.useState(false);
     const [serverError, setServerError] = React.useState("");
+    const [media, setMedia] = React.useState<string[]>([]);
+    const [mediaError, setMediaError] = React.useState("");
 
     const token = useToken();
     const navigate = useNavigate();
@@ -34,6 +37,7 @@ const CreatePropertyListing = ({ property }: CreatePropertyListingProps) => {
         register,
         handleSubmit,
         setValue,
+        getValues,
         watch,
         formState: { errors },
         reset,
@@ -86,13 +90,25 @@ const CreatePropertyListing = ({ property }: CreatePropertyListingProps) => {
         postPropertyMutation.mutate(data);
     }
 
+    async function handleAddMedia() {
+        const mediaInput = document.getElementById("media") as HTMLInputElement;
+
+        const isValid = await isImageValid(mediaInput.value);
+
+        if (isValid) {
+            setMediaError("");
+            setMedia([...media, mediaInput.value]);
+            setValue("media", [...media, mediaInput.value]);
+            console.log(getValues("media"));
+        } else {
+            setMediaError("Invalid image url");
+        }
+    }
     return (
         <>
-            <Heading h1 className="py-4">
-                Create Property Listing
-            </Heading>
+            <Heading h1>Create Property Listing</Heading>
             <form
-                className="flex flex-col gap-5 mb-3"
+                className="flex flex-col gap-5 my-3"
                 onSubmit={handleSubmit(onSubmit)}>
                 <InputWithValidation
                     input={{
@@ -104,6 +120,32 @@ const CreatePropertyListing = ({ property }: CreatePropertyListingProps) => {
                     register={register}
                     errors={errors}
                 />
+                <div>
+                    <div className="flex">
+                        <Input
+                            type="text"
+                            id="media"
+                            label="Media Url"
+                            danger={!!mediaError}
+                        />
+                        <Button
+                            onClick={handleAddMedia}
+                            primary
+                            sm
+                            type="button"
+                            className="h-13 -ml-1.5">
+                            Add
+                        </Button>
+                    </div>
+                    <div>
+                        {mediaError && (
+                            <Text sm danger>
+                                URL provided does not lead to an Image
+                            </Text>
+                        )}
+                        {media.length > 0 && <div>there is media</div>}
+                    </div>
+                </div>
                 <div className="flex flex-col gap-1 w-full">
                     <Textarea
                         id="description"

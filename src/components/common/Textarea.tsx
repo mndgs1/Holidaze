@@ -11,7 +11,7 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     ({ id, name, label, danger, onBlur, onChange, ...rest }, ref) => {
         const classes = className(
-            "w-full h-full border rounded-lg px-2 py-1 hover:border-secondary-300 py-2",
+            "w-full h-full border rounded-lg px-2 py-1 hover:border-secondary-300 py-2 px-3",
             {
                 "border-danger-200 bg-danger-50": danger,
             },

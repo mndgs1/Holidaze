@@ -59,7 +59,7 @@ const Card = ({ booking, property }: CardProps) => {
                         </Text>
                     </div>
                     <div className="">
-                        <RouterLink to={`/myProperties/${booking.id}`}>
+                        <RouterLink to={`holidaze/bookings/${booking.id}`}>
                             <button className="absolute top-0 right-0 flex gap-1 border border-gray-200 p-2 rounded-full drop-shadow hover:bg-gray-100">
                                 <Icon receipt md className="fill-secondary" />
                             </button>
@@ -104,12 +104,13 @@ const Card = ({ booking, property }: CardProps) => {
                             </Text>
                         </div>
                     </div>
-                    <RouterLink to={`/myProperties/${property.id}`}>
+                    <RouterLink to={`/holidaze/myProperties/${property.id}`}>
                         <button className="absolute top-0 right-0 flex gap-1 border border-gray-200 p-2 rounded-full drop-shadow hover:bg-gray-100">
                             <Icon receipt md className="fill-secondary" />
                         </button>
                     </RouterLink>
-                    <RouterLink to={`/myProperties/${property.id}`}>
+                    <RouterLink
+                        to={`/holidaze/myProperties/edit/${property.id}`}>
                         <button className="absolute bottom-0 right-0 flex gap-1 border border-gray-200 p-2 rounded-full drop-shadow hover:bg-gray-100">
                             <Icon edit md className="fill-secondary" />
                         </button>

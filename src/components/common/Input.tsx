@@ -9,6 +9,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
     defaultValue?: string;
     defaultChecked?: boolean;
+    onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -28,7 +29,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         ref
     ) => {
         const classes = className(
-            "w-full h-full border rounded-lg px-2 py-1 hover:border-secondary-300",
+            "w-full h-full border rounded-lg px-2 py-1 hover:border-secondary-300 px-3",
             {
                 "border-danger-200 bg-danger-50": danger,
             },

@@ -16,6 +16,8 @@ interface ButtonProps {
     md?: boolean;
     sm?: boolean;
     onClick?: () => void;
+    type?: "button" | "submit" | "reset";
+    id?: string;
 }
 
 const Button = ({

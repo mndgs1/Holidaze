@@ -1,6 +1,12 @@
 import React from "react";
+import Modal from "./Modal";
 
-const Gallery = () => {
+interface GalleryProps {
+    media?: string[];
+    editable?: boolean;
+}
+
+const Gallery = ({ media, editable }: GalleryProps) => {
     return <div>Gallery</div>;
 };
 

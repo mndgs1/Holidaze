@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import isImageValid from "../utils/isImageValid";
 
 // Registration Form schema
 export const registrationSchema = yup.object({
@@ -71,4 +72,17 @@ export const postPropertySchema = yup.object({
         lng: yup.number(),
         lat: yup.number(),
     }),
+});
+
+export const mediaSchema = yup.object({
+    mediaInput: yup
+        .string()
+        .test(
+            "test-media",
+            "Media url has to be a valid url that leads to image",
+            async (value) => {
+                const verified = await isImageValid(value as string);
+                return verified as boolean;
+            }
+        ),
 });
