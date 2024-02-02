@@ -52,7 +52,7 @@ const Bookings = () => {
 
     return (
         <>
-            <section>
+            <section className="">
                 <Heading h1>Upcomming</Heading>
                 {futureBookings.length > 0 ? (
                     <div className="mt-4 flex flex-col gap-4">

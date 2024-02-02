@@ -11,7 +11,7 @@ import {
     IoArrowForwardCircleOutline,
 } from "react-icons/io5";
 import { GoSync, GoSearch } from "react-icons/go";
-import { PiHandWavingLight } from "react-icons/pi";
+import { PiHandWavingLight, PiReceiptLight } from "react-icons/pi";
 import {
     FaSuitcaseRolling,
     FaSearch,
@@ -57,6 +57,7 @@ interface IconProps {
     xxl?: boolean;
     home?: boolean;
     searchlite?: boolean;
+    receipt?: boolean;
 }
 
 const Icon = ({
@@ -87,6 +88,7 @@ const Icon = ({
     xl,
     xxl,
     home,
+    receipt,
     ...rest
 }: IconProps) => {
     const classes = className(rest.className, "", {
@@ -163,6 +165,9 @@ const Icon = ({
     if (forward) {
         return <IoArrowForwardCircleOutline className={classes} />;
     }
+    if (receipt) {
+        return <PiReceiptLight className={classes} />;
+    }
     return null;
 };
 
@@ -190,6 +195,7 @@ Icon.propTypes = {
         twitter,
         forward,
         searchlite,
+        receipt,
     }: IconProps) => {
         const count =
             Number(!!edit) +
@@ -213,6 +219,7 @@ Icon.propTypes = {
             Number(!!youtube) +
             Number(!!twitter) +
             Number(!!forward) +
+            Number(!!receipt) +
             Number(!!searchlite);
 
         if (count > 1) {

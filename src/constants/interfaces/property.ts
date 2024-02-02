@@ -9,7 +9,7 @@ export interface Property {
     maxGuests: number;
     rating?: number | 0;
     created?: string;
-    updated?: string;
+    updated: string;
     meta: Amenities;
     location: Location;
     bookings: Booking[];

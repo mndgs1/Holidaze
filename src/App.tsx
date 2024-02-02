@@ -12,6 +12,7 @@ import Bookings from "./pages/Bookings";
 import MyProperties from "./pages/MyProperties";
 import About from "./pages/About";
 import CreatePropertyListing from "./pages/CreatePropertyListing";
+import EditMyProperty from "./pages/EditMyProperty";
 
 function App() {
     return (
@@ -31,6 +32,10 @@ function App() {
                 <Route
                     path="holidaze/myProperties"
                     element={<MyProperties />}
+                />
+                <Route
+                    path="holidaze/myProperties/:id"
+                    element={<EditMyProperty />}
                 />
                 <Route
                     path="holidaze/myProperties/create"

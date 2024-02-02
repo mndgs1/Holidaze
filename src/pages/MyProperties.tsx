@@ -59,7 +59,8 @@ const MyProperties = () => {
 
     return (
         <>
-            <section className="border-b border-secondary-100 pb-4">
+            <Heading h1>My Properties</Heading>
+            <section className="mt-4">
                 {data?.map((property: Property) => (
                     <Card key={property.id} property={property} />
                 ))}
