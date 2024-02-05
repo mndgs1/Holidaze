@@ -86,3 +86,29 @@ export const mediaSchema = yup.object({
             }
         ),
 });
+
+export const editPropertySchema = yup.object({
+    name: yup.string().required("Please enter a name"),
+    description: yup.string().required("Please enter a description"),
+    media: yup.array().of(yup.string().required()),
+    price: yup.number().required("Please enter a price"),
+    maxGuests: yup
+        .number()
+        .required("Please enter the maximum number of guests"),
+    rating: yup.number().required("Please enter a rating"),
+    meta: yup.object({
+        wifi: yup.boolean().required("Please select an option"),
+        parking: yup.boolean().required("Please select an option"),
+        breakfast: yup.boolean().required("Please select an option"),
+        pets: yup.boolean().required("Please select an option"),
+    }),
+    location: yup.object({
+        address: yup.string(),
+        city: yup.string(),
+        zip: yup.string(),
+        country: yup.string(),
+        continent: yup.string(),
+        lng: yup.number(),
+        lat: yup.number(),
+    }),
+});

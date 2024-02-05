@@ -34,7 +34,7 @@ function App() {
                     element={<MyProperties />}
                 />
                 <Route
-                    path="holidaze/myProperties/:id"
+                    path="holidaze/myProperties/edit/:id"
                     element={<EditMyProperty />}
                 />
                 <Route

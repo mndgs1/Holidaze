@@ -1,4 +1,9 @@
-import React, { TextareaHTMLAttributes, forwardRef, useState } from "react";
+import React, {
+    TextareaHTMLAttributes,
+    forwardRef,
+    useState,
+    useEffect,
+} from "react";
 import className from "classnames";
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -6,6 +11,7 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
     label: string;
     danger?: boolean;
     onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
+    defaultValue?: string;
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
@@ -22,6 +28,12 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
         // Handle
         const handleOpen = () => setIsFocused(true);
+
+        useEffect(() => {
+            if (rest.defaultValue) {
+                setIsFocused(true);
+            }
+        }, [rest.defaultValue]);
 
         // Send back label to the middle of the input if the input onBlur
         const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) => {

@@ -71,7 +71,7 @@ const Card = ({ booking, property }: CardProps) => {
     }
     if (property) {
         return (
-            <div className="border-b border-secondary-100 pb-4">
+            <div className="border-b border-secondary-100 pb-4 mt-4">
                 <div key={property.id} className="flex gap-2 relative ">
                     <div className="h-28 w-28">
                         <img

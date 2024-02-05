@@ -7,6 +7,7 @@ import { getProperties } from "../api/properties/getProperties";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Carousel from "../components/common/Carousel";
 
 const Properties = () => {
     const token = useToken();
@@ -46,18 +47,10 @@ const Properties = () => {
                         key={property.id}
                         className="block">
                         <div className="pb-1 mb-4 border-b border-secondary-100">
-                            <div className="w-full h-84">
-                                <img
-                                    className="w-full h-full object-cover rounded-lg"
-                                    src={
-                                        Array.isArray(property.media) &&
-                                        property.media.length > 0
-                                            ? property.media[0]
-                                            : "/assets/placeholders/Property-placeholder.jpg"
-                                    }
-                                    alt={property.name}
-                                />
-                            </div>
+                            <Carousel
+                                images={property.media}
+                                className="mb-2"
+                            />
                             <Heading h3 className="mb-0">
                                 {property.name}
                             </Heading>

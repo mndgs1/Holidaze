@@ -1,4 +1,9 @@
-import React, { InputHTMLAttributes, forwardRef, useState } from "react";
+import React, {
+    InputHTMLAttributes,
+    forwardRef,
+    useState,
+    useEffect,
+} from "react";
 import className from "classnames";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -38,6 +43,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
         const [isFocused, setIsFocused] = useState(false);
 
+        useEffect(() => {
+            if (defaultValue) {
+                setIsFocused(true);
+            }
+        }, [defaultValue]);
         // Handle
         const handleOpen = () => setIsFocused(true);
 
