@@ -6,8 +6,8 @@ export async function login(
 ): Promise<LoggedInUser> {
     const { password, email } = userDetails;
     const options = {
-        headers: { "Content-Type": "application/json" },
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password, email }),
     };
 

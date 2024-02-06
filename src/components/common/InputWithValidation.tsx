@@ -3,7 +3,12 @@ import React from "react";
 import Text from "./Text";
 import Input from "./Input";
 
-const InputWithValidation = ({ input, register, errors }: any) => {
+const InputWithValidation = ({
+    input,
+    register,
+    errors,
+    defaultValue,
+}: any) => {
     const fieldId = input.id as
         | "name"
         | "email"
@@ -23,6 +28,7 @@ const InputWithValidation = ({ input, register, errors }: any) => {
                 autoFocus={input.autoFocus || false}
                 {...register(fieldId as string)}
                 danger={!!errors[fieldId]?.message}
+                defaultValue={defaultValue}
             />
             {errors[fieldId]?.message && (
                 <Text danger sm>

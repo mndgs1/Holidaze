@@ -5,13 +5,14 @@ import {
     MdOutlineWifi,
     MdOutlinePets,
     MdOutlineRestaurantMenu,
+    MdDeleteForever,
 } from "react-icons/md";
 import {
     IoArrowBackCircleOutline,
     IoArrowForwardCircleOutline,
 } from "react-icons/io5";
 import { GoSync, GoSearch } from "react-icons/go";
-import { PiHandWavingLight } from "react-icons/pi";
+import { PiHandWavingLight, PiReceiptLight } from "react-icons/pi";
 import {
     FaSuitcaseRolling,
     FaSearch,
@@ -19,6 +20,7 @@ import {
     FaFacebook,
     FaInstagram,
     FaYoutube,
+    FaRegSave,
 } from "react-icons/fa";
 import { LuParkingSquare } from "react-icons/lu";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
@@ -57,6 +59,9 @@ interface IconProps {
     xxl?: boolean;
     home?: boolean;
     searchlite?: boolean;
+    receipt?: boolean;
+    save?: boolean;
+    deleteIcon?: boolean;
 }
 
 const Icon = ({
@@ -87,6 +92,9 @@ const Icon = ({
     xl,
     xxl,
     home,
+    receipt,
+    deleteIcon,
+    save,
     ...rest
 }: IconProps) => {
     const classes = className(rest.className, "", {
@@ -163,6 +171,15 @@ const Icon = ({
     if (forward) {
         return <IoArrowForwardCircleOutline className={classes} />;
     }
+    if (receipt) {
+        return <PiReceiptLight className={classes} />;
+    }
+    if (deleteIcon) {
+        return <MdDeleteForever className={classes} />;
+    }
+    if (save) {
+        return <FaRegSave className={classes} />;
+    }
     return null;
 };
 
@@ -190,6 +207,9 @@ Icon.propTypes = {
         twitter,
         forward,
         searchlite,
+        receipt,
+        deleteIcon,
+        save,
     }: IconProps) => {
         const count =
             Number(!!edit) +
@@ -213,6 +233,9 @@ Icon.propTypes = {
             Number(!!youtube) +
             Number(!!twitter) +
             Number(!!forward) +
+            Number(!!receipt) +
+            Number(!!deleteIcon) +
+            Number(!!save) +
             Number(!!searchlite);
 
         if (count > 1) {

@@ -26,7 +26,7 @@ const Bookings = () => {
             }
             return Promise.resolve(getBookings(token, user.name));
         },
-        staleTime: 5 * 100000,
+        // staleTime: 5 * 100000,
     });
 
     if (isLoading) {
@@ -52,7 +52,7 @@ const Bookings = () => {
 
     return (
         <>
-            <section>
+            <section className="">
                 <Heading h1>Upcomming</Heading>
                 {futureBookings.length > 0 ? (
                     <div className="mt-4 flex flex-col gap-4">

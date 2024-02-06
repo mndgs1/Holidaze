@@ -19,7 +19,7 @@ const Search = ({ className }: SearchProps) => {
                         Anywhere
                     </Text>
                     <Text secondary sm>
-                        Any time, add guests
+                        Any time, Guests
                     </Text>
                 </div>
             </button>

@@ -1,4 +1,9 @@
-import React, { InputHTMLAttributes, forwardRef, useState } from "react";
+import React, {
+    InputHTMLAttributes,
+    forwardRef,
+    useState,
+    useEffect,
+} from "react";
 import className from "classnames";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -7,12 +12,29 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     label: string;
     danger?: boolean;
     onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+    defaultValue?: string;
+    defaultChecked?: boolean;
+    onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ type, id, name, label, danger, onBlur, onChange, ...rest }, ref) => {
+    (
+        {
+            type,
+            id,
+            name,
+            label,
+            danger,
+            onBlur,
+            onChange,
+            defaultValue,
+            defaultChecked,
+            ...rest
+        },
+        ref
+    ) => {
         const classes = className(
-            "w-full h-full border rounded-lg px-2 py-1 hover:border-secondary-300",
+            "w-full h-full border rounded-lg px-2 py-1 hover:border-secondary-300 px-3",
             {
                 "border-danger-200 bg-danger-50": danger,
             },
@@ -21,6 +43,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
         const [isFocused, setIsFocused] = useState(false);
 
+        useEffect(() => {
+            if (defaultValue) {
+                setIsFocused(true);
+            }
+        }, [defaultValue]);
         // Handle
         const handleOpen = () => setIsFocused(true);
 
@@ -60,6 +87,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                         className={`h-5 w-5 border-gray-300 rounded accent-primary`}
                         ref={ref}
                         onChange={handleChange}
+                        defaultChecked={defaultChecked ? defaultChecked : false}
                         {...rest}
                     />
                     <label
@@ -93,6 +121,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                     onFocus={handleOpen}
                     onBlur={handleBlur}
                     onChange={handleChange}
+                    defaultValue={defaultValue ? defaultValue : ""}
                     ref={ref}
                     {...rest}
                 />

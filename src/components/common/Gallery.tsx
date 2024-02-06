@@ -1,6 +1,11 @@
 import React from "react";
 
-const Gallery = () => {
+interface GalleryProps {
+    media?: string[];
+    editable?: boolean;
+}
+
+const Gallery = ({ media, editable }: GalleryProps) => {
     return <div>Gallery</div>;
 };
 

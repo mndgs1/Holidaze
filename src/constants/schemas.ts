@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import isImageValid from "../utils/isImageValid";
 
 // Registration Form schema
 export const registrationSchema = yup.object({
@@ -35,7 +36,6 @@ export const loginSchema = yup.object({
     remember: yup.boolean(),
 });
 
-
 export const postBookingSchema = yup.object({
     venueId: yup.string().required("Please select a venue"),
     dateFrom: yup.date().required("Please select a start date"),
@@ -46,4 +46,69 @@ export const postBookingSchema = yup.object({
 export const updateSchema = yup.object({
     venueManager: yup.boolean(),
     avatar: yup.string(),
+});
+
+export const postPropertySchema = yup.object({
+    name: yup.string().required("Please enter a name"),
+    description: yup.string().required("Please enter a description"),
+    media: yup.array().of(yup.string().required()),
+    price: yup.number().required("Please enter a price"),
+    maxGuests: yup
+        .number()
+        .required("Please enter the maximum number of guests"),
+    rating: yup.number().required("Please enter a rating"),
+    meta: yup.object({
+        wifi: yup.boolean().required("Please select an option"),
+        parking: yup.boolean().required("Please select an option"),
+        breakfast: yup.boolean().required("Please select an option"),
+        pets: yup.boolean().required("Please select an option"),
+    }),
+    location: yup.object({
+        address: yup.string(),
+        city: yup.string(),
+        zip: yup.string(),
+        country: yup.string(),
+        continent: yup.string(),
+        lng: yup.number(),
+        lat: yup.number(),
+    }),
+});
+
+export const mediaSchema = yup.object({
+    mediaInput: yup
+        .string()
+        .test(
+            "test-media",
+            "Media url has to be a valid url that leads to image",
+            async (value) => {
+                const verified = await isImageValid(value as string);
+                return verified as boolean;
+            }
+        ),
+});
+
+export const editPropertySchema = yup.object({
+    name: yup.string().required("Please enter a name"),
+    description: yup.string().required("Please enter a description"),
+    media: yup.array().of(yup.string().required()),
+    price: yup.number().required("Please enter a price"),
+    maxGuests: yup
+        .number()
+        .required("Please enter the maximum number of guests"),
+    rating: yup.number().required("Please enter a rating"),
+    meta: yup.object({
+        wifi: yup.boolean().required("Please select an option"),
+        parking: yup.boolean().required("Please select an option"),
+        breakfast: yup.boolean().required("Please select an option"),
+        pets: yup.boolean().required("Please select an option"),
+    }),
+    location: yup.object({
+        address: yup.string(),
+        city: yup.string(),
+        zip: yup.string(),
+        country: yup.string(),
+        continent: yup.string(),
+        lng: yup.number(),
+        lat: yup.number(),
+    }),
 });

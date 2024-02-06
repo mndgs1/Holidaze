@@ -3,11 +3,11 @@ import { CreateBookingData, Booking } from "../../constants/interfaces/booking";
 
 export async function postBooking(token: string, data: CreateBookingData) {
     const options = {
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
         },
-        method: "POST",
         body: JSON.stringify(data),
     };
 

@@ -11,6 +11,7 @@ import Heading from "../components/common/Heading";
 import Modal from "../components/common/Modal";
 import Icon from "../components/common/Icon";
 import DatePicker from "../components/common/DatePicker/DatePicker";
+import Carousel from "../components/common/Carousel";
 
 import PropertyPageSkeleton from "../components/common/Skeletons/PropertyPageSkeleton";
 
@@ -140,20 +141,11 @@ const PropertyPage = () => {
     };
 
     const bookedDays = createBookedDaysArray(data);
+    console.log(data.media);
     return (
         <>
             <section className="pb-3.5 mb-3.5 border-b border-secondary-100">
-                <div className="w-full h-84 mb-3.5">
-                    <img
-                        className="w-full h-full object-cover rounded-lg"
-                        src={
-                            Array.isArray(data.media) && data.media.length > 0
-                                ? data.media[0]
-                                : "/assets/placeholders/Property-placeholder.jpg"
-                        }
-                        alt={data.name}
-                    />
-                </div>
+                <Carousel images={data.media} carouselControls />
                 <Heading className="" h2>
                     {data.name}
                 </Heading>
@@ -201,7 +193,7 @@ const PropertyPage = () => {
                         <Icon parking md />
                         <Text
                             primary
-                            className={data.meta.wifi ? "" : "line-through"}>
+                            className={data.meta.parking ? "" : "line-through"}>
                             Parking
                         </Text>
                     </div>
@@ -209,7 +201,7 @@ const PropertyPage = () => {
                         <Icon pets md />
                         <Text
                             primary
-                            className={data.meta.wifi ? "" : "line-through"}>
+                            className={data.meta.pets ? "" : "line-through"}>
                             Pets
                         </Text>
                     </div>
@@ -217,7 +209,9 @@ const PropertyPage = () => {
                         <Icon breakfast md />
                         <Text
                             primary
-                            className={data.meta.wifi ? "" : "line-through"}>
+                            className={
+                                data.meta.breakfast ? "" : "line-through"
+                            }>
                             Breakfast
                         </Text>
                     </div>

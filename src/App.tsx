@@ -10,8 +10,9 @@ import Profile from "./pages/Profile";
 import PropertyPage from "./pages/PropertyPage";
 import Bookings from "./pages/Bookings";
 import MyProperties from "./pages/MyProperties";
-import CreateListing from "./pages/CreateListing";
 import About from "./pages/About";
+import CreatePropertyListing from "./pages/CreatePropertyListing";
+import EditMyProperty from "./pages/EditMyProperty";
 
 function App() {
     return (
@@ -33,8 +34,12 @@ function App() {
                     element={<MyProperties />}
                 />
                 <Route
+                    path="holidaze/myProperties/edit/:id"
+                    element={<EditMyProperty />}
+                />
+                <Route
                     path="holidaze/myProperties/create"
-                    element={<CreateListing />}
+                    element={<CreatePropertyListing />}
                 />
                 <Route path="/about" element={<About />} />
             </Routes>

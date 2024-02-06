@@ -3,8 +3,8 @@ import { User } from "../../constants/interfaces/user";
 
 export async function registerUser(userDetails: User) {
     const options = {
-        headers: { "Content-Type": "application/json" },
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userDetails),
     };
 

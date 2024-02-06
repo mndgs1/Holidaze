@@ -11,11 +11,11 @@ export async function updateAvatar({
 }) {
     const url = `${PROFILES_URL}/${name}/media`;
     const options = {
+        method: "PUT",
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
         },
-        method: "PUT",
         body: JSON.stringify({ avatar: avatar }),
     };
 

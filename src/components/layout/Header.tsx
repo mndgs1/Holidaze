@@ -14,7 +14,6 @@ interface HeaderProps {
 const Header = ({ ...rest }: HeaderProps) => {
     const { pathname } = useLocation();
 
-    console.log(pathname);
     const isHeaderVisible = useOnScrollUp();
     const isMobile = useIsMobile();
 
