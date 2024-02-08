@@ -44,6 +44,10 @@ const MyProperty = () => {
         );
     }
 
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <>
             <Heading h1>My Property</Heading>
