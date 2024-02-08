@@ -6,6 +6,7 @@ import {
     MdOutlinePets,
     MdOutlineRestaurantMenu,
     MdDeleteForever,
+    MdPhoto,
 } from "react-icons/md";
 import {
     IoArrowBackCircleOutline,
@@ -62,6 +63,7 @@ interface IconProps {
     receipt?: boolean;
     save?: boolean;
     deleteIcon?: boolean;
+    photo?: boolean;
 }
 
 const Icon = ({
@@ -95,6 +97,7 @@ const Icon = ({
     receipt,
     deleteIcon,
     save,
+    photo,
     ...rest
 }: IconProps) => {
     const classes = className(rest.className, "", {
@@ -180,6 +183,9 @@ const Icon = ({
     if (save) {
         return <FaRegSave className={classes} />;
     }
+    if (photo) {
+        return <MdPhoto className={classes} />;
+    }
     return null;
 };
 
@@ -210,6 +216,7 @@ Icon.propTypes = {
         receipt,
         deleteIcon,
         save,
+        photo,
     }: IconProps) => {
         const count =
             Number(!!edit) +
@@ -236,6 +243,7 @@ Icon.propTypes = {
             Number(!!receipt) +
             Number(!!deleteIcon) +
             Number(!!save) +
+            Number(!!photo) +
             Number(!!searchlite);
 
         if (count > 1) {

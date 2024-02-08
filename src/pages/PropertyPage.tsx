@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useToken } from "../stores/useUserStore";
 import { useNavigate } from "react-router-dom";
+import useIsMobile from "../hooks/useIsMobile";
 
 import Button from "../components/common/Button";
 import Text from "../components/common/Text";
@@ -25,11 +26,13 @@ import { postBooking } from "../api/bookings/postBooking";
 import { postBookingSchema } from "../constants/schemas";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Gallery from "../components/common/Gallery";
 
 const PropertyPage = () => {
     const token = useToken();
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
+    const isMobile = useIsMobile();
 
     const [guestCount, setGuestCount] = useState<number>(1);
     const [selectedDayRange, setSelectedDayRange] = useState<DayRange>({
@@ -104,16 +107,17 @@ const PropertyPage = () => {
     });
 
     if (isLoading) {
-        console.log("loading");
         return <PropertyPageSkeleton />;
     }
 
     if (isError || !data) {
-        console.log("error");
+        const handleError = () => window.location.reload();
         return (
             <Text danger>
                 There was an error trying to get properties! Try refreshing...
-                <Button secondary>Refresh</Button>
+                <Button secondary md onClick={handleError}>
+                    Refresh
+                </Button>
             </Text>
         );
     }
@@ -144,162 +148,184 @@ const PropertyPage = () => {
     console.log(data.media);
     return (
         <>
-            <section className="pb-3.5 mb-3.5 border-b border-secondary-100">
+            {isMobile ? (
                 <Carousel images={data.media} carouselControls />
-                <Heading className="" h2>
-                    {data.name}
-                </Heading>
-                <Text primary>{data.rating} stars</Text>
-                <Text primary>For {data.maxGuests} Guests</Text>
-                <Text primary>
-                    <strong>{data.price}kr</strong> night
-                </Text>
-            </section>
-            <section className="pb-3.5 mb-3.5 border-b border-secondary-100">
-                <Heading h3 className="mb-2.5">
-                    Description
-                </Heading>
-                <Text>{data.description}</Text>
-            </section>
-            {data.location.address && (
-                <section className="pb-3.5 mb-3.5 border-b border-secondary-100">
-                    <Heading h3 className="mb-2.5">
-                        Location
-                    </Heading>
-                    <Text>{data.location.address}</Text>
-                    <Text>
-                        {data.location.city ? data.location.city : ""},{" "}
-                        {data.location.zip ? data.location.zip : ""}
-                    </Text>
-                    <Text>
-                        {data.location.country ? data.location.country : ""}
-                    </Text>
-                </section>
+            ) : (
+                <Gallery images={data.media} />
             )}
-            <section className="pb-3.5 mb-3.5 border-b border-secondary-100">
-                <Heading h3 className="mb-2.5">
-                    Amenities
-                </Heading>
-                <div className="flex flex-col gap-1">
-                    <div className="flex gap-2 items-center">
-                        <Icon wifi md />
-                        <Text
-                            primary
-                            className={data.meta.wifi ? "" : "line-through"}>
-                            Wifi
+            <div className="lg:grid lg:grid-cols-3 lg:gap-8 mt-4">
+                <div className="col-span-2">
+                    <section className="pb-3.5 mb-3.5 border-b border-secondary-100">
+                        <Heading h2>{data.name}</Heading>
+                        <Text primary>{data.rating} stars</Text>
+                        <Text primary>For {data.maxGuests} Guests</Text>
+                        <Text primary>
+                            <strong>{data.price}kr</strong> night
                         </Text>
-                    </div>
-                    <div className="flex gap-2 items-center">
-                        <Icon parking md />
-                        <Text
-                            primary
-                            className={data.meta.parking ? "" : "line-through"}>
-                            Parking
-                        </Text>
-                    </div>
-                    <div className="flex gap-2 items-center">
-                        <Icon pets md />
-                        <Text
-                            primary
-                            className={data.meta.pets ? "" : "line-through"}>
-                            Pets
-                        </Text>
-                    </div>
-                    <div className="flex gap-2 items-center">
-                        <Icon breakfast md />
-                        <Text
-                            primary
-                            className={
-                                data.meta.breakfast ? "" : "line-through"
-                            }>
-                            Breakfast
-                        </Text>
-                    </div>
-                </div>
-            </section>
-            {data.owner && (
-                <section className="pb-3.5 mb-3.5 border-b border-secondary-100">
-                    <Heading h3 className="mb-2.5">
-                        Owner
-                    </Heading>
-                    <div className="flex items-end gap-2">
-                        <div className="h-16 w-16">
-                            <img
-                                src={
-                                    data.owner.avatar
-                                        ? data.owner.avatar
-                                        : "/assets/placeholders/profile-placeholder.jpg"
-                                }
-                                className="rounded-full h-full w-full object-cover"
-                                alt={`${data.owner.name} avatar`}
-                            />
-                        </div>
-                        <div className="">
-                            <Text primary bold>
-                                {data.owner.name}
+                    </section>
+                    <section className="pb-3.5 mb-3.5 border-b border-secondary-100">
+                        <Heading h3 className="mb-2.5">
+                            Description
+                        </Heading>
+                        <Text>{data.description}</Text>
+                    </section>
+                    {data.location.address && (
+                        <section className="pb-3.5 mb-3.5 border-b border-secondary-100">
+                            <Heading h3 className="mb-2.5">
+                                Location
+                            </Heading>
+                            <Text>{data.location.address}</Text>
+                            <Text>
+                                {data.location.city ? data.location.city : ""},{" "}
+                                {data.location.zip ? data.location.zip : ""}
                             </Text>
-                            <Text primary>{data.owner.email}</Text>
+                            <Text>
+                                {data.location.country
+                                    ? data.location.country
+                                    : ""}
+                            </Text>
+                        </section>
+                    )}
+                    <section className="pb-3.5 mb-3.5 border-b border-secondary-100">
+                        <Heading h3 className="mb-2.5">
+                            Amenities
+                        </Heading>
+                        <div className="flex flex-col gap-1">
+                            <div className="flex gap-2 items-center">
+                                <Icon wifi md />
+                                <Text
+                                    primary
+                                    className={
+                                        data.meta.wifi ? "" : "line-through"
+                                    }>
+                                    Wifi
+                                </Text>
+                            </div>
+                            <div className="flex gap-2 items-center">
+                                <Icon parking md />
+                                <Text
+                                    primary
+                                    className={
+                                        data.meta.parking ? "" : "line-through"
+                                    }>
+                                    Parking
+                                </Text>
+                            </div>
+                            <div className="flex gap-2 items-center">
+                                <Icon pets md />
+                                <Text
+                                    primary
+                                    className={
+                                        data.meta.pets ? "" : "line-through"
+                                    }>
+                                    Pets
+                                </Text>
+                            </div>
+                            <div className="flex gap-2 items-center">
+                                <Icon breakfast md />
+                                <Text
+                                    primary
+                                    className={
+                                        data.meta.breakfast
+                                            ? ""
+                                            : "line-through"
+                                    }>
+                                    Breakfast
+                                </Text>
+                            </div>
                         </div>
-                    </div>
-                </section>
-            )}
-
-            <section className="pb-3.5 mb-3.5 border-b border-secondary-100 ">
-                <div className="pb-3.5 mb-3.5 border-b border-secondary-100">
-                    <Heading h3 className="mb-2.5">
-                        Book Property
-                    </Heading>
-                    <DatePicker
-                        value={selectedDayRange}
-                        onChange={setSelectedDayRange}
-                        disabledDays={bookedDays}
-                    />
-                    <div className="flex gap-2 items-center">
-                        <Text primary bold className="">
-                            Guests:
-                        </Text>
-                        <button type="button" onClick={guestMinus}>
-                            <Icon
-                                minus
-                                lg
-                                className=" fill-secondary-300 hover:fill-secondary"
-                            />
-                        </button>
-                        <Text primary bold>
-                            {guestCount}
-                        </Text>
-                        <button type="button" onClick={guestPlus}>
-                            <Icon
-                                plus
-                                lg
-                                className="fill-secondary-300 hover:fill-secondary"
-                            />
-                        </button>
-                        <Text secondary>Max. {data.maxGuests} Guests</Text>
-                    </div>
+                    </section>
+                    {data.owner && (
+                        <section className="pb-3.5 mb-3.5 border-b border-secondary-100">
+                            <Heading h3 className="mb-2.5">
+                                Owner
+                            </Heading>
+                            <div className="flex items-end gap-2">
+                                <div className="h-16 w-16">
+                                    <img
+                                        src={
+                                            data.owner.avatar
+                                                ? data.owner.avatar
+                                                : "/assets/placeholders/profile-placeholder.jpg"
+                                        }
+                                        className="rounded-full h-full w-full object-cover"
+                                        alt={`${data.owner.name} avatar`}
+                                    />
+                                </div>
+                                <div className="">
+                                    <Text primary bold>
+                                        {data.owner.name}
+                                    </Text>
+                                    <Text primary>{data.owner.email}</Text>
+                                </div>
+                            </div>
+                        </section>
+                    )}
                 </div>
-                <div className=" flex justify-between">
-                    <div>
-                        <Text bold className="underline ">
-                            {selectedDayRange.from && selectedDayRange.to
-                                ? `${monthNumberToName(
-                                      selectedDayRange.from.month
-                                  ).substring(0, 3)} ${
-                                      selectedDayRange.from.day
-                                  } -  ${monthNumberToName(
-                                      selectedDayRange.to.month
-                                  ).substring(0, 3)} ${selectedDayRange.to.day}`
-                                : "Choose Time"}
-                        </Text>
-                        <Text>
-                            <strong>{data.price}</strong> kr night
-                        </Text>
-                    </div>
-                    <Button primary md onClick={onSubmit}>
-                        Reserve
-                    </Button>
+                <div className="col-span-1">
+                    <section className="pb-3.5 mb-3.5 border-b border-secondary-100 ">
+                        <div className="pb-3.5 mb-3.5 border-b border-secondary-100">
+                            <Heading h3 className="mb-2.5">
+                                Book Property
+                            </Heading>
+                            <DatePicker
+                                value={selectedDayRange}
+                                onChange={setSelectedDayRange}
+                                disabledDays={bookedDays}
+                            />
+                            <div className="flex gap-2 items-center">
+                                <Text primary bold className="">
+                                    Guests:
+                                </Text>
+                                <button type="button" onClick={guestMinus}>
+                                    <Icon
+                                        minus
+                                        lg
+                                        className=" fill-secondary-300 hover:fill-secondary"
+                                    />
+                                </button>
+                                <Text primary bold>
+                                    {guestCount}
+                                </Text>
+                                <button type="button" onClick={guestPlus}>
+                                    <Icon
+                                        plus
+                                        lg
+                                        className="fill-secondary-300 hover:fill-secondary"
+                                    />
+                                </button>
+                                <Text secondary>
+                                    Max. {data.maxGuests} Guests
+                                </Text>
+                            </div>
+                        </div>
+                        <div className=" flex justify-between">
+                            <div>
+                                <Text bold className="underline ">
+                                    {selectedDayRange.from &&
+                                    selectedDayRange.to
+                                        ? `${monthNumberToName(
+                                              selectedDayRange.from.month
+                                          ).substring(0, 3)} ${
+                                              selectedDayRange.from.day
+                                          } -  ${monthNumberToName(
+                                              selectedDayRange.to.month
+                                          ).substring(0, 3)} ${
+                                              selectedDayRange.to.day
+                                          }`
+                                        : "Choose Time"}
+                                </Text>
+                                <Text>
+                                    <strong>{data.price}</strong> kr night
+                                </Text>
+                            </div>
+                            <Button primary md onClick={onSubmit}>
+                                Reserve
+                            </Button>
+                        </div>
+                    </section>
                 </div>
-            </section>
+            </div>
             {bookingMutation.isSuccess && <Modal isOpen>SUCCESS</Modal>}
         </>
     );

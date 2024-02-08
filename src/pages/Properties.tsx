@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Carousel from "../components/common/Carousel";
+import PropertiesCardSkeleton from "../components/common/Skeletons/PropertiesCardSkeleton";
 
 const Properties = () => {
     const token = useToken();
@@ -25,22 +26,40 @@ const Properties = () => {
         staleTime: 5 * 100000,
     });
 
-    if (isLoading) {
-        return <span>Loading...</span>;
-    }
-
     if (isError) {
+        const handleRefresh = () => {
+            window.location.reload();
+        };
+
         return (
             <Text danger>
                 There was an error trying to get properties! Try refreshing...
-                <Button secondary>Refresh</Button>
+                <Button secondary md onClick={handleRefresh}>
+                    Refresh
+                </Button>
             </Text>
+        );
+    }
+
+    if (isLoading) {
+        return (
+            <section className="md:grid md:gap-8 md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 animate-pulse">
+                <PropertiesCardSkeleton />
+                <PropertiesCardSkeleton />
+                <PropertiesCardSkeleton />
+                <PropertiesCardSkeleton />
+                <PropertiesCardSkeleton />
+                <PropertiesCardSkeleton />
+                <PropertiesCardSkeleton />
+                <PropertiesCardSkeleton />
+                <PropertiesCardSkeleton />
+            </section>
         );
     }
 
     return (
         <>
-            <section className="">
+            <section className="md:grid md:gap-8 md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4">
                 {data?.map((property) => (
                     <Link
                         to={`/holidaze/property/${property.id}`}

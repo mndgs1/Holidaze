@@ -3,16 +3,16 @@ import classNames from "classnames";
 
 import Text from "./Text";
 interface ServerMessageProps {
-    message: string;
     danger?: boolean;
     success?: boolean;
     className?: string;
+    children: React.ReactNode;
 }
 
 const ServerMessage = ({
-    message,
     danger,
     success,
+    children,
     ...rest
 }: ServerMessageProps) => {
     const classes = classNames(
@@ -26,7 +26,7 @@ const ServerMessage = ({
 
     return (
         <div className={classes}>
-            <Text>{message}</Text>
+            <Text>{children}</Text>
         </div>
     );
 };

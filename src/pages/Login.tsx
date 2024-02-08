@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { useUserActions } from "../stores/useUserStore";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ import { LoginInputConfig } from "../constants/inputConfig";
 import Button from "../components/common/Button";
 import Heading from "../components/common/Heading";
 import Link from "../components/common/Link";
-import Text from "../components/common/Text";
+import ServerMessage from "../components/common/ServerMessage";
 import InputWithValidation from "../components/common/InputWithValidation";
 import LoginRegisterLayout from "../components/layout/LoginRegisterLayout";
 
@@ -22,20 +22,13 @@ const Login = () => {
     const { setUser } = useUserActions();
     const navigate = useNavigate();
 
-    const [serverError, setServerError] = useState("");
-
-    const loginMutation = useMutation({
+    const { isError, error, mutate, isPending } = useMutation({
         mutationFn: (data: UserCredentials) => {
-            setServerError("");
-
             return login(data);
         },
         onSuccess: (data: LoggedInUser) => {
             setUser(data);
             navigate("/holidaze/properties");
-        },
-        onError: (error: any) => {
-            setServerError(error.message);
         },
     });
 
@@ -48,7 +41,7 @@ const Login = () => {
     });
 
     async function onSubmit(data: UserCredentials) {
-        loginMutation.mutate(data);
+        mutate(data);
     }
 
     return (
@@ -68,18 +61,16 @@ const Login = () => {
                     />
                 ))}
 
-                <Button primary xl>
+                <Button primary xl loading={isPending}>
                     Login
                 </Button>
             </form>
-            <div className="flex gap-2 justify-center">
+            <div className="flex gap-2 justify-center mb-2">
                 <p>Don't have an account?</p>
                 <Link to="/register">Sign Up</Link>
             </div>
-            {serverError && (
-                <div className="p-2 bg-danger-50 rounded mt-8">
-                    <Text>{serverError}</Text>
-                </div>
+            {isError && (
+                <ServerMessage danger>{error.toString()}</ServerMessage>
             )}
         </LoginRegisterLayout>
     );

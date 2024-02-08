@@ -12,6 +12,7 @@ import Card from "../components/common/Card";
 import { Property } from "../constants/interfaces/property";
 import Button from "../components/common/Button";
 import { Link as RouterLink } from "react-router-dom";
+import Text from "../components/common/Text";
 
 const MyProperties = () => {
     const token = useToken();
@@ -36,12 +37,20 @@ const MyProperties = () => {
         return <span>Loading...</span>;
     }
 
-    if (isError) {
-        return <span>Error</span>;
+    if (isError || !data) {
+        const handleRefresh = () => {
+            window.location.reload();
+        };
+        return (
+            <Text danger>
+                There was an error trying to get your Properties! Try
+                refreshing...
+                <Button secondary md onClick={handleRefresh}>
+                    Refresh
+                </Button>
+            </Text>
+        );
     }
-
-    console.log(data);
-    // if there are no properties
     if (data?.length === 0) {
         return (
             <section>

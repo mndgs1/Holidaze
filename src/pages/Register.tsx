@@ -1,7 +1,6 @@
 import React from "react";
 
 import Button from "../components/common/Button";
-import Text from "../components/common/Text";
 import InputWithValidation from "../components/common/InputWithValidation";
 import Heading from "../components/common/Heading";
 import Link from "../components/common/Link";
@@ -17,11 +16,12 @@ import { registerUser } from "../api/auth/register";
 import { User } from "../constants/interfaces/user";
 
 import { useMutation } from "@tanstack/react-query";
+import ServerMessage from "../components/common/ServerMessage";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-    const [isLoading, setIsLoading] = React.useState(false);
-    const [serverError, setServerError] = React.useState("");
     const [modalFormData, setModalFormData] = React.useState("");
+    const navigate = useNavigate();
 
     const {
         register,
@@ -38,12 +38,8 @@ const Register = () => {
         setValue("avatar", modalFormData);
     }, [setValue, modalFormData]);
 
-    const registerMutation = useMutation({
+    const { isError, error, isPending, mutate } = useMutation({
         mutationFn: (data: User) => {
-            setIsLoading(true);
-            setServerError("");
-
-            console.log("data", data);
             const { name, email, password, venueManager, avatar } = data;
             return registerUser({
                 name,
@@ -53,25 +49,16 @@ const Register = () => {
                 avatar,
             });
         },
-        onSuccess: (data: User) => {
-            console.log("succesfuly registered", data);
+        onSuccess: () => {
+            navigate("/login");
             reset();
         },
-        onError: (error: any) => {
-            console.log(error);
-            setServerError(error.message);
-        },
-        onSettled: () => setIsLoading(false),
     });
 
-    const { avatar, venueManager } = watch();
+    const { avatar } = watch();
 
-    console.log("venue manager state: " + venueManager);
-    console.log("Avatar state: " + avatar);
     function onSubmit(data: User) {
-        // Why does it send in repeat password? it does not check for types
-        console.log("data onSubmit", data);
-        registerMutation.mutate(data);
+        mutate(data);
     }
 
     return (
@@ -93,13 +80,11 @@ const Register = () => {
                         />
                     ))}
 
-                    <Button primary xl loading={isLoading}>
+                    <Button primary xl loading={isPending}>
                         Register
                     </Button>
-                    {serverError && (
-                        <div className="p-2 bg-danger-50 rounded mt-8">
-                            <Text>{serverError}</Text>
-                        </div>
+                    {isError && (
+                        <ServerMessage danger>{error.toString()}</ServerMessage>
                     )}
                 </form>
             </div>

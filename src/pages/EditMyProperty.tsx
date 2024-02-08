@@ -33,11 +33,15 @@ const EditMyProperty = () => {
     });
 
     if (isError || !data) {
-        console.log("error");
+        const handleRefresh = () => {
+            window.location.reload();
+        };
         return (
             <Text danger>
                 There was an error trying to get properties! Try refreshing...
-                <Button secondary>Refresh</Button>
+                <Button secondary md onClick={handleRefresh}>
+                    Refresh
+                </Button>
             </Text>
         );
     }

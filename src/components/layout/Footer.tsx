@@ -10,13 +10,16 @@ interface FooterProps {
 
 const Footer = ({ ...rest }: FooterProps) => {
     const classes = className(
-        "px-6 sm:px-10 md:px-16 lg:px-24 xl:px-34 2xl:px-40 3xl:px-auto max-w-screen-2xl flex flex-col gap-4 mt-8 border-t border-secondary-100 justify-between items-center py-4",
+        "px-6 sm:px-10 md:px-16 lg:px-24 xl:px-34 2xl:px-40 3xl:px-auto border-t border-secondary-100 mt-8 ",
         rest.className
     );
 
     return (
-        <footer className={""} {...rest}>
-            <div className={classes} {...rest}>
+        <footer className={classes} {...rest}>
+            <div
+                className={
+                    "max-w-screen-2xl flex flex-col gap-4 justify-between items-center py-4 md:flex-row mx-auto"
+                }>
                 <Text secondary>© 2024 Holidaze Inc. All rights reserved.</Text>
                 <div className="flex gap-4">
                     <button className="hover:opacity-80">
