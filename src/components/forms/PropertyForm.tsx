@@ -19,10 +19,9 @@ import { useMutation } from "@tanstack/react-query";
 import { postProperty } from "../../api/properties/postProperty";
 import { CreateProperty } from "../../constants/interfaces/property";
 import isImageValid from "../../utils/isImageValid";
+import ServerMessage from "../common/ServerMessage";
 
 const PropertyForm = () => {
-    const [isLoading, setIsLoading] = React.useState(false);
-    const [serverError, setServerError] = React.useState("");
     const [media, setMedia] = React.useState<string[]>([]);
     const [mediaError, setMediaError] = React.useState("");
 
@@ -40,7 +39,7 @@ const PropertyForm = () => {
         resolver: yupResolver(postPropertySchema),
     });
 
-    const postPropertyMutation = useMutation({
+    const { isError, error, isPending, mutate } = useMutation({
         mutationFn: (data: CreateProperty) => {
             if (!token) {
                 navigate("/login");
@@ -70,20 +69,13 @@ const PropertyForm = () => {
             });
         },
         onSuccess: (data: CreateProperty) => {
-            console.log("succesfuly registered", data);
             reset();
         },
-        onError: (error: any) => {
-            console.log(error);
-            setServerError(error.message);
-        },
-        onSettled: () => setIsLoading(false),
     });
 
     function onSubmit(data: CreateProperty) {
         setValue("media", media);
-        console.log("data onSubmit", data);
-        postPropertyMutation.mutate(data);
+        mutate(data);
     }
 
     async function handleAddMedia() {
@@ -248,13 +240,11 @@ const PropertyForm = () => {
                     {...register("meta.pets")}
                 />
                 <div className="flex flex-col items-center">
-                    <Button primary xl loading={isLoading}>
+                    <Button primary xl loading={isPending}>
                         List Property
                     </Button>
-                    {serverError && (
-                        <div className="p-2 bg-danger-50 rounded mt-8">
-                            <Text danger>{serverError}</Text>
-                        </div>
+                    {isError && (
+                        <ServerMessage danger>{error.message}</ServerMessage>
                     )}
                 </div>
             </form>

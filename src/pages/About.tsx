@@ -14,7 +14,7 @@ const About = () => {
                     Noroff Front-end development course. The project is using
                     Noroff API.
                 </Text>
-                <div className="flex justify-between mt-2">
+                <div className="flex justify-between mt-2 md:max-w-96">
                     <a
                         href="https://relaxed-paletas-c6ccfb.netlify.app/"
                         target="_blank"
@@ -35,7 +35,7 @@ const About = () => {
                         href="https://docs.noroff.dev/holidaze/authentication"
                         target="_blank"
                         rel="noreferrer">
-                        <Button secondary md>
+                        <Button warning md>
                             API Docs
                         </Button>
                     </a>

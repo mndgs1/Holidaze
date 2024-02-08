@@ -26,18 +26,25 @@ const Bookings = () => {
             }
             return Promise.resolve(getBookings(token, user.name));
         },
-        // staleTime: 5 * 100000,
     });
 
     if (isLoading) {
+        // Create skeletons
         return <span>Loading...</span>;
     }
+
+    const handleRefresh = () => {
+        window.location.reload();
+    };
 
     if (isError || !data) {
         return (
             <Text danger>
-                There was an error trying to get properties! Try refreshing...
-                <Button secondary>Refresh</Button>
+                There was an error trying to get your bookings! Try
+                refreshing...
+                <Button secondary md onClick={handleRefresh}>
+                    Refresh
+                </Button>
             </Text>
         );
     }

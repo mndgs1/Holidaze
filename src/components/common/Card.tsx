@@ -18,6 +18,7 @@ function formatToLongDate(dateString: string): string {
 interface CardProps {
     booking?: Booking;
     property?: Property;
+    bookings?: Booking;
 }
 
 const Card = ({ booking, property }: CardProps) => {

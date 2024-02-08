@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { updateSchema } from "../constants/schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useToken, useUserActions, useUser } from "../stores/useUserStore";
+import ServerMessage from "../components/common/ServerMessage";
 
 const Profile = () => {
     const loggedInUser = useUser();
@@ -27,7 +28,7 @@ const Profile = () => {
         resolver: yupResolver(updateSchema),
     });
 
-    const profileMutation = useMutation({
+    const { mutate, isError, error, isPending } = useMutation({
         mutationFn: (data: LoggedInUser) => {
             const { venueManager } = data;
             return updateProfile({
@@ -48,13 +49,12 @@ const Profile = () => {
             updateStoreVenueManager(data.venueManager);
             reset();
         },
-        onError: (error: any) => {},
     });
 
     const { avatar } = watch();
 
     function onSubmit(data: any) {
-        profileMutation.mutate(data);
+        mutate(data);
     }
 
     const [modalFormData, setModalFormData] = React.useState("");
@@ -97,11 +97,7 @@ const Profile = () => {
                         defaultChecked={loggedInUser.venueManager}
                         {...register("venueManager")}
                     />
-                    <Button
-                        primary
-                        xl
-                        className="mt-4"
-                        loading={profileMutation.isPending}>
+                    <Button primary xl className="mt-4" loading={isPending}>
                         Save Changes
                     </Button>
                 </form>
@@ -109,6 +105,7 @@ const Profile = () => {
             <Button secondary xl onClick={handleLogout}>
                 Logout
             </Button>
+            {isError && <ServerMessage danger>{error?.message}</ServerMessage>}
         </section>
     );
 };
