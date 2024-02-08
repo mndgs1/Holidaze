@@ -10,6 +10,12 @@ module.exports = {
             xl: ["22px", "28px"],
             "2xl": ["24px", "32px"],
             "3xl": ["32px", "40px"],
+            "4xl": ["38px", "48px"],
+            "5xl": ["48px", "48px"],
+            "6xl": ["60px", 1],
+            "7xl": ["72px", 1],
+            "8xl": ["96px", 1],
+            "9px": ["128px", 1],
         },
         extend: {
             fontFamily: {

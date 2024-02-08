@@ -7,6 +7,8 @@ import Heading from "../common/Heading";
 import Textarea from "../common/Textarea";
 import Input from "../common/Input";
 import Carousel from "../../components/common/Carousel";
+import ServerMessage from "../common/ServerMessage";
+import isImageValid from "../../utils/isImageValid";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -18,18 +20,19 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { CreateProperty } from "../../constants/interfaces/property";
 import { Property } from "../../constants/interfaces/property";
-import isImageValid from "../../utils/isImageValid";
 import { putProperty } from "../../api/properties/putProperty";
+import useIsMobile from "../../hooks/useIsMobile";
+import Gallery from "../common/Gallery";
 
 interface PropertyFormProps {
     property: Property;
 }
 
 const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
-    const [isLoading, setIsLoading] = React.useState(false);
-    const [serverError, setServerError] = React.useState("");
     const [mediaError, setMediaError] = React.useState("");
     const [media, setMedia] = React.useState<string[]>(property.media);
+
+    const isMobile = useIsMobile();
 
     useEffect(() => {
         setValue("media", property.media);
@@ -48,7 +51,7 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
         resolver: yupResolver(postPropertySchema),
     });
 
-    const postPropertyMutation = useMutation({
+    const { mutate, error, isError, isPending } = useMutation({
         mutationFn: (data: CreateProperty) => {
             if (!token) {
                 navigate("/login");
@@ -80,16 +83,11 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
         onSuccess: (data: CreateProperty) => {
             console.log("succesfuly edited", data);
         },
-        onError: (error: any) => {
-            console.log(error);
-            setServerError(error.message);
-        },
-        onSettled: () => setIsLoading(false),
     });
 
     function onSubmit(data: CreateProperty) {
         console.log("data onSubmit", data);
-        postPropertyMutation.mutate(data);
+        mutate(data);
     }
 
     async function handleAddMedia() {
@@ -119,19 +117,15 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
             <form
                 className="flex flex-col gap-5 my-3"
                 onSubmit={handleSubmit(onSubmit)}>
-                <InputWithValidation
-                    input={{
-                        name: "name",
-                        label: "Property Name",
-                        type: "text",
-                        id: "name",
-                    }}
-                    register={register}
-                    errors={errors}
-                    defaultValue={property.name}
-                />
                 <div className="relative">
-                    <Carousel images={getValues("media")} carouselControls />
+                    {isMobile ? (
+                        <Carousel
+                            images={getValues("media")}
+                            carouselControls
+                        />
+                    ) : (
+                        <Gallery images={getValues("media")} />
+                    )}
                 </div>
                 <div>
                     <div className="flex">
@@ -158,6 +152,18 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
                         )}
                     </div>
                 </div>
+                <InputWithValidation
+                    input={{
+                        name: "name",
+                        label: "Property Name",
+                        type: "text",
+                        id: "name",
+                    }}
+                    register={register}
+                    errors={errors}
+                    defaultValue={property.name}
+                />
+
                 <div className="flex flex-col gap-1 w-full">
                     <Textarea
                         id="description"
@@ -275,13 +281,11 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
                     defaultChecked={property ? property.meta.pets : false}
                 />
                 <div className="flex justify-center">
-                    <Button primary xl loading={isLoading}>
+                    <Button primary xl loading={isPending}>
                         Save Changes
                     </Button>
-                    {serverError && (
-                        <div className="p-2 bg-danger-50 rounded mt-8">
-                            <Text danger>{serverError}</Text>
-                        </div>
+                    {isError && isError && (
+                        <ServerMessage danger>{error.message}</ServerMessage>
                     )}
                 </div>
             </form>

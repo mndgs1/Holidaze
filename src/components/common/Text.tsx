@@ -28,15 +28,15 @@ const Text = ({
 }: TextProps) => {
     // add font-text later now doesnt work
     const classes = className(
-        "",
+        "md:text-lg",
         {
             "text-secondary": primary,
             "font-extralight": secondary,
             "text-primary": success,
             "text-danger-600": danger,
-            "text-xl": xl,
-            "text-lg": lg,
-            "text-sm leading-tight": sm,
+            "text-xl md:text-2xl": xl,
+            "text-lg md:text-xl": lg,
+            "text-sm leading-tight md:text-base": sm,
             "font-medium": bold,
         },
         rest.className
