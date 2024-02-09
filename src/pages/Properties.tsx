@@ -62,7 +62,7 @@ const Properties = () => {
             <section className="md:grid md:gap-8 md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4">
                 {data?.map((property) => (
                     <Link
-                        to={`/holidaze/property/${property.id}`}
+                        to={`/holidaze/properties/${property.id}`}
                         key={property.id}
                         className="block">
                         <div className="pb-1 mb-4 border-b border-secondary-100">

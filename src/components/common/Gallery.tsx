@@ -34,7 +34,7 @@ const Gallery = ({ images }: { images: string[] | undefined }) => {
         <>
             <div className="grid grid-rows-2  grid-cols-3 xl:grid-cols-4 h-[32rem] xl:h-[36rem] gap-2 rounded-xl overflow-hidden hover:cursor-pointer">
                 <div
-                    className="col-span-2 row-span-2 xl:col-span-3"
+                    className="col-span-2 row-span-2 xl:col-span-3 "
                     onClick={() => handleOpen(0)}>
                     <img
                         src={images[0]}

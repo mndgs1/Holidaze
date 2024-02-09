@@ -56,7 +56,7 @@ export const postPropertySchema = yup.object({
     maxGuests: yup
         .number()
         .required("Please enter the maximum number of guests"),
-    rating: yup.number().required("Please enter a rating"),
+    rating: yup.number(),
     meta: yup.object({
         wifi: yup.boolean().required("Please select an option"),
         parking: yup.boolean().required("Please select an option"),

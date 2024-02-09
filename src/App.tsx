@@ -26,7 +26,7 @@ function App() {
                 <Route path="holidaze/properties" element={<Properties />} />
                 <Route path="holidaze/profile" element={<Profile />} />
                 <Route
-                    path="holidaze/Property/:id"
+                    path="holidaze/properties/:id"
                     element={<PropertyPage />}
                 />
                 <Route path="holidaze/bookings" element={<Bookings />} />

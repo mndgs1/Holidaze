@@ -7,6 +7,7 @@ import Heading from "../common/Heading";
 import Textarea from "../common/Textarea";
 import Input from "../common/Input";
 import Carousel from "../../components/common/Carousel";
+import Gallery from "../common/Gallery";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -20,6 +21,7 @@ import { postProperty } from "../../api/properties/postProperty";
 import { CreateProperty } from "../../constants/interfaces/property";
 import isImageValid from "../../utils/isImageValid";
 import ServerMessage from "../common/ServerMessage";
+import useIsMobile from "../../hooks/useIsMobile";
 
 const PropertyForm = () => {
     const [media, setMedia] = React.useState<string[]>([]);
@@ -27,6 +29,7 @@ const PropertyForm = () => {
 
     const token = useToken();
     const navigate = useNavigate();
+    const isMobile = useIsMobile();
 
     const {
         register,
@@ -109,7 +112,14 @@ const PropertyForm = () => {
                     errors={errors}
                 />
                 <div className="relative">
-                    <Carousel images={getValues("media")} carouselControls />
+                    {isMobile ? (
+                        <Carousel
+                            images={getValues("media")}
+                            carouselControls
+                        />
+                    ) : (
+                        <Gallery images={getValues("media")} />
+                    )}
                 </div>
 
                 <div>

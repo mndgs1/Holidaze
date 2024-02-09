@@ -77,7 +77,7 @@ const MyProperties = () => {
             <div className="flex justify-center mt-8">
                 <RouterLink to="/holidaze/myProperties/create">
                     <Button primary xl>
-                        List Property
+                        List New Property
                     </Button>
                 </RouterLink>
             </div>
