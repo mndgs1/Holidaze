@@ -30,10 +30,8 @@ export default function Home() {
                             </Button>
                         </RouterLink>
                         <RouterLink to={"/register"}>
-                            <Button
-                                md
-                                className="text-sm font-semibold leading-6 border-black ">
-                                Register <span aria-hidden="true">→</span>
+                            <Button secondary md>
+                                Register
                             </Button>
                         </RouterLink>
                     </div>

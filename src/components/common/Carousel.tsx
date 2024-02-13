@@ -34,14 +34,9 @@ export default function Carousel({
     const updateIndex = ({ index: current }: { index: number }) =>
         setIndex(current);
 
-    const renderOptions = carouselControls
-        ? undefined
-        : { buttonPrev: () => null, buttonNext: () => null };
-
     return (
         <div className={rest.className}>
             <Lightbox
-                render={renderOptions}
                 index={index}
                 slides={slides}
                 plugins={[Inline, Counter]}

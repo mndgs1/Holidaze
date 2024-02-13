@@ -7,9 +7,9 @@ import Button from "../components/common/Button";
 const About = () => {
     return (
         <>
-            <section className="mt-28">
+            <section>
                 <Heading h1>About Project</Heading>
-                <Text primary className="mt-2">
+                <Text primary>
                     Holidaze is a fictional project created for my final exam in
                     Noroff Front-end development course. The project is using
                     Noroff API.

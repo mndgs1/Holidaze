@@ -62,7 +62,7 @@ const Bookings = () => {
             <section className="">
                 <Heading h1>Upcomming</Heading>
                 {futureBookings.length > 0 ? (
-                    <div className="mt-4 flex flex-col gap-4">
+                    <div className="flex flex-col gap-4">
                         {futureBookings.map((booking) => (
                             <Card key={booking.id} booking={booking} />
                         ))}
@@ -78,7 +78,7 @@ const Bookings = () => {
             </section>
             <section className="mt-8">
                 <Heading h1>History</Heading>
-                <div className="mt-4 flex flex-col gap-4">
+                <div className="flex flex-col gap-4">
                     {pastBookings.length > 0 &&
                         pastBookings.map((booking) => (
                             <Card key={booking.id} booking={booking} />

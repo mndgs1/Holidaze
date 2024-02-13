@@ -44,14 +44,7 @@ const PropertyPage = () => {
         throw new Error("Cant find a property id");
     }
 
-    const {
-        // register,
-        // handleSubmit,
-        setValue,
-        watch,
-        // formState: { errors },
-        // reset,
-    } = useForm({
+    const { setValue, watch } = useForm({
         resolver: yupResolver(postBookingSchema),
     });
 

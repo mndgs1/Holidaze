@@ -37,7 +37,7 @@ const Text = ({
             "text-xl": xl,
             "text-lg": lg,
             "text-sm leading-tight": sm,
-            "font-medium": bold,
+            "font-semibold": bold,
         },
         rest.className
     );
