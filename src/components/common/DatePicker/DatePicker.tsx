@@ -14,7 +14,7 @@ const DatePicker = ({ value, onChange, disabledDays }: any) => {
                     ? "ring-2 ring-primary border-transparent"
                     : ""
             }`}
-            wrapperClassName="w-full mb-2.5 z-0"
+            wrapperClassName="w-full mb-2.5 z-10"
             colorPrimaryLight="#D1FAE5"
             colorPrimary="#10B981"
             disabledDays={disabledDays}

@@ -42,10 +42,11 @@ const Button = ({
             "opacity-80": loading,
             "bg-primary hover:bg-primary-450 border-primary text-white":
                 primary,
-            "bg-secondary hover:bg-secondary-450 text-white": secondary,
+            "bg-secondary hover:bg-secondary-450 text-white border-secondary hover:border-secondary-450":
+                secondary,
             "border-green-500 bg-green-500 text-white": success,
-            "border-warning bg-warning text-white": warning,
-            "border-danger bg-danger hover:bg-danger-400 hover:border-danger-400 text-white":
+            "bg-warning text-white hover:bg-warning-400 ": warning,
+            "bg-danger hover:bg-danger-400 hover:border-danger-400 text-white":
                 danger,
             "h-13 w-76 font-bold text-lg": xl,
             "h-10": lg,

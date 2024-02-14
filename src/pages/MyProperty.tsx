@@ -7,6 +7,9 @@ import { useNavigate } from "react-router-dom";
 import Text from "../components/common/Text";
 import Button from "../components/common/Button";
 import Heading from "../components/common/Heading";
+import { isFutureDate } from "../utils/isFutureDate";
+import { formatToLongDate } from "../utils/formatToLongDate";
+import { subtractDates } from "../utils/subtractDates";
 
 const MyProperty = () => {
     const { id } = useParams();
@@ -27,7 +30,6 @@ const MyProperty = () => {
             return Promise.resolve(getProperty(token, id));
         },
     });
-
     if (isError || !data) {
         const handleRefresh = () => {
             window.location.reload();
@@ -44,18 +46,156 @@ const MyProperty = () => {
         );
     }
 
+    const futureBookings = data.bookings.filter((booking) =>
+        isFutureDate(booking.dateFrom)
+    );
+
+    const pastBookings = data.bookings.filter(
+        (booking) => !isFutureDate(booking.dateFrom)
+    );
+
+    console.log(data);
     if (isLoading) {
         return <div>Loading...</div>;
     }
 
     return (
         <>
-            <Heading h1>My Property</Heading>
-            <Heading h2>{data.name}</Heading>
-            <Heading h3>Bookings</Heading>
-            {/* {data.bookings.map((booking) => {
-                return <Card booking={booking} />;
-            })} */}
+            <Heading h1>{data.name}</Heading>
+            {pastBookings.length > 0 && (
+                <section>
+                    <Heading h2 className="mb-1">
+                        Upcomming bookings
+                    </Heading>
+                    <table className="w-full border-collapse">
+                        <thead className="">
+                            <tr className="">
+                                <th className=" border border-slate-500">
+                                    <Text primary bold>
+                                        From
+                                    </Text>
+                                </th>
+                                <th className=" border border-slate-500">
+                                    <Text primary bold>
+                                        To
+                                    </Text>
+                                </th>
+                                <th className=" border border-slate-500">
+                                    <Text primary bold>
+                                        Guests
+                                    </Text>
+                                </th>
+                                <th className=" border border-slate-500">
+                                    <Text primary bold>
+                                        Total Days
+                                    </Text>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {futureBookings.map((fBooking) => {
+                                return (
+                                    <tr key={fBooking.id}>
+                                        <td className=" border border-slate-500">
+                                            <Text primary>
+                                                {formatToLongDate(
+                                                    fBooking.dateFrom
+                                                )}
+                                            </Text>
+                                        </td>
+                                        <td className=" border border-slate-500">
+                                            <Text primary>
+                                                {formatToLongDate(
+                                                    fBooking.dateTo
+                                                )}
+                                            </Text>
+                                        </td>
+                                        <td className=" border border-slate-500">
+                                            <Text primary>
+                                                {fBooking.guests}
+                                            </Text>
+                                        </td>
+                                        <td className=" border border-slate-500">
+                                            <Text primary>
+                                                {subtractDates(
+                                                    fBooking.dateFrom,
+                                                    fBooking.dateTo
+                                                )}
+                                            </Text>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </section>
+            )}
+            {pastBookings.length > 0 && (
+                <section>
+                    <Heading h2>History</Heading>
+                    <table className="w-full border-collapse">
+                        <thead className="">
+                            <tr className="">
+                                <th className=" border border-slate-500">
+                                    <Text primary bold>
+                                        From
+                                    </Text>
+                                </th>
+                                <th className=" border border-slate-500">
+                                    <Text primary bold>
+                                        To
+                                    </Text>
+                                </th>
+                                <th className=" border border-slate-500">
+                                    <Text primary bold>
+                                        Guests
+                                    </Text>
+                                </th>
+                                <th className=" border border-slate-500">
+                                    <Text primary bold>
+                                        Total Days
+                                    </Text>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {pastBookings.map((fBooking) => {
+                                return (
+                                    <tr key={fBooking.id}>
+                                        <td className=" border border-slate-500">
+                                            <Text primary>
+                                                {formatToLongDate(
+                                                    fBooking.dateFrom
+                                                )}
+                                            </Text>
+                                        </td>
+                                        <td className=" border border-slate-500">
+                                            <Text primary>
+                                                {formatToLongDate(
+                                                    fBooking.dateTo
+                                                )}
+                                            </Text>
+                                        </td>
+                                        <td className=" border border-slate-500">
+                                            <Text primary>
+                                                {fBooking.guests}
+                                            </Text>
+                                        </td>
+                                        <td className=" border border-slate-500">
+                                            <Text primary>
+                                                {subtractDates(
+                                                    fBooking.dateFrom,
+                                                    fBooking.dateTo
+                                                )}
+                                            </Text>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </section>
+            )}
         </>
     );
 };

@@ -7,7 +7,6 @@ import { getProperties } from "../api/properties/getProperties";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import Carousel from "../components/common/Carousel";
 import PropertiesCardSkeleton from "../components/common/Skeletons/PropertiesCardSkeleton";
 
 const Properties = () => {
@@ -62,15 +61,22 @@ const Properties = () => {
             <section className="md:grid md:gap-8 md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4">
                 {data?.map((property) => (
                     <Link
-                        to={`/holidaze/property/${property.id}`}
+                        to={`/holidaze/properties/${property.id}`}
                         key={property.id}
                         className="block">
                         <div className="pb-1 mb-4 border-b border-secondary-100">
-                            <Carousel
-                                images={property.media}
-                                className="mb-2"
-                            />
-                            <Heading h3 className="mb-0">
+                            <div className="h-72 mb-1">
+                                <img
+                                    src={
+                                        property.media[0]
+                                            ? property.media[0]
+                                            : "/assets/placeholders/property-placeholder.jpg"
+                                    }
+                                    className="w-full object-cover h-full rounded-lg"
+                                    alt={`${property.name}`}
+                                />
+                            </div>
+                            <Heading h3 className="mb-0 hover:underline">
                                 {property.name}
                             </Heading>
                             <Text primary sm>

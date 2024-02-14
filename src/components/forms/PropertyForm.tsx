@@ -7,19 +7,22 @@ import Heading from "../common/Heading";
 import Textarea from "../common/Textarea";
 import Input from "../common/Input";
 import Carousel from "../../components/common/Carousel";
+import Gallery from "../common/Gallery";
+import Modal from "../common/Modal";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { postPropertySchema } from "../../constants/schemas";
 import { useToken } from "../../stores/useUserStore";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useMutation } from "@tanstack/react-query";
 import { postProperty } from "../../api/properties/postProperty";
 import { CreateProperty } from "../../constants/interfaces/property";
 import isImageValid from "../../utils/isImageValid";
 import ServerMessage from "../common/ServerMessage";
+import useIsMobile from "../../hooks/useIsMobile";
 
 const PropertyForm = () => {
     const [media, setMedia] = React.useState<string[]>([]);
@@ -27,6 +30,7 @@ const PropertyForm = () => {
 
     const token = useToken();
     const navigate = useNavigate();
+    const isMobile = useIsMobile();
 
     const {
         register,
@@ -39,7 +43,7 @@ const PropertyForm = () => {
         resolver: yupResolver(postPropertySchema),
     });
 
-    const { isError, error, isPending, mutate } = useMutation({
+    const { isError, error, isPending, mutate, isSuccess } = useMutation({
         mutationFn: (data: CreateProperty) => {
             if (!token) {
                 navigate("/login");
@@ -68,7 +72,7 @@ const PropertyForm = () => {
                 location,
             });
         },
-        onSuccess: (data: CreateProperty) => {
+        onSuccess: () => {
             reset();
         },
     });
@@ -109,7 +113,14 @@ const PropertyForm = () => {
                     errors={errors}
                 />
                 <div className="relative">
-                    <Carousel images={getValues("media")} carouselControls />
+                    {isMobile ? (
+                        <Carousel
+                            images={getValues("media")}
+                            carouselControls
+                        />
+                    ) : (
+                        <Gallery images={getValues("media")} />
+                    )}
                 </div>
 
                 <div>
@@ -247,6 +258,21 @@ const PropertyForm = () => {
                         <ServerMessage danger>{error.message}</ServerMessage>
                     )}
                 </div>
+                {isSuccess && (
+                    <Modal isOpen>
+                        <div className="flex flex-col gap-4 p-12 sm:p-24">
+                            <Heading h2>Property listing created!</Heading>
+                            <Text primary>
+                                You can track your properties in Rentals
+                            </Text>
+                            <Link to={"/holidaze/myProperties"}>
+                                <Button primary xl>
+                                    My Rentals
+                                </Button>
+                            </Link>
+                        </div>
+                    </Modal>
+                )}
             </form>
         </>
     );

@@ -4,7 +4,9 @@ import Modal from "./Modal";
 import Button from "./Button";
 import Icon from "./Icon";
 import InputWithValidation from "./InputWithValidation";
+import Text from "./Text";
 import { CombinedInputConfig } from "../../constants/inputConfig";
+import isImageValid from "../../utils/isImageValid";
 
 // import useImageValidator from "../../hooks/useImageValidator";
 
@@ -22,6 +24,7 @@ interface AvatarProps {
 
 const Avatar = ({ avatar, setModalFormData, user }: AvatarProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [mediaError, setMediaError] = useState("");
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -48,8 +51,14 @@ const Avatar = ({ avatar, setModalFormData, user }: AvatarProps) => {
         });
     }, [reset, avatar]);
 
-    const onSubmit = (data: FormValues) => {
-        setModalFormData(data.avatar);
+    const onSubmit = async (data: FormValues) => {
+        const isValid = await isImageValid(data.avatar);
+        if (isValid) {
+            setMediaError("");
+            setModalFormData(data.avatar);
+        } else {
+            setMediaError("URL provided does not lead to an Image");
+        }
     };
 
     return (
@@ -77,41 +86,44 @@ const Avatar = ({ avatar, setModalFormData, user }: AvatarProps) => {
                 </button>
             </div>
             <Modal openModal={openModal} isOpen={isModalOpen}>
-                <div className="bg-white p-8 relative">
+                <div className="relative bg-white p-8">
                     <button
                         onClick={closeModal}
                         className="flex items-center gap-1 absolute">
                         <Icon back xl className="text-secondary-450" />
                     </button>
-                    <div className="h-52 w-52 mx-auto mb-4 mt-2">
-                        <img
-                            src={
-                                avatar
-                                    ? avatar
-                                    : user?.avatar
-                                    ? user.avatar
-                                    : `/assets/placeholders/profile-placeholder.jpg`
-                            }
-                            className="rounded-full h-full w-full object-cover"
-                            alt="profile"
-                        />
+                    <div className="flex flex-col items-center">
+                        <div className="h-52 w-52 mx-auto mb-4 mt-2">
+                            <img
+                                src={
+                                    avatar
+                                        ? avatar
+                                        : user?.avatar
+                                        ? user.avatar
+                                        : `/assets/placeholders/profile-placeholder.jpg`
+                                }
+                                className="rounded-full h-full w-full object-cover"
+                                alt="profile"
+                            />
+                        </div>
+                        <form
+                            onSubmit={handleSubmit(onSubmit)}
+                            className="w-76 relative">
+                            <InputWithValidation
+                                key={CombinedInputConfig.avatar.id}
+                                input={CombinedInputConfig.avatar}
+                                register={register}
+                                errors={errors}
+                            />
+                            {mediaError && <Text danger>{mediaError}</Text>}
+                            <Button
+                                primary
+                                sm
+                                className="absolute top-0 right-0 h-13">
+                                Save
+                            </Button>
+                        </form>
                     </div>
-                    <form
-                        onSubmit={handleSubmit(onSubmit)}
-                        className="w-76 relative">
-                        <InputWithValidation
-                            key={CombinedInputConfig.avatar.id}
-                            input={CombinedInputConfig.avatar}
-                            register={register}
-                            errors={errors}
-                        />
-                        <Button
-                            primary
-                            sm
-                            className="absolute top-0 right-0 h-13">
-                            Save
-                        </Button>
-                    </form>
                 </div>
             </Modal>
         </>

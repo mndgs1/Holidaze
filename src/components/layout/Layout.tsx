@@ -24,13 +24,15 @@ const Layout: React.FC<{
     }
     if (pathname.includes("/holidaze/"))
         return (
-            <>
+            <div className="min-h-screen flex flex-col">
                 <Header />
-                <main
-                    className={
-                        "mt-24 mx-6 sm:mx-10 md:mx-16 lg:mx-24 xl:mx-34 2xl:mx-40 3xl:mx-auto max-w-screen-2xl"
-                    }>
-                    {children}
+                <main className="sm:grow">
+                    <div
+                        className={
+                            "pt-24 mx-6 sm:mx-10 md:mx-16 lg:mx-24 xl:mx-34 2xl:mx-40 3xl:mx-auto max-w-screen-2xl "
+                        }>
+                        {children}
+                    </div>
                 </main>
                 {isMobile && (
                     <Navigation
@@ -40,15 +42,15 @@ const Layout: React.FC<{
                                 : "transform translate-y-0 transition-all duration-300"
                         }`}></Navigation>
                 )}
-                {pathname !== "/holidaze/profile" && <Footer />}
-            </>
+                <Footer />
+            </div>
         );
     return (
-        <div className="relative">
+        <div className="relative min-h-screen flex flex-col">
             <Header />
             <main
                 className={
-                    "z-10 mx-6 sm:mx-10 md:mx-16 lg:mx-24 xl:mx-34 2xl:mx-40 3xl:mx-auto max-w-screen-2xl"
+                    "z-10 pt-24 mx-6 sm:mx-10 md:mx-16 lg:mx-24 xl:mx-34 2xl:mx-40 3xl:mx-auto max-w-screen-2xl grow"
                 }>
                 {children}
             </main>

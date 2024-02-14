@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
 const useIsMobile = () => {
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Adjust the breakpoint as needed
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 640); // Adjust the breakpoint as needed
 
     const handleResize = () => {
-        setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint as needed
+        setIsMobile(window.innerWidth <= 640); // Adjust the breakpoint as needed
     };
 
     useEffect(() => {

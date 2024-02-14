@@ -18,10 +18,12 @@ import { User } from "../constants/interfaces/user";
 import { useMutation } from "@tanstack/react-query";
 import ServerMessage from "../components/common/ServerMessage";
 import { useNavigate } from "react-router-dom";
+import Modal from "../components/common/Modal";
 
 const Register = () => {
     const [modalFormData, setModalFormData] = React.useState("");
     const navigate = useNavigate();
+    const [openModal, setOpenModal] = React.useState(false);
 
     const {
         register,
@@ -38,7 +40,7 @@ const Register = () => {
         setValue("avatar", modalFormData);
     }, [setValue, modalFormData]);
 
-    const { isError, error, isPending, mutate } = useMutation({
+    const { isError, error, isPending, mutate, isSuccess } = useMutation({
         mutationFn: (data: User) => {
             const { name, email, password, venueManager, avatar } = data;
             return registerUser({
@@ -50,8 +52,8 @@ const Register = () => {
             });
         },
         onSuccess: () => {
-            navigate("/login");
             reset();
+            setOpenModal(true);
         },
     });
 
@@ -92,6 +94,21 @@ const Register = () => {
                 <p>Already have an account?</p>
                 <Link to="/login">Log in</Link>
             </div>
+            {isSuccess && (
+                <Modal isOpen={openModal}>
+                    <div className="flex flex-col gap-4 items-center p-24">
+                        <h1 className="text-center text-2xl font-bold">
+                            Registration Successful
+                        </h1>
+                        <p className="text-center">
+                            You can now login to your account
+                        </p>
+                        <Button primary xl onClick={() => navigate("/login")}>
+                            Login
+                        </Button>
+                    </div>
+                </Modal>
+            )}
         </LoginRegisterLayout>
     );
 };
