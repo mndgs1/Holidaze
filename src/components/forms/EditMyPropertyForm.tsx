@@ -9,6 +9,8 @@ import Input from "../common/Input";
 import Carousel from "../../components/common/Carousel";
 import ServerMessage from "../common/ServerMessage";
 import isImageValid from "../../utils/isImageValid";
+import { Link } from "react-router-dom";
+import Modal from "../common/Modal";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -51,7 +53,7 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
         resolver: yupResolver(postPropertySchema),
     });
 
-    const { mutate, error, isError, isPending } = useMutation({
+    const { mutate, error, isError, isPending, isSuccess } = useMutation({
         mutationFn: (data: CreateProperty) => {
             if (!token) {
                 navigate("/login");
@@ -288,6 +290,18 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
                         <ServerMessage danger>{error.message}</ServerMessage>
                     )}
                 </div>
+                {isSuccess && (
+                    <Modal isOpen>
+                        <div className="flex flex-col gap-4 p-12 sm:p-24">
+                            <Heading h2>Property edited succesfuly!</Heading>
+                            <Link to={"/holidaze/myProperties"}>
+                                <Button primary xl>
+                                    My Rentals
+                                </Button>
+                            </Link>
+                        </div>
+                    </Modal>
+                )}
             </form>
         </>
     );

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getProperty } from "../api/properties/getProperty";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useToken } from "../stores/useUserStore";
 import { useNavigate } from "react-router-dom";
@@ -138,7 +138,6 @@ const PropertyPage = () => {
     };
 
     const bookedDays = createBookedDaysArray(data);
-    console.log(data.media);
     return (
         <>
             {isMobile ? (
@@ -319,7 +318,19 @@ const PropertyPage = () => {
                     </section>
                 </div>
             </div>
-            {bookingMutation.isSuccess && <Modal isOpen>SUCCESS</Modal>}
+            {bookingMutation.isSuccess && (
+                <Modal isOpen>
+                    <div className="flex flex-col gap-4 p-24 items-center">
+                        <Heading h2>Booking Successful!</Heading>
+                        <Text primary>Prepare for your trip!</Text>
+                        <Link to={"/holidaze/bookings"}>
+                            <Button primary xl>
+                                View Bookings
+                            </Button>
+                        </Link>
+                    </div>
+                </Modal>
+            )}
         </>
     );
 };
