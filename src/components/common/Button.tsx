@@ -37,7 +37,7 @@ const Button = ({
 }: ButtonProps) => {
     const classes = className(
         rest.className,
-        "flex items-center justify-center border rounded-lg font-heading drop-shadow-xl tracking-wide",
+        "flex items-center justify-center border rounded-lg font-heading drop-shadow-xl tracking-wide transition",
         {
             "opacity-80": loading,
             "bg-primary hover:bg-primary-450 border-primary text-white":

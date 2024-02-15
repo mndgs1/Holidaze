@@ -25,6 +25,7 @@ import { Property } from "../../constants/interfaces/property";
 import { putProperty } from "../../api/properties/putProperty";
 import useIsMobile from "../../hooks/useIsMobile";
 import Gallery from "../common/Gallery";
+import Icon from "../common/Icon";
 
 interface PropertyFormProps {
     property: Property;
@@ -154,6 +155,18 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
                         )}
                     </div>
                 </div>
+                {media.length > 0 &&
+                    media.map((value, index) => {
+                        return (
+                            <div key={value} className="flex gap-3">
+                                <Text sm>{index + 1}</Text>
+                                <Button secondary sm type="button" className="">
+                                    <Icon deleteIcon />
+                                </Button>
+                            </div>
+                        );
+                    })}
+                <div className=""></div>
                 <InputWithValidation
                     input={{
                         name: "name",

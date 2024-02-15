@@ -38,7 +38,7 @@ const Card = ({ booking, property }: CardProps) => {
                     <div className="flex flex-col">
                         <RouterLink
                             to={`/holidaze/properties/${booking.venue.id}`}>
-                            <Heading h3 className="hover:underline">
+                            <Heading h3 className="hover:underline transition">
                                 {booking.venue.name}
                             </Heading>
                         </RouterLink>
@@ -59,7 +59,7 @@ const Card = ({ booking, property }: CardProps) => {
 
                     <div className="">
                         <RouterLink to={`holidaze/bookings/${booking.id}`}>
-                            <button className="absolute bottom-0 right-0 flex gap-1 border border-gray-200 p-2 rounded-full drop-shadow hover:bg-gray-100">
+                            <button className="absolute bottom-0 right-0 flex gap-1 border border-gray-200 p-2 rounded-full drop-shadow transition hover:bg-gray-100">
                                 <Icon receipt md className="fill-secondary" />
                             </button>
                         </RouterLink>
@@ -92,7 +92,9 @@ const Card = ({ booking, property }: CardProps) => {
                         <div>
                             <RouterLink
                                 to={`/holidaze/properties/${property.id}`}>
-                                <Heading h3 className="hover:underline">
+                                <Heading
+                                    h3
+                                    className="hover:underline transition">
                                     {property.name}
                                 </Heading>
                             </RouterLink>
@@ -117,13 +119,13 @@ const Card = ({ booking, property }: CardProps) => {
                     <div className="absolute bottom-0 right-0 flex gap-4">
                         <RouterLink
                             to={`/holidaze/myProperties/${property.id}`}>
-                            <button className="border border-gray-200 p-2 rounded-full drop-shadow hover:bg-gray-100">
+                            <button className="border border-gray-200 p-2 rounded-full drop-shadow hover:bg-gray-100 transition">
                                 <Icon receipt md className="fill-secondary" />
                             </button>
                         </RouterLink>
                         <RouterLink
                             to={`/holidaze/myProperties/edit/${property.id}`}>
-                            <button className="border border-gray-200 p-2 rounded-full drop-shadow hover:bg-gray-100">
+                            <button className="border border-gray-200 p-2 rounded-full drop-shadow hover:bg-gray-100 transition">
                                 <Icon edit md className="fill-secondary" />
                             </button>
                         </RouterLink>

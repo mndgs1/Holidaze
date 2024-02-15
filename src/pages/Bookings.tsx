@@ -9,8 +9,8 @@ import { isFutureDate } from "../utils/isFutureDate";
 import Text from "../components/common/Text";
 import Button from "../components/common/Button";
 import Heading from "../components/common/Heading";
-import Card from "../components/common/Card";
 import Hero from "../components/common/Hero";
+import BookingCard from "../components/Cards/BookingCard";
 
 const Bookings = () => {
     const token = useToken();
@@ -64,7 +64,7 @@ const Bookings = () => {
                 {futureBookings.length > 0 ? (
                     <div className="flex flex-col gap-4">
                         {futureBookings.map((booking) => (
-                            <Card key={booking.id} booking={booking} />
+                            <BookingCard key={booking.id} booking={booking} />
                         ))}
                     </div>
                 ) : (
@@ -81,7 +81,7 @@ const Bookings = () => {
                 <div className="flex flex-col gap-4">
                     {pastBookings.length > 0 &&
                         pastBookings.map((booking) => (
-                            <Card key={booking.id} booking={booking} />
+                            <BookingCard key={booking.id} booking={booking} />
                         ))}
                 </div>
             </section>
