@@ -47,7 +47,7 @@ const Navigation = ({ ...rest }: NavigationProps) => {
     const token = useToken();
     const isLoggedIn = !!token;
 
-    const classes = className("", rest.className);
+    const classes = className("z-50", rest.className);
     if (isLoggedIn)
         return (
             <nav className={classes}>

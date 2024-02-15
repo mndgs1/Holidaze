@@ -46,7 +46,7 @@ const Button = ({
                 secondary,
             "border-green-500 bg-green-500 text-white": success,
             "bg-warning text-white hover:bg-warning-400 ": warning,
-            "bg-danger hover:bg-danger-400 hover:border-danger-400 text-white":
+            "bg-danger hover:bg-danger-400 hover:border-danger-400 text-white border-danger":
                 danger,
             "h-13 w-76 font-bold text-lg": xl,
             "h-10": lg,
