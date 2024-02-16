@@ -23,6 +23,8 @@ function App() {
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
                 <Route path="*" element={<Page404 />} />
+                <Route path="/about" element={<About />} />
+
                 <Route path="holidaze/properties" element={<Properties />} />
                 <Route path="holidaze/profile" element={<Profile />} />
                 <Route
@@ -42,7 +44,6 @@ function App() {
                     path="holidaze/myProperties/create"
                     element={<CreatePropertyListing />}
                 />
-                <Route path="/about" element={<About />} />
                 <Route
                     path="/holidaze/myProperties/:id"
                     element={<MyProperty />}

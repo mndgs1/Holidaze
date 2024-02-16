@@ -14,6 +14,7 @@ import BookingCard from "../components/Cards/BookingCard";
 
 const Bookings = () => {
     const token = useToken();
+
     const navigate = useNavigate();
     const user = useUser();
 
