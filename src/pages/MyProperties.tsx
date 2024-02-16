@@ -8,11 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { getProfileProperties } from "../api/properties/getProperties";
 import { useUser } from "../stores/useUserStore";
 import { useQuery } from "@tanstack/react-query";
-import Card from "../components/common/Card";
 import { Property } from "../constants/interfaces/property";
 import Button from "../components/common/Button";
 import { Link as RouterLink } from "react-router-dom";
 import Text from "../components/common/Text";
+import PropertyCard from "../components/Cards/PropertyCard";
 
 const MyProperties = () => {
     const token = useToken();
@@ -71,7 +71,7 @@ const MyProperties = () => {
             <Heading h1>My Properties</Heading>
             <section className="mt-4">
                 {data?.map((property: Property) => (
-                    <Card key={property.id} property={property} />
+                    <PropertyCard key={property.id} property={property} />
                 ))}
             </section>
             <div className="flex justify-center mt-8">

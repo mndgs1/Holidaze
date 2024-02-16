@@ -8,7 +8,12 @@ import Icon from "./Icon";
 
 // ...
 
-const Gallery = ({ images }: { images: string[] | undefined }) => {
+const Gallery = ({
+    images,
+}: {
+    images: string[] | undefined;
+    edit?: boolean;
+}) => {
     const [open, setOpen] = React.useState(false);
     const [index, setIndex] = React.useState(0);
 
@@ -33,13 +38,6 @@ const Gallery = ({ images }: { images: string[] | undefined }) => {
     return (
         <>
             <div className="grid grid-rows-2  grid-cols-3 xl:grid-cols-4 h-[32rem] xl:h-[36rem] gap-2 rounded-xl overflow-hidden hover:cursor-pointer">
-                <div className="absolute top-0 left-0 z-10">
-                    <button
-                        type="button"
-                        className="p-4 bg-gray-100 hover:bg-gray-200 rounded-full m-4 z-10 transition-colors">
-                        <Icon edit md className="fill-secondary" />
-                    </button>
-                </div>
                 <div
                     className="col-span-2 row-span-2 xl:col-span-3 hover:opacity-90 transition"
                     onClick={() => handleOpen(0)}>

@@ -62,37 +62,16 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
             }
 
             console.log("data", data);
-            const {
-                name,
-                description,
-                media,
-                price,
-                maxGuests,
-                rating,
-                meta,
-                location,
-            } = data;
-            return putProperty(property.id, token, {
-                name,
-                description,
-                media,
-                price,
-                maxGuests,
-                rating,
-                meta,
-                location,
-            });
-        },
-        onSuccess: (data: CreateProperty) => {
-            console.log("succesfuly edited", data);
+
+            return putProperty(property.id, token, data);
         },
     });
 
     function onSubmit(data: CreateProperty) {
-        console.log("data onSubmit", data);
         mutate(data);
     }
 
+    // adds media to array from input, validates if url leads to an image
     async function handleAddMedia() {
         const mediaInput = document.getElementById("media") as HTMLInputElement;
 
@@ -121,14 +100,23 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
                 className="flex flex-col gap-5 my-3"
                 onSubmit={handleSubmit(onSubmit)}>
                 <div className="relative">
-                    {isMobile ? (
-                        <Carousel
-                            images={getValues("media")}
-                            carouselControls
-                        />
-                    ) : (
-                        <Gallery images={getValues("media")} />
-                    )}
+                    <div>
+                        {isMobile ? (
+                            <Carousel
+                                images={getValues("media")}
+                                carouselControls
+                            />
+                        ) : (
+                            <Gallery images={getValues("media")} />
+                        )}
+                        <div className="absolute top-0 left-0 z-10">
+                            <button
+                                type="button"
+                                className="p-4 bg-gray-100 hover:bg-gray-200 rounded-full m-4 z-10 transition-colors">
+                                <Icon edit md className="fill-secondary" />
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <div className="flex">
@@ -155,18 +143,6 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
                         )}
                     </div>
                 </div>
-                {media.length > 0 &&
-                    media.map((value, index) => {
-                        return (
-                            <div key={value} className="flex gap-3">
-                                <Text sm>{index + 1}</Text>
-                                <Button secondary sm type="button" className="">
-                                    <Icon deleteIcon />
-                                </Button>
-                            </div>
-                        );
-                    })}
-                <div className=""></div>
                 <InputWithValidation
                     input={{
                         name: "name",
