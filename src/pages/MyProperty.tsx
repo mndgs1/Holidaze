@@ -58,11 +58,11 @@ const MyProperty = () => {
     }
 
     const futureBookings = data.bookings.filter((booking) =>
-        isFutureDate(booking.dateFrom)
+        isFutureDate(booking.dateTo)
     );
 
     const pastBookings = data.bookings.filter(
-        (booking) => !isFutureDate(booking.dateFrom)
+        (booking) => !isFutureDate(booking.dateTo)
     );
 
     // Table config
@@ -122,18 +122,21 @@ const MyProperty = () => {
                     />
                 )}
             </section>
-
-            {pastBookings.length > 0 && (
-                <section>
-                    <Heading h2>History</Heading>
+            <section>
+                <Heading h2>History</Heading>
+                {pastBookings.length > 0 ? (
                     <Table
                         data={pastBookings}
                         config={tableCfg}
                         keyFn={keyFn}
                         className="w-full max-w-lg"
                     />
-                </section>
-            )}
+                ) : (
+                    <Text secondary>
+                        Booking history of the property has no entries
+                    </Text>
+                )}
+            </section>
         </>
     );
 };

@@ -51,6 +51,22 @@ const MyProperties = () => {
             </Text>
         );
     }
+
+    if (!user?.venueManager) {
+        return (
+            <section>
+                <Heading h1>My Properties</Heading>
+                <Hero
+                    informational
+                    statement="Only venue managers can list properties!"
+                    suggestion="If you are a venue manager, please change your profile status."
+                    buttonText="Profile"
+                    navigateTo="/holidaze/profile"
+                />
+            </section>
+        );
+    }
+
     if (data?.length === 0) {
         return (
             <section>
