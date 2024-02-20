@@ -68,11 +68,6 @@ const MyProperty = () => {
     // Table config
     const tableCfg = [
         {
-            label: "Created",
-            render: (data: BookingTableData) =>
-                dateToLocaleDateString(data.created),
-        },
-        {
             label: "Guests",
             render: (data: BookingTableData) => data.guests.toString(),
         },

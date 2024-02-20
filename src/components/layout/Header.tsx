@@ -18,7 +18,7 @@ const Header = ({ ...rest }: HeaderProps) => {
     const isMobile = useIsMobile();
 
     const classes = className(
-        `mx-6 sm:mx-10 md:mx-16 lg:mx-24 xl:mx-34 2xl:mx-40 3xl:mx-auto max-w-screen-2xl h-21 flex items-center justify-between gap-12 lg:gap-20`,
+        `mx-6 sm:mx-10 md:mx-16 lg:mx-24 xl:mx-34 2xl:mx-40 3xl:mx-auto max-w-screen-2xl h-21 flex items-center justify-between gap-8 lg:gap-20`,
         rest.className
     );
     return (

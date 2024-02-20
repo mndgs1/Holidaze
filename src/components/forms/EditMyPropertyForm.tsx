@@ -37,18 +37,15 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
 
     const isMobile = useIsMobile();
 
-    useEffect(() => {
-        setValue("media", property.media);
-    });
-
     const token = useToken();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        setMedia(property.media);
+    }, [property]);
     const {
         register,
         handleSubmit,
-        setValue,
-        getValues,
         formState: { errors },
     } = useForm({
         resolver: yupResolver(postPropertySchema),
@@ -61,13 +58,12 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
                 throw new Error("No token");
             }
 
-            console.log("data", data);
-
             return putProperty(property.id, token, data);
         },
     });
 
     function onSubmit(data: CreateProperty) {
+        data.media = media;
         mutate(data);
     }
 
@@ -79,21 +75,18 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
 
         if (isValid) {
             setMediaError("");
-            if (media) {
-                setValue("media", [...media, mediaInput.value]);
-                setMedia([...media, mediaInput.value]);
-            } else {
-                setValue("media", [mediaInput.value]);
-                setMedia([...media, mediaInput.value]);
-            }
+            setMedia([...media, mediaInput.value]);
 
             mediaInput.value = "";
-            console.log("media:" + getValues("media"));
         } else {
             setMediaError("URL provided does not lead to an Image");
         }
     }
 
+    const handleDeleteMedia = (index: number) => () => {
+        const newMedia = media.filter((_, i) => i !== index);
+        setMedia(newMedia);
+    };
     return (
         <>
             <form
@@ -102,12 +95,9 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
                 <div className="relative">
                     <div>
                         {isMobile ? (
-                            <Carousel
-                                images={getValues("media")}
-                                carouselControls
-                            />
+                            <Carousel images={media} carouselControls />
                         ) : (
-                            <Gallery images={getValues("media")} />
+                            <Gallery images={media} />
                         )}
                         <div className="absolute top-0 left-0 z-10">
                             <button
@@ -142,6 +132,22 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
                             </Text>
                         )}
                     </div>
+                </div>
+                <div className="w-full flex flex-wrap gap-1">
+                    {media.map((image, index) => (
+                        <div
+                            key={index}
+                            className="flex gap-1 items-center bg-gray-100 p-2 rounded-xl">
+                            <Text>{index + 1}. Image</Text>
+                            <Button
+                                danger
+                                sm
+                                type="button"
+                                onClick={handleDeleteMedia(index)}>
+                                <Icon deleteIcon sm />
+                            </Button>
+                        </div>
+                    ))}
                 </div>
                 <InputWithValidation
                     input={{

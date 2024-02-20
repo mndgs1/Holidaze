@@ -28,7 +28,7 @@ const Profile = () => {
         resolver: yupResolver(updateSchema),
     });
 
-    const { mutate, isError, error, isPending } = useMutation({
+    const { mutate, isError, error, isPending, isSuccess } = useMutation({
         mutationFn: (data: LoggedInUser) => {
             const { venueManager } = data;
             return updateProfile({
@@ -97,6 +97,7 @@ const Profile = () => {
                         defaultChecked={loggedInUser.venueManager}
                         {...register("venueManager")}
                     />
+
                     <Button primary xl className="mt-4" loading={isPending}>
                         Save Changes
                     </Button>
@@ -105,7 +106,14 @@ const Profile = () => {
             <Button secondary xl onClick={handleLogout}>
                 Logout
             </Button>
-            {isError && <ServerMessage danger>{error?.message}</ServerMessage>}
+            <div className="mt-4">
+                {isSuccess && (
+                    <ServerMessage success>Profile updated!</ServerMessage>
+                )}
+                {isError && (
+                    <ServerMessage danger>{error?.message}</ServerMessage>
+                )}
+            </div>
         </section>
     );
 };

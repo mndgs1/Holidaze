@@ -79,7 +79,7 @@ const Search = ({ className }: SearchProps) => {
                 </button>
                 <input
                     type="text"
-                    className="px-4 py-2 pr-10 border border-secondary-100 drop-shadow-lg rounded-2xl sm:w-32 md:w-64 lg:w-72"
+                    className="px-4 py-2 pr-10 border border-secondary-100 w-full drop-shadow-lg rounded-2xl "
                     onChange={handleSearchInput}
                     value={search}
                 />

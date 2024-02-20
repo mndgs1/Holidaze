@@ -53,6 +53,7 @@ const EditMyProperty = () => {
         navigate("/holidaze/myProperties");
     };
 
+    console.log(data);
     return (
         <>
             <Heading h1>Edit Listing</Heading>

@@ -19,7 +19,7 @@ const ServerMessage = ({
         "p-2 rounded",
         {
             "text-danger-600 bg-danger-50": danger,
-            "text-success-600 bg-success-50": success,
+            "text-secondary bg-primary-100": success,
         },
         rest.className
     );
