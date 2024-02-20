@@ -99,13 +99,6 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
                         ) : (
                             <Gallery images={media} />
                         )}
-                        <div className="absolute top-0 left-0 z-10">
-                            <button
-                                type="button"
-                                className="p-4 bg-gray-100 hover:bg-gray-200 rounded-full m-4 z-10 transition-colors">
-                                <Icon edit md className="fill-secondary" />
-                            </button>
-                        </div>
                     </div>
                 </div>
                 <div>
