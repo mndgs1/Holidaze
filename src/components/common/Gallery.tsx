@@ -2,14 +2,18 @@ import React from "react";
 
 import Lightbox from "yet-another-react-lightbox";
 import Counter from "yet-another-react-lightbox/plugins/counter";
-import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/plugins/counter.css";
 import "yet-another-react-lightbox/styles.css";
 import Icon from "./Icon";
 
-const Gallery = ({ images }: { images: string[] | undefined }) => {
-    const zoomRef = React.useRef(null);
+// ...
 
+const Gallery = ({
+    images,
+}: {
+    images: string[] | undefined;
+    edit?: boolean;
+}) => {
     const [open, setOpen] = React.useState(false);
     const [index, setIndex] = React.useState(0);
 
@@ -30,11 +34,12 @@ const Gallery = ({ images }: { images: string[] | undefined }) => {
         updateIndex({ index });
         setOpen(true);
     };
+
     return (
         <>
             <div className="grid grid-rows-2  grid-cols-3 xl:grid-cols-4 h-[32rem] xl:h-[36rem] gap-2 rounded-xl overflow-hidden hover:cursor-pointer">
                 <div
-                    className="col-span-2 row-span-2 xl:col-span-3 "
+                    className="col-span-2 row-span-2 xl:col-span-3 hover:opacity-90 transition"
                     onClick={() => handleOpen(0)}>
                     <img
                         src={images[0]}
@@ -42,7 +47,7 @@ const Gallery = ({ images }: { images: string[] | undefined }) => {
                         className="object-cover w-full h-full"
                     />
                 </div>
-                <div onClick={() => handleOpen(1)}>
+                <div onClick={() => handleOpen(1)} className="hover:opacity-90">
                     <img
                         src={
                             images[1]
@@ -53,7 +58,9 @@ const Gallery = ({ images }: { images: string[] | undefined }) => {
                         className="object-cover w-full h-full"
                     />
                 </div>
-                <div className="relative" onClick={() => handleOpen(2)}>
+                <div
+                    className="relative hover:opacity-90"
+                    onClick={() => handleOpen(2)}>
                     <img
                         src={
                             images[2]
@@ -76,8 +83,7 @@ const Gallery = ({ images }: { images: string[] | undefined }) => {
 
             <Lightbox
                 open={open}
-                plugins={[Counter, Zoom]}
-                zoom={{ ref: zoomRef }}
+                plugins={[Counter]}
                 close={toggleOpen(false)}
                 index={index}
                 slides={slides}

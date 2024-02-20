@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProperty } from "../api/properties/getProperty";
@@ -10,12 +10,14 @@ import EditMyPropertyForm from "../components/forms/EditMyPropertyForm";
 import Icon from "../components/common/Icon";
 import { Link as RouterLink } from "react-router-dom";
 import { deleteProperty } from "../api/properties/deleteProperty";
+import Modal from "../components/common/Modal";
 
 const EditMyProperty = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const token = useToken();
 
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
     if (id === undefined) {
         throw new Error("Cant find a property id");
     }
@@ -51,6 +53,7 @@ const EditMyProperty = () => {
         navigate("/holidaze/myProperties");
     };
 
+    console.log(data);
     return (
         <>
             <Heading h1>Edit Listing</Heading>
@@ -77,12 +80,44 @@ const EditMyProperty = () => {
                         sm
                         type="button"
                         loading={isLoading}
-                        onClick={handleDelete}>
+                        onClick={() => setOpenDeleteModal(!false)}>
                         <Icon deleteIcon md />
                         Delete
                     </Button>
                 </div>
             </div>
+            <Modal isOpen={openDeleteModal}>
+                <div className="p-4">
+                    <div className="mb-4">
+                        <Heading h2>Your Listing will be lost</Heading>
+                        <Text primary>
+                            Are you sure you want to delete {data.name}?
+                        </Text>
+                    </div>
+                    <Text danger sm>
+                        Warning: This action is irreversible
+                    </Text>
+                    <div className="flex justify-end gap-4">
+                        <Button
+                            secondary
+                            type="button"
+                            sm
+                            onClick={() => setOpenDeleteModal(false)}>
+                            <Icon back md className="mr-1" />
+                            Cancel
+                        </Button>
+                        <Button
+                            danger
+                            sm
+                            type="button"
+                            loading={isLoading}
+                            onClick={handleDelete}>
+                            <Icon deleteIcon md />
+                            Delete
+                        </Button>
+                    </div>
+                </div>
+            </Modal>
         </>
     );
 };

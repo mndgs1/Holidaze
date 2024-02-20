@@ -25,6 +25,7 @@ import { Property } from "../../constants/interfaces/property";
 import { putProperty } from "../../api/properties/putProperty";
 import useIsMobile from "../../hooks/useIsMobile";
 import Gallery from "../common/Gallery";
+import Icon from "../common/Icon";
 
 interface PropertyFormProps {
     property: Property;
@@ -36,18 +37,15 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
 
     const isMobile = useIsMobile();
 
-    useEffect(() => {
-        setValue("media", property.media);
-    });
-
     const token = useToken();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        setMedia(property.media);
+    }, [property]);
     const {
         register,
         handleSubmit,
-        setValue,
-        getValues,
         formState: { errors },
     } = useForm({
         resolver: yupResolver(postPropertySchema),
@@ -60,38 +58,16 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
                 throw new Error("No token");
             }
 
-            console.log("data", data);
-            const {
-                name,
-                description,
-                media,
-                price,
-                maxGuests,
-                rating,
-                meta,
-                location,
-            } = data;
-            return putProperty(property.id, token, {
-                name,
-                description,
-                media,
-                price,
-                maxGuests,
-                rating,
-                meta,
-                location,
-            });
-        },
-        onSuccess: (data: CreateProperty) => {
-            console.log("succesfuly edited", data);
+            return putProperty(property.id, token, data);
         },
     });
 
     function onSubmit(data: CreateProperty) {
-        console.log("data onSubmit", data);
+        data.media = media;
         mutate(data);
     }
 
+    // adds media to array from input, validates if url leads to an image
     async function handleAddMedia() {
         const mediaInput = document.getElementById("media") as HTMLInputElement;
 
@@ -99,35 +75,31 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
 
         if (isValid) {
             setMediaError("");
-            if (media) {
-                setValue("media", [...media, mediaInput.value]);
-                setMedia([...media, mediaInput.value]);
-            } else {
-                setValue("media", [mediaInput.value]);
-                setMedia([...media, mediaInput.value]);
-            }
+            setMedia([...media, mediaInput.value]);
 
             mediaInput.value = "";
-            console.log("media:" + getValues("media"));
         } else {
             setMediaError("URL provided does not lead to an Image");
         }
     }
 
+    const handleDeleteMedia = (index: number) => () => {
+        const newMedia = media.filter((_, i) => i !== index);
+        setMedia(newMedia);
+    };
     return (
         <>
             <form
                 className="flex flex-col gap-5 my-3"
                 onSubmit={handleSubmit(onSubmit)}>
                 <div className="relative">
-                    {isMobile ? (
-                        <Carousel
-                            images={getValues("media")}
-                            carouselControls
-                        />
-                    ) : (
-                        <Gallery images={getValues("media")} />
-                    )}
+                    <div>
+                        {isMobile ? (
+                            <Carousel images={media} carouselControls />
+                        ) : (
+                            <Gallery images={media} />
+                        )}
+                    </div>
                 </div>
                 <div>
                     <div className="flex">
@@ -153,6 +125,22 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
                             </Text>
                         )}
                     </div>
+                </div>
+                <div className="w-full flex flex-wrap gap-1">
+                    {media.map((image, index) => (
+                        <div
+                            key={index}
+                            className="flex gap-1 items-center bg-gray-100 p-2 rounded-xl">
+                            <Text>{index + 1}. Image</Text>
+                            <Button
+                                danger
+                                sm
+                                type="button"
+                                onClick={handleDeleteMedia(index)}>
+                                <Icon deleteIcon sm />
+                            </Button>
+                        </div>
+                    ))}
                 </div>
                 <InputWithValidation
                     input={{

@@ -3,7 +3,6 @@ import * as React from "react";
 import Lightbox from "yet-another-react-lightbox";
 import Inline from "yet-another-react-lightbox/plugins/inline";
 import Counter from "yet-another-react-lightbox/plugins/counter";
-import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/plugins/counter.css";
 import "yet-another-react-lightbox/styles.css";
 
@@ -20,8 +19,6 @@ export default function Carousel({
     deleteImage,
     ...rest
 }: CarouselProps) {
-    const zoomRef = React.useRef(null);
-
     const [open, setOpen] = React.useState(false);
     const [index, setIndex] = React.useState(0);
 
@@ -69,8 +66,7 @@ export default function Carousel({
 
             <Lightbox
                 open={open}
-                plugins={[Counter, Zoom]}
-                zoom={{ ref: zoomRef }}
+                plugins={[Counter]}
                 close={toggleOpen(false)}
                 index={index}
                 slides={slides}

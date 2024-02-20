@@ -56,6 +56,7 @@ const Avatar = ({ avatar, setModalFormData, user }: AvatarProps) => {
         if (isValid) {
             setMediaError("");
             setModalFormData(data.avatar);
+            closeModal();
         } else {
             setMediaError("URL provided does not lead to an Image");
         }
@@ -64,7 +65,7 @@ const Avatar = ({ avatar, setModalFormData, user }: AvatarProps) => {
     return (
         <>
             <div
-                className="flex flex-col items-center transition-all duration-300 "
+                className="flex flex-col items-center transition-all duration-300 cursor-pointer"
                 onClick={openModal}>
                 <div className="h-52 w-52">
                     <img

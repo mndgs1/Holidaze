@@ -1,7 +1,7 @@
 import className from "classnames";
 import Icon from "./Icon";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children: React.ReactNode;
     primary?: boolean;
     secondary?: boolean;
@@ -9,15 +9,11 @@ interface ButtonProps {
     warning?: boolean;
     danger?: boolean;
     loading?: boolean;
-    className?: string;
     xxl?: boolean;
     xl?: boolean;
     lg?: boolean;
     md?: boolean;
     sm?: boolean;
-    onClick?: () => void;
-    type?: "button" | "submit" | "reset";
-    id?: string;
 }
 
 const Button = ({
@@ -32,12 +28,11 @@ const Button = ({
     md,
     lg,
     sm,
-    onClick,
     ...rest
 }: ButtonProps) => {
     const classes = className(
         rest.className,
-        "flex items-center justify-center border rounded-lg font-heading drop-shadow-xl tracking-wide",
+        "flex items-center justify-center border rounded-lg font-heading drop-shadow-xl tracking-wide transition",
         {
             "opacity-80": loading,
             "bg-primary hover:bg-primary-450 border-primary text-white":
@@ -46,7 +41,7 @@ const Button = ({
                 secondary,
             "border-green-500 bg-green-500 text-white": success,
             "bg-warning text-white hover:bg-warning-400 ": warning,
-            "bg-danger hover:bg-danger-400 hover:border-danger-400 text-white":
+            "bg-danger hover:bg-danger-400 hover:border-danger-400 text-white border-danger":
                 danger,
             "h-13 w-76 font-bold text-lg": xl,
             "h-10": lg,
@@ -56,11 +51,7 @@ const Button = ({
     );
 
     return (
-        <button
-            {...rest}
-            disabled={loading}
-            className={classes}
-            onClick={onClick}>
+        <button {...rest} disabled={loading} className={classes}>
             {loading ? (
                 <>
                     <Icon refresh className="mr-4 animate-spin" />

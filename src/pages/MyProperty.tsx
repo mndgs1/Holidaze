@@ -8,8 +8,15 @@ import Text from "../components/common/Text";
 import Button from "../components/common/Button";
 import Heading from "../components/common/Heading";
 import { isFutureDate } from "../utils/isFutureDate";
-import { formatToLongDate } from "../utils/formatToLongDate";
 import { subtractDates } from "../utils/subtractDates";
+import { Booking } from "../constants/interfaces/booking";
+import { dateToLocaleDateString } from "../utils/dateToLocaleDateString";
+import Table from "../components/common/Table";
+import Hero from "../components/common/Hero";
+
+interface BookingTableData extends Booking {
+    Total: number;
+}
 
 const MyProperty = () => {
     const { id } = useParams();
@@ -46,156 +53,85 @@ const MyProperty = () => {
         );
     }
 
-    const futureBookings = data.bookings.filter((booking) =>
-        isFutureDate(booking.dateFrom)
-    );
-
-    const pastBookings = data.bookings.filter(
-        (booking) => !isFutureDate(booking.dateFrom)
-    );
-
-    console.log(data);
     if (isLoading) {
         return <div>Loading...</div>;
     }
 
+    const futureBookings = data.bookings.filter((booking) =>
+        isFutureDate(booking.dateTo)
+    );
+
+    const pastBookings = data.bookings.filter(
+        (booking) => !isFutureDate(booking.dateTo)
+    );
+
+    // Table config
+    const tableCfg = [
+        {
+            label: "Guests",
+            render: (data: BookingTableData) => data.guests.toString(),
+        },
+        {
+            label: "From",
+            render: (data: BookingTableData) =>
+                dateToLocaleDateString(data.dateFrom),
+        },
+        {
+            label: "To",
+            render: (data: BookingTableData) =>
+                dateToLocaleDateString(data.dateTo),
+        },
+        {
+            label: "Days",
+            render: (data: BookingTableData) =>
+                subtractDates(data.dateFrom, data.dateTo).toString(),
+        },
+    ];
+    const keyFn = (bookingData: Booking) => {
+        return bookingData.created;
+    };
+
     return (
         <>
             <Heading h1>{data.name}</Heading>
-            {pastBookings.length > 0 && (
-                <section>
-                    <Heading h2 className="mb-1">
-                        Upcomming bookings
-                    </Heading>
-                    <table className="w-full border-collapse">
-                        <thead className="">
-                            <tr className="">
-                                <th className=" border border-slate-500">
-                                    <Text primary bold>
-                                        From
-                                    </Text>
-                                </th>
-                                <th className=" border border-slate-500">
-                                    <Text primary bold>
-                                        To
-                                    </Text>
-                                </th>
-                                <th className=" border border-slate-500">
-                                    <Text primary bold>
-                                        Guests
-                                    </Text>
-                                </th>
-                                <th className=" border border-slate-500">
-                                    <Text primary bold>
-                                        Total Days
-                                    </Text>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {futureBookings.map((fBooking) => {
-                                return (
-                                    <tr key={fBooking.id}>
-                                        <td className=" border border-slate-500">
-                                            <Text primary>
-                                                {formatToLongDate(
-                                                    fBooking.dateFrom
-                                                )}
-                                            </Text>
-                                        </td>
-                                        <td className=" border border-slate-500">
-                                            <Text primary>
-                                                {formatToLongDate(
-                                                    fBooking.dateTo
-                                                )}
-                                            </Text>
-                                        </td>
-                                        <td className=" border border-slate-500">
-                                            <Text primary>
-                                                {fBooking.guests}
-                                            </Text>
-                                        </td>
-                                        <td className=" border border-slate-500">
-                                            <Text primary>
-                                                {subtractDates(
-                                                    fBooking.dateFrom,
-                                                    fBooking.dateTo
-                                                )}
-                                            </Text>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                </section>
-            )}
-            {pastBookings.length > 0 && (
-                <section>
-                    <Heading h2>History</Heading>
-                    <table className="w-full border-collapse">
-                        <thead className="">
-                            <tr className="">
-                                <th className=" border border-slate-500">
-                                    <Text primary bold>
-                                        From
-                                    </Text>
-                                </th>
-                                <th className=" border border-slate-500">
-                                    <Text primary bold>
-                                        To
-                                    </Text>
-                                </th>
-                                <th className=" border border-slate-500">
-                                    <Text primary bold>
-                                        Guests
-                                    </Text>
-                                </th>
-                                <th className=" border border-slate-500">
-                                    <Text primary bold>
-                                        Total Days
-                                    </Text>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {pastBookings.map((fBooking) => {
-                                return (
-                                    <tr key={fBooking.id}>
-                                        <td className=" border border-slate-500">
-                                            <Text primary>
-                                                {formatToLongDate(
-                                                    fBooking.dateFrom
-                                                )}
-                                            </Text>
-                                        </td>
-                                        <td className=" border border-slate-500">
-                                            <Text primary>
-                                                {formatToLongDate(
-                                                    fBooking.dateTo
-                                                )}
-                                            </Text>
-                                        </td>
-                                        <td className=" border border-slate-500">
-                                            <Text primary>
-                                                {fBooking.guests}
-                                            </Text>
-                                        </td>
-                                        <td className=" border border-slate-500">
-                                            <Text primary>
-                                                {subtractDates(
-                                                    fBooking.dateFrom,
-                                                    fBooking.dateTo
-                                                )}
-                                            </Text>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                </section>
-            )}
+            <section className="mb-4">
+                <Heading h2>Bookings</Heading>
+                {futureBookings.length > 0 ? (
+                    <Table
+                        data={futureBookings}
+                        config={tableCfg}
+                        keyFn={keyFn}
+                        className="w-full max-w-lg"
+                    />
+                ) : (
+                    <Hero
+                        statement={
+                            "You have no upcomming bookings on your property."
+                        }
+                        suggestion={
+                            "Try editing your property listing to get better traction!"
+                        }
+                        buttonText={"Edit property"}
+                        navigateTo={`/holidaze/myProperties/edit/${id}`}
+                        informational
+                    />
+                )}
+            </section>
+            <section>
+                <Heading h2>History</Heading>
+                {pastBookings.length > 0 ? (
+                    <Table
+                        data={pastBookings}
+                        config={tableCfg}
+                        keyFn={keyFn}
+                        className="w-full max-w-lg"
+                    />
+                ) : (
+                    <Text secondary>
+                        Booking history of the property has no entries
+                    </Text>
+                )}
+            </section>
         </>
     );
 };
