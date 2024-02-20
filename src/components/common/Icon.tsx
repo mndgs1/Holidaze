@@ -31,7 +31,7 @@ import { FaMapLocationDot, FaXTwitter } from "react-icons/fa6";
 
 import className from "classnames";
 
-interface IconProps {
+interface IconProps extends React.HTMLAttributes<HTMLElement> {
     edit?: boolean;
     back?: boolean;
     wifi?: boolean;
@@ -51,7 +51,6 @@ interface IconProps {
     forward?: boolean;
     minus?: boolean;
     money?: boolean;
-    className?: string;
     location?: boolean;
     sm?: boolean;
     md?: boolean;

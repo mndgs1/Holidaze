@@ -1,13 +1,12 @@
 import React from "react";
 import className from "classnames";
 
-interface HeadingProps {
+interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
     children: React.ReactNode;
     h1?: boolean;
     h2?: boolean;
     h3?: boolean;
     h4?: boolean;
-    className?: string;
 }
 const Heading = ({ h1, h2, h3, h4, children, ...rest }: HeadingProps) => {
     const classes = className(
