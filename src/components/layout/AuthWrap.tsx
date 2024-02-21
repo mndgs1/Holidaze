@@ -14,7 +14,15 @@ function AuthWrapper({ children }: RouteProps) {
         if (isProtectedRoute && !isLoggedIn) {
             navigate("/login");
         }
-    }, [isLoggedIn, isProtectedRoute, navigate]);
+
+        if (
+            (isLoggedIn && pathname === "/login") ||
+            pathname === "/register" ||
+            pathname === "/"
+        ) {
+            navigate("/holidaze/properties");
+        }
+    }, [isLoggedIn, isProtectedRoute, navigate, pathname]);
 
     return <>{children}</>;
 }
