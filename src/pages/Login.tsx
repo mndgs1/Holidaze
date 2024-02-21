@@ -45,34 +45,36 @@ const Login = () => {
     }
 
     return (
-        <LoginRegisterLayout login>
-            <Heading h1 className="text-center  mb-9">
-                Welcome back
-            </Heading>
-            <form
-                className="flex flex-col gap-6 justify-center mb-3"
-                onSubmit={handleSubmit(onSubmit)}>
-                {LoginInputConfig.map((input) => (
-                    <InputWithValidation
-                        key={input.id}
-                        input={input}
-                        register={register}
-                        errors={errors}
-                    />
-                ))}
+        <>
+            <LoginRegisterLayout login>
+                <Heading h1 className="text-center  mb-9">
+                    Welcome back
+                </Heading>
+                <form
+                    className="flex flex-col gap-6 justify-center mb-3"
+                    onSubmit={handleSubmit(onSubmit)}>
+                    {LoginInputConfig.map((input) => (
+                        <InputWithValidation
+                            key={input.id}
+                            input={input}
+                            register={register}
+                            errors={errors}
+                        />
+                    ))}
 
-                <Button primary xl loading={isPending}>
-                    Login
-                </Button>
-            </form>
-            <div className="flex gap-2 justify-center mb-2">
-                <p>Don't have an account?</p>
-                <Link to="/register">Sign Up</Link>
-            </div>
-            {isError && (
-                <ServerMessage danger>{error.toString()}</ServerMessage>
-            )}
-        </LoginRegisterLayout>
+                    <Button primary xl loading={isPending}>
+                        Login
+                    </Button>
+                </form>
+                <div className="flex gap-2 justify-center mb-2">
+                    <p>Don't have an account?</p>
+                    <Link to="/register">Sign Up</Link>
+                </div>
+                {isError && (
+                    <ServerMessage danger>{error.toString()}</ServerMessage>
+                )}
+            </LoginRegisterLayout>
+        </>
     );
 };
 

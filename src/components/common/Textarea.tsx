@@ -7,11 +7,8 @@ import React, {
 import className from "classnames";
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-    id: string;
     label: string;
     danger?: boolean;
-    onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
-    defaultValue?: string;
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(

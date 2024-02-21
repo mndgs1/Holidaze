@@ -44,7 +44,9 @@ export const useUserActions = () => {
 
 export const useUser = () => {
     const user = useUserStore((state) => state.user);
+    const token = useUserStore((state) => state.user?.accessToken);
 
-    if (user) return user;
-    else return null;
+    const isLoggedIn = !!user && !!token;
+
+    return { user, token, isLoggedIn };
 };

@@ -15,7 +15,6 @@ export async function getBookings(token: string, name: string) {
     );
 
     const json = await response.json();
-    console.log(json);
 
     if (!response.ok) {
         throw new Error(json.errors?.[0]?.message ?? "There was an error");

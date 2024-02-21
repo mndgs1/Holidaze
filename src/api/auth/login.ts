@@ -16,7 +16,6 @@ export async function login(
     const json = await response.json();
 
     if (!response.ok) {
-        console.log(json);
         throw new Error(json.errors?.[0]?.message ?? "There was an error");
     }
 

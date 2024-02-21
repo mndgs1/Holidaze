@@ -1,5 +1,4 @@
 import React from "react";
-import { useToken } from "../stores/useUserStore";
 import { getBookings } from "../api/bookings/getBookings";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -13,10 +12,8 @@ import Hero from "../components/common/Hero";
 import BookingCard from "../components/Cards/BookingCard";
 
 const Bookings = () => {
-    const token = useToken();
-
     const navigate = useNavigate();
-    const user = useUser();
+    const { user, token } = useUser();
 
     const { isLoading, isError, data } = useQuery({
         queryKey: ["bookings"],

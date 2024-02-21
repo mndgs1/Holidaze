@@ -11,12 +11,9 @@ export async function postBooking(token: string, data: CreateBookingData) {
         body: JSON.stringify(data),
     };
 
-    console.log(data);
-
     const response = await fetch(BOOKINGS_URL, options);
 
     const json = await response.json();
-    console.log(json);
 
     if (!response.ok) {
         throw new Error(json.errors?.[0]?.message ?? "There was an error");

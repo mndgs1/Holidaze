@@ -3,7 +3,6 @@ import React from "react";
 import Heading from "../components/common/Heading";
 import Hero from "../components/common/Hero";
 
-import { useToken } from "../stores/useUserStore";
 import { useNavigate } from "react-router-dom";
 import { getProfileProperties } from "../api/properties/getProperties";
 import { useUser } from "../stores/useUserStore";
@@ -15,9 +14,9 @@ import Text from "../components/common/Text";
 import PropertyCard from "../components/Cards/PropertyCard";
 
 const MyProperties = () => {
-    const token = useToken();
     const navigate = useNavigate();
-    const user = useUser();
+    const { user, token } = useUser();
+
     if (!token || !user) {
         navigate("/login");
     }
