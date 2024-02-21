@@ -58,12 +58,17 @@ const Bookings = () => {
     return (
         <>
             <section className="">
-                <Heading h1>Upcomming</Heading>
                 {futureBookings.length > 0 ? (
-                    <div className="flex flex-col gap-4">
-                        {futureBookings.map((booking) => (
-                            <BookingCard key={booking.id} booking={booking} />
-                        ))}
+                    <div>
+                        <Heading h1>Upcomming</Heading>
+                        <div className="flex flex-col gap-4">
+                            {futureBookings.map((booking) => (
+                                <BookingCard
+                                    key={booking.id}
+                                    booking={booking}
+                                />
+                            ))}
+                        </div>
                     </div>
                 ) : (
                     <Hero
@@ -75,13 +80,20 @@ const Bookings = () => {
                 )}
             </section>
             <section className="mt-8">
-                <Heading h1>History</Heading>
-                <div className="flex flex-col gap-4">
-                    {pastBookings.length > 0 &&
-                        pastBookings.map((booking) => (
-                            <BookingCard key={booking.id} booking={booking} />
-                        ))}
-                </div>
+                {pastBookings.length > 0 && (
+                    <div>
+                        <Heading h1>History</Heading>
+
+                        <div className="flex flex-col gap-4">
+                            {pastBookings.map((booking) => (
+                                <BookingCard
+                                    key={booking.id}
+                                    booking={booking}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                )}
             </section>
         </>
     );
