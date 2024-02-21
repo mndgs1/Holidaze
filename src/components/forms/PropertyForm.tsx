@@ -50,7 +50,6 @@ const PropertyForm = () => {
                 throw new Error("No token");
             }
 
-            console.log("data", data);
             const {
                 name,
                 description,

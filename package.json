@@ -27,6 +27,7 @@
         "react-datepicker": "^4.25.0",
         "react-dom": "^18.2.0",
         "react-helmet": "^6.1.0",
+        "react-helmet-async": "^2.0.4",
         "react-hook-form": "^7.49.3",
         "react-modern-calendar-datepicker": "^3.1.6",
         "react-photo-album": "^2.3.1",

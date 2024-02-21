@@ -21,13 +21,14 @@ import { createBookedDaysArray } from "../utils/createBookedDaysArray";
 import { monthNumberToName } from "../utils/monthNumberToName";
 
 import { useMutation } from "@tanstack/react-query";
-import { Booking, CreateBookingData } from "../constants/interfaces/booking";
+import { CreateBookingData } from "../constants/interfaces/booking";
 import { postBooking } from "../api/bookings/postBooking";
 import { postBookingSchema } from "../constants/schemas";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Gallery from "../components/common/Gallery";
 import Seo from "../components/layout/Seo";
+import ServerMessage from "../components/common/ServerMessage";
 
 const PropertyPage = () => {
     const token = useToken();
@@ -89,14 +90,7 @@ const PropertyPage = () => {
                 navigate("/login");
                 throw new Error("No token");
             }
-            console.log(data);
             return postBooking(token, data);
-        },
-        onSuccess: (data: Booking) => {
-            console.log("mutation sucess", data);
-        },
-        onError: (error: any) => {
-            console.log(error.message);
         },
     });
 
@@ -124,7 +118,6 @@ const PropertyPage = () => {
                 dateFrom: dateFrom,
                 dateTo: dateTo,
             };
-            console.log("booking data", bookingData);
             bookingMutation.mutate(bookingData);
         }
     }
@@ -318,6 +311,11 @@ const PropertyPage = () => {
                                 Reserve
                             </Button>
                         </div>
+                        {bookingMutation.isError && (
+                            <ServerMessage danger className="mt-4">
+                                {bookingMutation.error?.message}
+                            </ServerMessage>
+                        )}
                     </section>
                 </div>
             </div>

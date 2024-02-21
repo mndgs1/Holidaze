@@ -13,12 +13,11 @@ import { updateProfile, updateAvatar } from "../api/profiles/putProfile";
 import { useForm } from "react-hook-form";
 import { updateSchema } from "../constants/schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useToken, useUserActions, useUser } from "../stores/useUserStore";
+import { useUserActions, useUser } from "../stores/useUserStore";
 import ServerMessage from "../components/common/ServerMessage";
 
 const Profile = () => {
-    const loggedInUser = useUser();
-    const token = useToken();
+    const { user, token } = useUser();
     const navigate = useNavigate();
 
     const { clearUser, updateStoreAvatar, updateStoreVenueManager } =
@@ -33,14 +32,13 @@ const Profile = () => {
             const { venueManager } = data;
             return updateProfile({
                 token,
-                name: loggedInUser?.name,
+                name: user?.name,
                 venueManager,
             });
         },
         onMutate: (data: LoggedInUser) => {
             const { avatar } = data;
-            console.log(data);
-            updateAvatar({ token, name: loggedInUser?.name, avatar });
+            updateAvatar({ token, name: user?.name, avatar });
             if (data.avatar) {
                 updateStoreAvatar(data.avatar);
             }
@@ -63,7 +61,7 @@ const Profile = () => {
         setValue("avatar", modalFormData);
     }, [setValue, modalFormData]);
 
-    if (!loggedInUser) {
+    if (!user) {
         navigate("/login");
         return null;
     }
@@ -79,22 +77,22 @@ const Profile = () => {
                 <Avatar
                     avatar={avatar}
                     setModalFormData={setModalFormData}
-                    user={loggedInUser}
+                    user={user}
                 />
                 <form
                     className="flex flex-col items-center mb-2"
                     onSubmit={handleSubmit(onSubmit)}>
                     <Heading h1 className="mt-4">
-                        {loggedInUser.name}
+                        {user.name}
                     </Heading>
                     <Text primary bold className="mb-8">
-                        {loggedInUser.email}
+                        {user.email}
                     </Text>
                     <Input
                         type="checkbox"
                         id="venueManager"
                         label="I am a property manager"
-                        defaultChecked={loggedInUser.venueManager}
+                        defaultChecked={user.venueManager}
                         {...register("venueManager")}
                     />
 

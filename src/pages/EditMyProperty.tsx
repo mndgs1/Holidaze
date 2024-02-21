@@ -54,7 +54,6 @@ const EditMyProperty = () => {
         navigate("/holidaze/myProperties");
     };
 
-    console.log(data);
     return (
         <>
             <Seo title={`Edit ${data.name}`} />

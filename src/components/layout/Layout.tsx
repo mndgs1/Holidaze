@@ -26,7 +26,7 @@ const Layout: React.FC<{
         return (
             <>
                 <Seo />
-                <body className="min-h-screen flex flex-col">
+                <div className="min-h-screen flex flex-col">
                     <Header />
                     <main className="sm:grow">
                         <div
@@ -43,13 +43,13 @@ const Layout: React.FC<{
                             }></Navigation>
                     )}
                     <Footer />
-                </body>
+                </div>
             </>
         );
     return (
         <>
             <Seo />
-            <body className="relative min-h-screen flex flex-col">
+            <div className="relative min-h-screen flex flex-col">
                 <Header />
                 <main
                     className={
@@ -58,7 +58,7 @@ const Layout: React.FC<{
                     {children}
                 </main>
                 <Footer />
-            </body>
+            </div>
         </>
     );
 };

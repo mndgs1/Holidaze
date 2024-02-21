@@ -14,42 +14,54 @@ import About from "./pages/About";
 import CreatePropertyListing from "./pages/CreatePropertyListing";
 import EditMyProperty from "./pages/EditMyProperty";
 import MyProperty from "./pages/MyProperty";
+import AuthWrapper from "./components/layout/AuthWrap";
+import { HelmetProvider } from "react-helmet-async";
 
 function App() {
     return (
-        <Layout>
-            <Routes>
-                <Route path="/" index element={<Home />} />
-                <Route path="login" element={<Login />} />
-                <Route path="register" element={<Register />} />
-                <Route path="*" element={<Page404 />} />
-                <Route path="/about" element={<About />} />
+        <HelmetProvider>
+            <Layout>
+                <AuthWrapper>
+                    <Routes>
+                        <Route path="/" index element={<Home />} />
+                        <Route path="login" element={<Login />} />
+                        <Route path="register" element={<Register />} />
+                        <Route path="*" element={<Page404 />} />
+                        <Route path="/about" element={<About />} />
 
-                <Route path="holidaze/properties" element={<Properties />} />
-                <Route path="holidaze/profile" element={<Profile />} />
-                <Route
-                    path="holidaze/properties/:id"
-                    element={<PropertyPage />}
-                />
-                <Route path="holidaze/bookings" element={<Bookings />} />
-                <Route
-                    path="holidaze/myProperties"
-                    element={<MyProperties />}
-                />
-                <Route
-                    path="holidaze/myProperties/edit/:id"
-                    element={<EditMyProperty />}
-                />
-                <Route
-                    path="holidaze/myProperties/create"
-                    element={<CreatePropertyListing />}
-                />
-                <Route
-                    path="/holidaze/myProperties/:id"
-                    element={<MyProperty />}
-                />
-            </Routes>
-        </Layout>
+                        <Route
+                            path="holidaze/properties"
+                            element={<Properties />}
+                        />
+                        <Route path="holidaze/profile" element={<Profile />} />
+                        <Route
+                            path="holidaze/properties/:id"
+                            element={<PropertyPage />}
+                        />
+                        <Route
+                            path="holidaze/bookings"
+                            element={<Bookings />}
+                        />
+                        <Route
+                            path="holidaze/myProperties"
+                            element={<MyProperties />}
+                        />
+                        <Route
+                            path="holidaze/myProperties/edit/:id"
+                            element={<EditMyProperty />}
+                        />
+                        <Route
+                            path="holidaze/myProperties/create"
+                            element={<CreatePropertyListing />}
+                        />
+                        <Route
+                            path="/holidaze/myProperties/:id"
+                            element={<MyProperty />}
+                        />
+                    </Routes>
+                </AuthWrapper>
+            </Layout>
+        </HelmetProvider>
     );
 }
 export default App;
