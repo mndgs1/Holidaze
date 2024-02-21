@@ -2,7 +2,6 @@ import React from "react";
 
 import { useLocation } from "react-router-dom";
 import useIsMobile from "../../hooks/useIsMobile";
-import useOnScrollUp from "../../hooks/useOnScrollUp";
 
 import Header from "./Header";
 import Footer from "./Footer";
@@ -13,7 +12,6 @@ const Layout: React.FC<{
 }> = ({ children }) => {
     const { pathname } = useLocation();
     const isMobile = useIsMobile();
-    const isHeaderVisible = useOnScrollUp();
 
     if (pathname.includes("/login") || pathname.includes("/register")) {
         return (
