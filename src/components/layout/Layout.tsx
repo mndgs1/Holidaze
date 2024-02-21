@@ -36,11 +36,9 @@ const Layout: React.FC<{
                 </main>
                 {isMobile && (
                     <Navigation
-                        className={`fixed flex flex-col justify-center bottom-0 left-0 right-0 h-14 bg-white border-t border-secondary-100 ${
-                            !isHeaderVisible
-                                ? "transform translate-y-full transition-all duration-300"
-                                : "transform translate-y-0 transition-all duration-300"
-                        }`}></Navigation>
+                        className={
+                            "fixed flex flex-col justify-center bottom-0 left-0 right-0 h-14 bg-white border-t border-secondary-100 "
+                        }></Navigation>
                 )}
                 <Footer />
             </div>
