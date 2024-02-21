@@ -27,6 +27,7 @@ import { postBookingSchema } from "../constants/schemas";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Gallery from "../components/common/Gallery";
+import Seo from "../components/layout/Seo";
 
 const PropertyPage = () => {
     const token = useToken();
@@ -140,6 +141,8 @@ const PropertyPage = () => {
     const bookedDays = createBookedDaysArray(data);
     return (
         <>
+            <Seo title={data.name} />
+
             {isMobile ? (
                 <Carousel images={data.media} carouselControls />
             ) : (

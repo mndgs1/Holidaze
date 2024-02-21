@@ -11,6 +11,7 @@ import Icon from "../components/common/Icon";
 import { Link as RouterLink } from "react-router-dom";
 import { deleteProperty } from "../api/properties/deleteProperty";
 import Modal from "../components/common/Modal";
+import Seo from "../components/layout/Seo";
 
 const EditMyProperty = () => {
     const { id } = useParams<{ id: string }>();
@@ -56,6 +57,7 @@ const EditMyProperty = () => {
     console.log(data);
     return (
         <>
+            <Seo title={`Edit ${data.name}`} />
             <Heading h1>Edit Listing</Heading>
             <EditMyPropertyForm property={data} />
             <div>
