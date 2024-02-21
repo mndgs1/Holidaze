@@ -6,6 +6,7 @@ import Icon from "../common/Icon";
 import { Link as RouterLink } from "react-router-dom";
 
 import { Property } from "../../constants/interfaces/property";
+import Tooltip from "../common/Tooltip";
 
 interface CardProps {
     property: Property;
@@ -57,11 +58,14 @@ const PropertyCard = ({ property }: CardProps) => {
                 </div>
 
                 <div className="absolute bottom-0 right-0 flex gap-4">
-                    <RouterLink to={`/holidaze/myProperties/${property.id}`}>
-                        <button className="border border-gray-200 p-2 rounded-full drop-shadow hover:bg-gray-100 transition">
-                            <Icon receipt md className="fill-secondary" />
-                        </button>
-                    </RouterLink>
+                    <Tooltip text="View Bookings">
+                        <RouterLink
+                            to={`/holidaze/myProperties/${property.id}`}>
+                            <button className="border border-gray-200 p-2 rounded-full drop-shadow hover:bg-gray-100 transition">
+                                <Icon receipt md className="fill-secondary" />
+                            </button>
+                        </RouterLink>
+                    </Tooltip>
                     <RouterLink
                         to={`/holidaze/myProperties/edit/${property.id}`}>
                         <button className="border border-gray-200 p-2 rounded-full drop-shadow hover:bg-gray-100 transition">
