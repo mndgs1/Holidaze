@@ -82,6 +82,7 @@ const Search = ({ className }: SearchProps) => {
                     className="px-4 py-2 pr-10 border border-secondary-100 w-full drop-shadow-lg rounded-2xl "
                     onChange={handleSearchInput}
                     value={search}
+                    name="search"
                 />
             </div>
             {openAccordion && (

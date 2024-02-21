@@ -3,7 +3,7 @@ import { Booking } from "../../constants/interfaces/booking";
 
 import Heading from "../common/Heading";
 import Text from "../common/Text";
-import Icon from "../common/Icon";
+// import Icon from "../common/Icon";
 
 import { Link as RouterLink } from "react-router-dom";
 import { formatToLongDate } from "../../utils/formatToLongDate";
@@ -50,13 +50,13 @@ const BookingCard = ({ booking }: CardProps) => {
                     </Text>
                 </div>
 
-                <div className="">
+                {/* <div className="">
                     <RouterLink to={`holidaze/bookings/${booking.id}`}>
                         <button className="absolute bottom-0 right-0 flex gap-1 border border-gray-200 p-2 rounded-full drop-shadow transition hover:bg-gray-100">
                             <Icon receipt md className="fill-secondary" />
                         </button>
                     </RouterLink>
-                </div>
+                </div> */}
             </div>
         </div>
     );
