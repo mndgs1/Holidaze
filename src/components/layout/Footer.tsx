@@ -10,7 +10,7 @@ interface FooterProps {
 
 const Footer = ({ ...rest }: FooterProps) => {
     const classes = className(
-        "px-6 sm:px-10 md:px-16 lg:px-24 xl:px-34 2xl:px-40 3xl:px-auto border-t border-secondary-100 mt-8",
+        "px-6 sm:px-10 md:px-16 lg:px-24 xl:px-34 2xl:px-40 3xl:px-auto border-t border-secondary-100 mt-8 mb-16 sm:mb-0",
         rest.className
     );
 
