@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useToken } from "../../stores/useUserStore";
+import { useUser } from "../../stores/useUserStore";
 
 const Logo = ({ ...rest }) => {
-    const token = useToken();
-    const isLoggedIn = !!token;
+    const { isLoggedIn } = useUser();
 
     return (
         <Link {...rest} to={isLoggedIn ? "/holidaze/properties" : "/"}>
