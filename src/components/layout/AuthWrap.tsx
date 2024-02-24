@@ -8,17 +8,18 @@ function AuthWrapper({ children }: RouteProps) {
     const { isLoggedIn } = useUser();
 
     const { pathname } = useLocation();
+
     const isProtectedRoute = pathname.includes("/holidaze/");
 
     useEffect(() => {
+        const routesToRedirect = ["/login", "/register", "/"];
         if (isProtectedRoute && !isLoggedIn) {
             navigate("/login");
         }
 
         if (
-            (isLoggedIn && pathname === "/login") ||
-            pathname === "/register" ||
-            pathname === "/"
+            isLoggedIn &&
+            routesToRedirect.some((route) => route === pathname)
         ) {
             navigate("/holidaze/properties");
         }
