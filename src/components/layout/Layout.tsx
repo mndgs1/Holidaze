@@ -42,7 +42,7 @@ const Layout: React.FC<{
                                 "fixed flex flex-col justify-center bottom-0 left-0 right-0 h-14 bg-white border-t border-secondary-100 "
                             }></Navigation>
                     )}
-                    <Footer className="mb-16" />
+                    <Footer className="mb-16 sm:mb-0" />
                 </div>
             </>
         );
