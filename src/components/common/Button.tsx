@@ -35,7 +35,7 @@ const Button = ({
         "flex items-center justify-center border rounded-lg font-heading drop-shadow-xl tracking-wide transition",
         {
             "opacity-80": loading,
-            "bg-primary hover:bg-primary-450 border-primary text-white":
+            "bg-primary hover:bg-primary-400 hover:border-primary-400 border-primary text-white":
                 primary,
             "bg-secondary hover:bg-secondary-450 text-white border-secondary hover:border-secondary-450":
                 secondary,

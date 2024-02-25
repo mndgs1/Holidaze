@@ -81,6 +81,7 @@ const Search = ({ className }: SearchProps) => {
                     onChange={handleSearchInput}
                     value={search}
                     name="search"
+                    id="search"
                 />
                 <label htmlFor="search" className="sr-only">
                     Search
