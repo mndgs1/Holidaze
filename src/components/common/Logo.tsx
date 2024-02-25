@@ -1,12 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../../stores/useUserStore";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Logo = ({ ...rest }) => {
     const { isLoggedIn } = useUser();
+    const { pathname } = useLocation();
+    const navigate = useNavigate();
+
+    const handleRefresh = () => {
+        if (
+            (pathname === "/" && !isLoggedIn) ||
+            (pathname === "/holidaze/properties" && isLoggedIn)
+        ) {
+            navigate(0);
+        }
+    };
 
     return (
-        <Link {...rest} to={isLoggedIn ? "/holidaze/properties" : "/"}>
+        <Link
+            {...rest}
+            to={isLoggedIn ? "/holidaze/properties" : "/"}
+            onClick={handleRefresh}>
             <svg
                 width="100"
                 height="33"
