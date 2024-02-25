@@ -33,6 +33,7 @@ const DatePicker = ({ value, onChange, disabledDays }: any) => {
             colorPrimary="#10B981"
             minimumDate={minimumDate}
             disabledDays={disabledDays}
+            inputName="datePicker"
         />
     );
 };

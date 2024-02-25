@@ -40,6 +40,7 @@ export const LoginInputConfig = [
         type: "text",
         id: "email",
         label: "Email address",
+        autocomplete: true,
         autoFocus: true,
     },
     {
