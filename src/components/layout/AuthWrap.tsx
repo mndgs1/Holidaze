@@ -9,7 +9,13 @@ function AuthWrapper({ children }: RouteProps) {
 
     const { pathname } = useLocation();
 
-    const isProtectedRoute = pathname.includes("/holidaze/");
+    const protectedRoutes = [
+        "/holidaze/properties",
+        "/holidaze/bookings",
+        "/holidaze/myProperties",
+        "/holidaze/profile",
+    ];
+    const isProtectedRoute = pathname.includes(protectedRoutes.join("|"));
 
     useEffect(() => {
         const routesToRedirect = ["/login", "/register", "/"];
