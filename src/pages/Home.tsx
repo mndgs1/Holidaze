@@ -9,20 +9,22 @@ export default function Home() {
     return (
         <>
             <div className="h-screen flex flex-col justify-center">
-                <div className="h-screen w-full absolute top-0 right-0 drop-shadow-lg ">
+                <div className="h-screen w-full absolute top-0 right-0 bg-black opacity-60 z-10"></div>
+
+                <div className="h-screen w-full absolute top-0 right-0">
                     <img
                         className="w-full h-full drop-shadow-lg object-cover"
-                        src="/assets/Images/durian-bullet-JCMQo028t3Q-unsplash.jpg"
+                        src="/assets/Images/portrait/gaddafi-rusli-2ueUnL4CkV8-unsplash.jpg"
                         alt="Durian property"
                     />
                 </div>
-                <div className="z-10 py-10 mb-32 flex flex-col items-center">
-                    <Heading h1 className="mb-2">
+                <div className="z-10 py-10 mb-32 flex flex-col items-center gap-4">
+                    <h1 className="font-black text-4xl md:text-7xl text-white">
                         Not sure where to go?
-                    </Heading>
-                    <Text className="text-lg text-semibold mb-4 ">
+                    </h1>
+                    <p className="md:text-xl text-white text-semibold mb-4 ">
                         Find your next holiday stay with us.
-                    </Text>
+                    </p>
                     <div className="flex items-center justify-center gap-x-4">
                         <RouterLink to="/login">
                             <Button primary md>
@@ -30,14 +32,14 @@ export default function Home() {
                             </Button>
                         </RouterLink>
                         <RouterLink to={"/register"}>
-                            <Button secondary md>
+                            <Button warning md>
                                 Register
                             </Button>
                         </RouterLink>
                     </div>
                 </div>
             </div>
-            <section className="mt-8">
+            <section className="-mt-16">
                 <Heading h2>Why choose us?</Heading>
                 <div className="flex flex-col sm:flex-row justify-between mt-4 gap-4">
                     <div className="flex flex-col text-center items-center basis-1/3 rounded-full p-8 border drop-shadow-lg">

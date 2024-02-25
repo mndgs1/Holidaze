@@ -191,12 +191,16 @@ const EditMyPropertyForm = ({ property }: PropertyFormProps) => {
                         register={register}
                         errors={errors}
                     />
-                    <Input
-                        type="number"
-                        id="rating"
-                        label="Rating"
-                        {...register("rating")}
-                        defaultValue={property?.rating?.toString() ?? ""}
+                    <InputWithValidation
+                        input={{
+                            name: "rating",
+                            label: "Rating",
+                            type: "number",
+                            id: "rating",
+                        }}
+                        defaultValue={property ? property.rating : ""}
+                        register={register}
+                        errors={errors}
                     />
                 </div>
                 <Heading h2>Location</Heading>

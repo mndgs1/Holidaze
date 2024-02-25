@@ -26,6 +26,11 @@ const Seo = ({ title }: SeoProps) => {
         pageTitle = "Home";
     }
 
+    if (pathname.includes("/search")) {
+        const searchTerm = pathname.split("/").pop();
+        pageTitle = `Search: ${searchTerm}`;
+    }
+
     if (title) {
         return (
             <Helmet>

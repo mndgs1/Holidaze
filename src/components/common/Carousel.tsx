@@ -10,13 +10,11 @@ interface CarouselProps {
     images?: string[];
     carouselControls?: boolean | "false";
     className?: string;
-    deleteImage?: boolean;
 }
 
 export default function Carousel({
     images,
     carouselControls,
-    deleteImage,
     ...rest
 }: CarouselProps) {
     const [open, setOpen] = React.useState(false);
@@ -25,6 +23,7 @@ export default function Carousel({
     if (!images || images.length === 0) {
         images = ["/assets/placeholders/Property-placeholder.jpg"];
     }
+
     const slides = images.map((url) => ({ src: url }));
     const toggleOpen = (state: boolean) => () => setOpen(state);
 

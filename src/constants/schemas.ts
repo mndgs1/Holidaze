@@ -52,11 +52,18 @@ export const postPropertySchema = yup.object({
     name: yup.string().required("Please enter a name"),
     description: yup.string().required("Please enter a description"),
     media: yup.array().of(yup.string().required()),
-    price: yup.number().required("Please enter a price"),
+    price: yup
+        .number()
+        .typeError("Price must be a number")
+        .required("Please enter a price"),
     maxGuests: yup
         .number()
-        .required("Please enter the maximum number of guests"),
-    rating: yup.number(),
+        .required("Please enter the maximum number of guests")
+        .typeError("Max guests must be a number"),
+    rating: yup
+        .number()
+        .typeError("Rating must be a number")
+        .required("Please enter a rating"),
     meta: yup.object({
         wifi: yup.boolean().required("Please select an option"),
         parking: yup.boolean().required("Please select an option"),
@@ -69,8 +76,6 @@ export const postPropertySchema = yup.object({
         zip: yup.string(),
         country: yup.string(),
         continent: yup.string(),
-        lng: yup.number(),
-        lat: yup.number(),
     }),
 });
 
@@ -91,11 +96,18 @@ export const editPropertySchema = yup.object({
     name: yup.string().required("Please enter a name"),
     description: yup.string().required("Please enter a description"),
     media: yup.array().of(yup.string().required()),
-    price: yup.number().required("Please enter a price"),
+    price: yup
+        .number()
+        .typeError("Price must be a number")
+        .required("Please enter a price"),
     maxGuests: yup
         .number()
-        .required("Please enter the maximum number of guests"),
-    rating: yup.number().required("Please enter a rating"),
+        .required("Please enter the maximum number of guests")
+        .typeError("Max guests must be a number"),
+    rating: yup
+        .number()
+        .typeError("Rating must be a number")
+        .required("Please enter a rating"),
     meta: yup.object({
         wifi: yup.boolean().required("Please select an option"),
         parking: yup.boolean().required("Please select an option"),
@@ -108,7 +120,5 @@ export const editPropertySchema = yup.object({
         zip: yup.string(),
         country: yup.string(),
         continent: yup.string(),
-        lng: yup.number(),
-        lat: yup.number(),
     }),
 });
