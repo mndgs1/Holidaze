@@ -60,6 +60,7 @@ const PropertyForm = () => {
                 meta,
                 location,
             } = data;
+
             return postProperty(token, {
                 name,
                 description,
@@ -182,11 +183,15 @@ const PropertyForm = () => {
                         register={register}
                         errors={errors}
                     />
-                    <Input
-                        type="number"
-                        id="rating"
-                        label="Rating"
-                        {...register("rating")}
+                    <InputWithValidation
+                        input={{
+                            name: "rating",
+                            label: "Rating",
+                            type: "number",
+                            id: "rating",
+                        }}
+                        register={register}
+                        errors={errors}
                     />
                 </div>
                 <Heading h2>Location</Heading>
