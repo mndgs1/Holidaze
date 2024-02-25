@@ -8,7 +8,7 @@ Noroff API.
 
 [Live site](https://holidaze-eight.vercel.app/holidaze/properties)
 
-[API Docs](https://docs.noroff.dev/docs/v2/holidaze/bookings)
+[API Docs](https://docs.noroff.dev/docs/v1)
 
 [Repo](https://github.com/mndgs1/Holidaze)
 
