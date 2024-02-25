@@ -6,6 +6,12 @@ Holidaze is a fictional project created for my final exam in
 Noroff Front-end development course. The project is using
 Noroff API.
 
+[Live site](https://holidaze-eight.vercel.app/holidaze/properties)
+
+[API Docs](https://docs.noroff.dev/docs/v2/holidaze/bookings)
+
+[Repo](https://github.com/mndgs1/Holidaze)
+
 ## Built With
 
 -   React
