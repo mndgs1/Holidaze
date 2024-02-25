@@ -8,10 +8,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import PropertiesCardSkeleton from "../components/common/Skeletons/PropertiesCardSkeleton";
+import { useParams } from "react-router-dom";
 
-const Properties = () => {
+const Search = () => {
     const token = useToken();
     const navigate = useNavigate();
+
+    const { search } = useParams<{ search: string }>();
 
     const { isLoading, isError, data } = useQuery({
         queryKey: ["properties"],
@@ -56,14 +59,26 @@ const Properties = () => {
         );
     }
 
+    const filteredProperties = data?.filter((property) => {
+        if (!search) return property;
+        return property.name.toLowerCase().includes(search.toLowerCase());
+    });
+
     return (
-        <>
+        <article>
+            <section>
+                <Heading h1>Search for: {search}</Heading>
+                <Text primary className="mb-4">
+                    We found {filteredProperties?.length} properties that match
+                    your search.
+                </Text>
+            </section>
             <section className="md:grid md:gap-8 md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4">
-                {data?.map((property) => (
+                {filteredProperties?.map((property) => (
                     <Link
                         to={`/holidaze/properties/${property.id}`}
                         key={property.id}
-                        className="block group">
+                        className="block">
                         <div className="pb-1 mb-4 border-b border-secondary-100">
                             <div className="h-72 mb-1">
                                 <img
@@ -72,11 +87,11 @@ const Properties = () => {
                                             ? property.media[0]
                                             : "/assets/placeholders/property-placeholder.jpg"
                                     }
-                                    className="w-full object-cover h-full rounded-lg group-hover:opacity-90 transition-all"
+                                    className="w-full object-cover h-full rounded-lg"
                                     alt={`${property.name}`}
                                 />
                             </div>
-                            <Heading h3 className="mb-0 group-hover:underline">
+                            <Heading h3 className="mb-0 hover:underline">
                                 {property.name}
                             </Heading>
                             <Text primary sm>
@@ -92,8 +107,8 @@ const Properties = () => {
                     </Link>
                 ))}
             </section>
-        </>
+        </article>
     );
 };
 
-export default Properties;
+export default Search;

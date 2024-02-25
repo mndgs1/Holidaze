@@ -67,14 +67,27 @@ const Search = ({ className }: SearchProps) => {
         };
     }, []);
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setOpenAccordion(!openAccordion);
+        const input = document.getElementById("search") as HTMLInputElement;
+        input.blur();
+        navigate(`/holidaze/properties/search/${search}`);
+    };
     return (
         <div className="relative accordion-wrapper">
-            <div className={classes} onClick={handleOpen}>
-                <Icon
-                    searchlite
-                    md
-                    className="absolute top-1/2 right-2 -translate-y-1/2 z-10"
-                />
+            <form
+                className={classes}
+                onClick={handleOpen}
+                id="searchForm"
+                onSubmit={handleSubmit}>
+                <button type="submit" aria-label="Search button">
+                    <Icon
+                        searchlite
+                        md
+                        className="absolute top-1/2 right-2 -translate-y-1/2 z-10"
+                    />
+                </button>
                 <input
                     type="text"
                     className="px-4 py-2 pr-10 border border-secondary-100 w-full drop-shadow-lg rounded-2xl "
@@ -86,7 +99,7 @@ const Search = ({ className }: SearchProps) => {
                 <label htmlFor="search" className="sr-only">
                     Search
                 </label>
-            </div>
+            </form>
             {openAccordion && (
                 <div className="absolute bg-white w-full mt-2 flex flex-col gap-1 rounded-xl">
                     {filteredData?.slice(0, 5).map((property: Property) => (

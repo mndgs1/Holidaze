@@ -18,7 +18,9 @@ const PropertyCard = ({ property }: CardProps) => {
             className="border-b border-secondary-100 pb-4 w-full"
             key={property.id}>
             <div className="flex flex-col sm:flex-row gap-2 relative ">
-                <RouterLink to={`/holidaze/properties/${property.id}`}>
+                <RouterLink
+                    to={`/holidaze/properties/${property.id}`}
+                    className="group">
                     <div className="w-full h-72 sm:w-48 sm:h-32">
                         <img
                             src={
@@ -32,30 +34,34 @@ const PropertyCard = ({ property }: CardProps) => {
                     </div>
                 </RouterLink>
 
-                <div className="flex flex-col justify-between">
-                    <div>
-                        <RouterLink to={`/holidaze/properties/${property.id}`}>
-                            <Heading h3 className="hover:underline transition">
+                <RouterLink
+                    to={`/holidaze/properties/${property.id}`}
+                    className="group">
+                    <div className="flex flex-col justify-between">
+                        <div>
+                            <Heading
+                                h3
+                                className="group-hover:underline transition">
                                 {property.name}
                             </Heading>
-                        </RouterLink>
-                        <Text primary sm>
-                            {property.location.address},{" "}
-                            {property.location.city}{" "}
-                        </Text>
+                            <Text primary sm>
+                                {property.location.address},{" "}
+                                {property.location.city}{" "}
+                            </Text>
+                        </div>
+                        <div>
+                            <Text primary sm>
+                                {property.rating} stars
+                            </Text>
+                            <Text primary sm>
+                                For {property.maxGuests} Guests
+                            </Text>
+                            <Text primary>
+                                <strong>{property.price}kr</strong> night
+                            </Text>
+                        </div>
                     </div>
-                    <div>
-                        <Text primary sm>
-                            {property.rating} stars
-                        </Text>
-                        <Text primary sm>
-                            For {property.maxGuests} Guests
-                        </Text>
-                        <Text primary>
-                            <strong>{property.price}kr</strong> night
-                        </Text>
-                    </div>
-                </div>
+                </RouterLink>
 
                 <div className="absolute bottom-0 right-0 flex gap-4">
                     <Tooltip text="View Bookings">

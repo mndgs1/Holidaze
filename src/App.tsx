@@ -16,6 +16,7 @@ import EditMyProperty from "./pages/EditMyProperty";
 import MyProperty from "./pages/MyProperty";
 import AuthWrapper from "./components/layout/AuthWrap";
 import { HelmetProvider } from "react-helmet-async";
+import Search from "./pages/Search";
 
 function App() {
     return (
@@ -57,6 +58,10 @@ function App() {
                         <Route
                             path="/holidaze/myProperties/:id"
                             element={<MyProperty />}
+                        />
+                        <Route
+                            path="/holidaze/properties/search/:search"
+                            element={<Search />}
                         />
                     </Routes>
                 </AuthWrapper>
