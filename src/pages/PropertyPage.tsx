@@ -265,7 +265,10 @@ const PropertyPage = () => {
                                 <Text primary bold className="">
                                     Guests:
                                 </Text>
-                                <button type="button" onClick={guestMinus}>
+                                <button
+                                    type="button"
+                                    onClick={guestMinus}
+                                    aria-label="remove guest">
                                     <Icon
                                         minus
                                         lg
@@ -275,7 +278,10 @@ const PropertyPage = () => {
                                 <Text primary bold>
                                     {guestCount}
                                 </Text>
-                                <button type="button" onClick={guestPlus}>
+                                <button
+                                    type="button"
+                                    onClick={guestPlus}
+                                    aria-label="add guest">
                                     <Icon
                                         plus
                                         lg

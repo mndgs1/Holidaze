@@ -70,13 +70,11 @@ const Search = ({ className }: SearchProps) => {
     return (
         <div className="relative accordion-wrapper">
             <div className={classes} onClick={handleOpen}>
-                <button>
-                    <Icon
-                        searchlite
-                        md
-                        className="absolute top-1/2 right-2 -translate-y-1/2 z-10"
-                    />
-                </button>
+                <Icon
+                    searchlite
+                    md
+                    className="absolute top-1/2 right-2 -translate-y-1/2 z-10"
+                />
                 <input
                     type="text"
                     className="px-4 py-2 pr-10 border border-secondary-100 w-full drop-shadow-lg rounded-2xl "
@@ -84,6 +82,9 @@ const Search = ({ className }: SearchProps) => {
                     value={search}
                     name="search"
                 />
+                <label htmlFor="search" className="sr-only">
+                    Search
+                </label>
             </div>
             {openAccordion && (
                 <div className="absolute bg-white w-full mt-2 flex flex-col gap-1 rounded-xl">

@@ -22,38 +22,38 @@ const Footer = ({ ...rest }: FooterProps) => {
                 }>
                 <Text secondary>© 2024 Holidaze Inc. All rights reserved.</Text>
                 <div className="flex gap-4">
-                    <button className="hover:opacity-80">
-                        <a
-                            href="https://facebook.com"
-                            target="_blank"
-                            rel="noreferrer">
-                            <Icon facebook md className="fill-secondary" />
-                        </a>
-                    </button>
-                    <button className="hover:opacity-80">
-                        <a
-                            href="https://instagram.com"
-                            target="_blank"
-                            rel="noreferrer">
-                            <Icon instagram md className="fill-secondary" />
-                        </a>
-                    </button>
-                    <button className="hover:opacity-80">
-                        <a
-                            href="https://twitter.com"
-                            target="_blank"
-                            rel="noreferrer">
-                            <Icon twitter md className="fill-secondary" />
-                        </a>
-                    </button>
-                    <button className="hover:opacity-80">
-                        <a
-                            href="https://youtube.com"
-                            target="_blank"
-                            rel="noreferrer">
-                            <Icon youtube md className="fill-secondary" />
-                        </a>
-                    </button>
+                    <a
+                        href="https://facebook.com"
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="facebook"
+                        className="hover:opacity-80">
+                        <Icon facebook md className="fill-secondary" />
+                    </a>
+                    <a
+                        href="https://instagram.com"
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="instagram"
+                        className="hover:opacity-80">
+                        <Icon instagram md className="fill-secondary" />
+                    </a>
+                    <a
+                        href="https://twitter.com"
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="twitter"
+                        className="hover:opacity-80">
+                        <Icon twitter md className="fill-secondary" />
+                    </a>
+                    <a
+                        href="https://youtube.com"
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="youtube"
+                        className="hover:opacity-80">
+                        <Icon youtube md className="fill-secondary" />
+                    </a>
                 </div>
             </div>
         </footer>
