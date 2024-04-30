@@ -26,7 +26,7 @@ Noroff API.
 1. Clone the repo
 
 ```bash
-git clone  <https://github.com/mndgs1/Holidaze>
+git clone https://github.com/mndgs1/Holidaze
 ```
 
 2. Install dependencies
