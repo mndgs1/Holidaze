@@ -73,6 +73,11 @@ const Login = () => {
                 {isError && (
                     <ServerMessage danger>{error.toString()}</ServerMessage>
                 )}
+                <div className="border border-primary flex flex-col gap-2 mt-4 p-2 rounded-lg">
+                    <p className="text-center">Test Account</p>
+                    <p>Email: MinBan66364@stud.noroff.no</p>
+                    <p>Password: 12341234</p>
+                </div>
             </LoginRegisterLayout>
         </>
     );
